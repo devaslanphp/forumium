@@ -11,18 +11,20 @@
 </head>
 <body x-cloak x-data="sidebar()">
 
-    {{-- NAVBAR --}}
-    @include('partials.navbar')
+    <div class="w-full absolute top-0 left-0 right-0 bottom-0 w-full h-full overflow-auto" id="body-container" style="opacity: 0;">
+        {{-- NAVBAR --}}
+        @include('partials.navbar')
 
-    {{ $slot }}
+        {{ $slot }}
 
-    {{-- SIDEBAR --}}
-    @include('partials.sidebar')
+        {{-- SIDEBAR --}}
+        @include('partials.sidebar')
 
-    {{-- DIALOGS --}}
-    @include('partials.dialogs.add-discussion')
-    @include('partials.dialogs.login')
-    @include('partials.dialogs.sign-up')
+        {{-- DIALOGS --}}
+        @include('partials.dialogs.add-discussion')
+        @include('partials.dialogs.login')
+        @include('partials.dialogs.sign-up')
+    </div>
 
     <script>
         function sidebar() {
@@ -60,6 +62,7 @@
 
     @livewireScripts
     @vite('resources/js/app.js')
+    @livewire('notifications')
     @stack('scripts')
 </body>
 </html>

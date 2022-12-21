@@ -73,40 +73,44 @@
                         Home
                     </a>
                 </li>
-                <li>
-                    <button type="button" data-modal-toggle="sign-up-modal"
-                            class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Sign up</button>
-                </li>
-                <li>
-                    <button type="button" data-modal-toggle="login-modal"
-                            class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Log in</button>
-                </li>
-                <li>
-                    <button type="button" id="profile-dropdown" data-dropdown-toggle="dropdown"
-                            class="flex items-center gap-2 py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700" aria-current="page">
-                        <img src="https://ui-avatars.com/api/?background=3f84f3&name=EL%20OUFIR%20Hatim&color=ffffff" alt="Avatar" class="rounded-full w-6 h-6" /> EL OUFIR Hatim
-                    </button>
+                @guest
+                    <li>
+                        <button type="button" data-modal-toggle="sign-up-modal"
+                                class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Sign up</button>
+                    </li>
+                    <li>
+                        <button type="button" data-modal-toggle="login-modal"
+                                class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Log in</button>
+                    </li>
+                @endguest
+                @auth
+                    <li>
+                        <button type="button" id="profile-dropdown" data-dropdown-toggle="dropdown"
+                                class="flex items-center gap-2 py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700" aria-current="page">
+                            <img src="{{ auth()->user()->avatarUrl }}" alt="Avatar" class="rounded-full w-6 h-6" /> {{ auth()->user()->name }}
+                        </button>
 
-                    <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700">
-                        <ul class="py-1 text-sm text-slate-700 dark:text-slate-200" aria-labelledby="profile-dropdown">
-                            <li>
-                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                    <i class="fa-solid fa-user"></i> Profile
+                        <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700">
+                            <ul class="py-1 text-sm text-slate-700 dark:text-slate-200" aria-labelledby="profile-dropdown">
+                                <li>
+                                    <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                        <i class="fa-solid fa-user"></i> Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('settings') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                        <i class="fa-solid fa-cog"></i> Settings
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="py-1">
+                                <a href="{{ route('logout') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                    <i class="fa-solid fa-sign-out"></i> Sign out
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('settings') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                    <i class="fa-solid fa-cog"></i> Settings
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="py-1">
-                            <a href="{{ route('home') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                <i class="fa-solid fa-sign-out"></i> Sign out
-                            </a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

@@ -4,18 +4,18 @@
 
     <div class="w-full h-52 bg-slate-400 flex flex-row justify-center items-center">
         <div class="container flex flex-row justify-start items-center gap-5">
-            <img src="https://ui-avatars.com/api/?background=3f84f3&name=EL%20OUFIR%20Hatim&color=ffffff&size=128" alt="Avatar" class="rounded-full w-24 h-24 border-4 border-white shadow" />
+            <img src="{{ $user->avatarUrl }}" alt="Avatar" class="rounded-full w-24 h-24 border-4 border-white shadow" />
             <div class="flex flex-col justify-center items-start gap-3">
-                <span class="text-xl font-medium text-white">EL OUFIR Hatim</span>
+                <span class="text-xl font-medium text-white">{{ $user->name }}</span>
                 <div class="w-full flex flex-row justify-start items-center gap-5 text-white text-xs">
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
-                        <i class="lg:flex hidden fa-regular fa-clock"></i> 44 minutes ago
+                        <i class="lg:flex hidden fa-regular fa-clock"></i> {{ $user->updated_at->diffForHumans() }}
                     </span>
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
-                        <i class="lg:flex hidden fa-solid fa-sign-in"></i> Joined an hour ago
+                        <i class="lg:flex hidden fa-solid fa-sign-in"></i> Joined {{ $user->created_at->diffForHumans() }}
                     </span>
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
-                        <i class="lg:flex hidden fa-solid fa-check"></i> 2 best answers
+                        <i class="lg:flex hidden fa-solid fa-check"></i> 0 best answer
                     </span>
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
                         <i class="lg:flex hidden fa-solid fa-medal"></i> 0 points

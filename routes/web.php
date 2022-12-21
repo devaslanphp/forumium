@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
-Route::view('/profile', 'profile')->name('profile');
-Route::view('/settings', 'settings')->name('settings');
+
+Route::middleware(['auth'])
+    ->group(function () {
+        Route::view('/profile', 'profile')->name('profile');
+        Route::view('/settings', 'settings')->name('settings');
+        Route::get('logout', LogoutController::class)->name('logout');
+    });

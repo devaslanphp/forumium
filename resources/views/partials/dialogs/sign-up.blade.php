@@ -8,7 +8,7 @@
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">Sign up to Forumium</h3>
+                <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">Sign up to {{ config('app.name') }}</h3>
                 <form class="space-y-6" action="#">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-slate-900 dark:text-white">Full name</label>

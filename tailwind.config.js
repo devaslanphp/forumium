@@ -1,16 +1,27 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-  content: [
-      "./resources/**/*.blade.php",
-      "./resources/**/*.js",
-      './node_modules/flowbite/**/*.js'
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-      require('flowbite/plugin'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/typography'),
-  ],
+    mode: 'jit',
+    content: [
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './node_modules/flowbite/**/*.js',
+        './vendor/filament/**/*.blade.php',
+    ],
+    theme: {
+        extend: {
+            colors: {
+                danger: colors.rose,
+                primary: colors.blue,
+                success: colors.green,
+                warning: colors.yellow,
+            },
+        },
+    },
+    plugins: [
+        require('flowbite/plugin'),
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+    ],
 }

@@ -11,7 +11,7 @@
                     </button>
                     <a href="{{ route('home') }}" class="flex items-center">
                         <img src="{{ asset('favicon.svg') }}" class="h-6 mr-3 sm:h-9" alt="Logo" />
-                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-slate-500">Forumium</span>
+                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-slate-500">{{ config('app.name') }}</span>
                     </a>
                 </div>
 

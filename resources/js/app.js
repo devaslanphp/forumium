@@ -3,8 +3,21 @@ import '../css/app.scss';
 
 import 'flowbite';
 
-import Alpine from 'alpinejs';
+import './pace.min';
 
-window.Alpine = Alpine;
+import Alpine from 'alpinejs'
+import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
+import AlpineFloatingUI from '@awcodes/alpine-floating-ui'
+import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
 
-Alpine.start();
+Alpine.plugin(FormsAlpinePlugin)
+Alpine.plugin(AlpineFloatingUI)
+Alpine.plugin(NotificationsAlpinePlugin)
+
+window.Alpine = Alpine
+
+Alpine.start()
+
+window.addEventListener('load', function () {
+    document.getElementById('body-container').style.opacity = 1;
+})

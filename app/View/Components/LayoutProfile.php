@@ -2,11 +2,13 @@
 
 namespace App\View\Components;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\View\Component;
 
 class LayoutProfile extends Component
 {
     public string|null $title;
+    public Authenticatable $user;
 
     /**
      * Create a new component instance.
@@ -15,6 +17,7 @@ class LayoutProfile extends Component
      */
     public function __construct(string|null $title = null)
     {
+        $this->user = auth()->user();
         $this->title = $title;
     }
 

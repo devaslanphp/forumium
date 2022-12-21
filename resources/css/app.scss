@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'flash.css';
+
+@import '../../vendor/filament/forms/dist/module.esm.css';
+
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
-[x-cloak] {
-    display: none;
+#body-container {
+    opacity:0;
+    -webkit-transition: opacity 1.2s;
+    -moz-transition: opacity 1.2s;
+    -o-transition: opacity 1.2s;
+    transition: opacity 1.2s;
 }
