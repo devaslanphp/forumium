@@ -74,4 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
         }
         return $this->roles->pluck('permissions')->flatten()->whereIn('name', $permissions)->count();
     }
+
+    public function appNotifications(): BelongsToMany
+    {
+        return $this->belongsToMany(Notification::class, 'user_notifications', 'user_id', 'notification_id')->withPivot(['via_web', 'via_email']);
+    }
 }

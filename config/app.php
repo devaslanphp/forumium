@@ -211,6 +211,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Roles' => App\Core\RoleConstants::class,
         'Permissions' => App\Core\PermissionConstants::class,
+        'Notifications' => App\Core\NotificationConstants::class,
     ])->toArray(),
 
 ];
