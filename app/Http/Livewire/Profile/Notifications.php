@@ -41,7 +41,7 @@ class Notifications extends Component implements HasForms
                         ->label('Web'),
 
                     Toggle::make('notification_' . $notification->id . '_email')
-                        ->label('email'),
+                        ->label('Email'),
                 ]);
         }
         return $fields;
