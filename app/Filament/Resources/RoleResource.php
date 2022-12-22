@@ -7,6 +7,7 @@ use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Models\Role;
 use Filament\Forms;
 use Filament\Resources\Form;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -23,6 +24,13 @@ class RoleResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
+                    ->unique(table: Role::class, column: 'name', ignorable: function ($livewire) {
+                        if ($livewire instanceof EditRecord) {
+                            return $livewire->record;
+                        } else {
+                            return null;
+                        }
+                    })
                     ->required()
                     ->maxLength(255),
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ Route::get('/reset-password/{token}', function (string $token) {
     return view('password-reset', compact('token'));
 })->middleware('guest')
     ->name('password.reset');
+
+Route::get("redirect/{provider}", [SocialiteController::class, 'redirect'])
+    ->name('socialite.redirect');
+
+Route::get("callback/{provider}", [SocialiteController::class, 'callback'])
+    ->name('socialite.callback');
 
 Route::middleware(['auth', 'verified'])
     ->group(function () {

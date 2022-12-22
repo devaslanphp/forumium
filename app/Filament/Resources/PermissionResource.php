@@ -7,11 +7,10 @@ use App\Filament\Resources\PermissionResource\RelationManagers;
 use App\Models\Permission;
 use Filament\Forms;
 use Filament\Resources\Form;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PermissionResource extends Resource
 {
@@ -25,6 +24,13 @@ class PermissionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
+                    ->unique(table: Permission::class, column: 'name', ignorable: function ($livewire) {
+                        if ($livewire instanceof EditRecord) {
+                            return $livewire->record;
+                        } else {
+                            return null;
+                        }
+                    })
                     ->required()
                     ->maxLength(255),
 

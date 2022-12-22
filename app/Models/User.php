@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -47,6 +48,18 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
         'email_verified_at' => 'datetime',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (User $item) {
+            UserRole::create([
+                'role_id' => Role::where('name', RoleConstants::MEMBER->value)->first()->id,
+                'user_id' => $item->id
+            ]);
+        });
+    }
+
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
@@ -78,5 +91,10 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
     public function appNotifications(): BelongsToMany
     {
         return $this->belongsToMany(Notification::class, 'user_notifications', 'user_id', 'notification_id')->withPivot(['via_web', 'via_email']);
+    }
+
+    public function socials(): HasMany
+    {
+        return $this->hasMany(Social::class, 'user_id', 'id');
     }
 }
