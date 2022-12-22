@@ -38,10 +38,10 @@ class Notifications extends Component implements HasForms
                         ->columnSpan(2),
 
                     Toggle::make('notification_' . $notification->id . '_web')
-                        ->label('Via Web'),
+                        ->label('Web'),
 
                     Toggle::make('notification_' . $notification->id . '_email')
-                        ->label('Via email'),
+                        ->label('email'),
                 ]);
         }
         return $fields;
