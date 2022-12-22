@@ -91,26 +91,26 @@
                         </button>
 
                         <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700">
-                            <ul class="py-1 text-sm text-slate-700 dark:text-slate-200" aria-labelledby="profile-dropdown">
+                            <ul class="text-sm text-slate-700 dark:text-slate-200" aria-labelledby="profile-dropdown">
                                 <li>
                                     <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                        <i class="fa-solid fa-user"></i> Profile
+                                        <i class="fa-solid fa-user w-[20px]"></i> Profile
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('settings') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                        <i class="fa-solid fa-cog"></i> Settings
+                                        <i class="fa-solid fa-cog w-[20px]"></i> Settings
                                     </a>
                                 </li>
-                                <li>
+                                <li class="pb-1">
                                     <a href="{{ route('filament.pages.dashboard') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                        <i class="fa-solid fa-gears"></i> Administration
+                                        <i class="fa-solid fa-gears w-[20px]"></i> Administration
                                     </a>
                                 </li>
                             </ul>
-                            <div class="py-1">
-                                <a href="{{ route('logout') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                    <i class="fa-solid fa-sign-out"></i> Sign out
+                            <div class="pt-1">
+                                <a href="{{ route('logout') }}" class="rounded-b flex items-center gap-2 py-2 px-4 text-red-600 hover:bg-red-100 dark:hover:bg-red-600 dark:hover:text-white">
+                                    <i class="fa-solid fa-sign-out w-[20px]"></i> Sign out
                                 </a>
                             </div>
                         </div>
