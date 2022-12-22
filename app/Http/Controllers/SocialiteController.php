@@ -34,6 +34,7 @@ class SocialiteController extends Controller
         if (in_array($provider, $this->providers)) {
             $data = Socialite::driver($request->provider)->user();
             $details = $data->user;
+            $user = null;
             if (session()->has('settings')) {
                 $user = User::where('id', session()->get('settings'))->first();
             }

@@ -17,6 +17,12 @@
         </div>
     </div>
     <div class="w-full flex flex-col gap-3">
+        <span class="font-medium text-slate-700">Email address</span>
+        <span class="text-xs text-slate-700">
+            Your account's principal email address is: <span class="font-medium">{{ auth()->user()->email }}</span>
+        </span>
+    </div>
+    <div class="w-full flex flex-col gap-3">
         <span class="font-medium text-slate-700">Linked accounts</span>
         <span class="text-xs text-slate-700">
             These linked accounts allow you to sign into the forum using other providers.
