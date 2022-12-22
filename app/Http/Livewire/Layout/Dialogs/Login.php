@@ -9,6 +9,7 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Phpsa\FilamentPasswordReveal\Password;
@@ -70,6 +71,12 @@ class Login extends Component implements HasForms
 
         session()->regenerate();
 
-        $this->redirect(route('home'));
+        if (auth()->user()->hasVerifiedEmail()) {
+            $this->redirect(route('home'));
+        } else {
+            auth()->user()->sendEmailVerificationNotification();
+            session()->flash('registered', auth()->user()->id);
+            $this->redirect(route('verification.notice'));
+        }
     }
 }

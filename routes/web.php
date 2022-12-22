@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoutController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,27 @@ use App\Http\Controllers\LogoutController;
 |
 */
 
-Route::view('/', 'home')->name('home');
+Route::view('/', 'home')
+    ->name('home');
 
-Route::middleware(['auth'])
+Route::view('/registered', 'registered')
+    ->name('verification.notice')
+    ->middleware('just-registered');
+
+Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
+
+Route::middleware(['auth', 'verified'])
     ->group(function () {
-        Route::view('/profile', 'profile')->name('profile');
-        Route::view('/settings', 'settings')->name('settings');
-        Route::get('logout', LogoutController::class)->name('logout');
+
+        Route::view('/profile', 'profile')
+            ->name('profile');
+
+        Route::view('/settings', 'settings')
+            ->name('settings');
+
+        Route::get('logout', LogoutController::class)
+            ->name('logout');
+
     });
