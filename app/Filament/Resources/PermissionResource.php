@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\PermissionResource\Pages;
+use App\Filament\Resources\PermissionResource\RelationManagers;
+use App\Models\Permission;
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class PermissionResource extends Resource
+{
+    protected static ?string $model = Permission::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->label('Name')
+                    ->required()
+                    ->maxLength(255),
+
+                Forms\Components\RichEditor::make('description')
+                    ->label('Description')
+                    ->required()
+                    ->columnSpan(2),
+
+                Forms\Components\CheckboxList::make('roles')
+                    ->relationship('roles', 'name')
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name'),
+
+                Tables\Columns\TagsColumn::make('roles.name')
+                    ->label('Roles')
+                    ->limit()
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListPermissions::route('/'),
+            'create' => Pages\CreatePermission::route('/create'),
+            'view' => Pages\ViewPermission::route('/{record}'),
+            'edit' => Pages\EditPermission::route('/{record}/edit'),
+        ];
+    }
+}
