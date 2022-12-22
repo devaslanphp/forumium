@@ -2,7 +2,7 @@
 
     <x-slot name="title">{{ $title }}</x-slot>
 
-    <div class="w-full h-52 bg-slate-400 flex flex-row justify-center items-center">
+    <div class="w-full h-52 bg-slate-400 flex flex-row justify-center items-center lg:px-0 px-6">
         <div class="container flex flex-row justify-start items-center gap-5">
             <img src="{{ $user->avatarUrl }}" alt="Avatar" class="rounded-full w-24 h-24 border-4 border-white shadow" />
             <div class="flex flex-col justify-center items-start gap-3">

@@ -25,5 +25,6 @@ module.exports = {
         require('flowbite/plugin'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+        require('tailwindcss-textshadow')
     ],
 }

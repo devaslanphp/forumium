@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialiteController;
+use App\Models\Discussion;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,9 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('logout', LogoutController::class)
             ->name('logout');
+
+        Route::get('discussion/{discussion}/{slug}', function (Discussion $discussion) {
+            return view('discussion', compact('discussion'));
+        })->name('discussion');
 
     });
