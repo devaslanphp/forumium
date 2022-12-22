@@ -11,7 +11,7 @@ class HomeContent extends Component
 
     public function mount(): void
     {
-        $this->discussions = Discussion::all();
+        $this->discussions = Discussion::orderBy('created_at', 'desc')->all();
     }
 
     public function render()
