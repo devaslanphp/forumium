@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Filament\Facades\Filament;
+use Filament\Navigation\UserMenuItem;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,13 @@ class AppServiceProvider extends ServiceProvider
         Filament::serving(function () {
             // Using Vite
             Filament::registerViteTheme('resources/css/filament.scss');
+            // Customize user menu
+            Filament::registerUserMenuItems([
+                UserMenuItem::make()
+                    ->label('Settings')
+                    ->url(route('settings'))
+                    ->icon('heroicon-s-cog'),
+            ]);
         });
 
         // Register tippy styles

@@ -102,6 +102,11 @@
                                         <i class="fa-solid fa-cog"></i> Settings
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('filament.pages.dashboard') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                        <i class="fa-solid fa-gears"></i> Administration
+                                    </a>
+                                </li>
                             </ul>
                             <div class="py-1">
                                 <a href="{{ route('logout') }}" class="flex items-center gap-2 py-2 px-4 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
