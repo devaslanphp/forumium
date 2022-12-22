@@ -6,7 +6,12 @@
         <div class="container flex flex-row justify-start items-center gap-5">
             <img src="{{ $user->avatarUrl }}" alt="Avatar" class="rounded-full w-24 h-24 border-4 border-white shadow" />
             <div class="flex flex-col justify-center items-start gap-3">
-                <span class="text-xl font-medium text-white">{{ $user->name }}</span>
+                <div class="flex items-center gap-3">
+                    <span class="text-xl font-medium text-white">
+                        {{ $user->name }}
+                    </span>
+                    @include('partials.layouts.profile.roles-tags', compact('user'))
+                </div>
                 <div class="w-full flex flex-row justify-start items-center gap-5 text-white text-xs">
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
                         <i class="lg:flex hidden fa-regular fa-clock"></i> {{ $user->updated_at->diffForHumans() }}
