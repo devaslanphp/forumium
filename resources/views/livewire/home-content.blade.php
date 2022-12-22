@@ -22,7 +22,7 @@
                             {{ $discussion->name }}
                         </span>
                         <span class="text-slate-400 text-sm">
-                            Created by <span class="font-medium">{{ $discussion->user->name }}</span>
+                            Created by <span class="font-medium">{{ $discussion->user->name }}</span> (<span class="text-xs">{{ $discussion->created_at->diffForHumans() }}</span>)
                         </span>
                         <span class="text-slate-400 font-light lg:max-w-[90%] max-w-full text-sm">
                             {{ Str::limit(strip_tags($discussion->content), 200) }}
