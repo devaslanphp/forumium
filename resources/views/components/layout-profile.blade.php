@@ -26,11 +26,6 @@
                         <i class="lg:flex hidden fa-solid fa-medal"></i> 0 points
                     </span>
                 </div>
-                <p class="text-white font-light text-sm m-0 p-0 lg:max-w-[50%] max-w-full">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam cupiditate ad neque error?
-                    Deleniti autem impedit, nemo sed dolores distinctio perspiciatis doloribus quis! Fuga cum sequi,
-                    culpa ipsum a qui!
-                </p>
             </div>
         </div>
     </div>
