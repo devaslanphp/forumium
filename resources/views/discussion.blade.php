@@ -31,8 +31,8 @@
 
     <!-- Page content -->
     <div class="w-full flex justify-center items-center px-2 sm:px-4 py-10">
-        <div class="container  mx-auto flex flex-row gap-10">
-            <div class="flex flex-col lg:w-5/6 w-full">
+        <div class="container  mx-auto flex lg:flex-row flex-col gap-10">
+            <div class="flex flex-col lg:w-5/6 w-full lg:order-1 order-2">
                 <div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5">
                     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
                     <div class="w-full flex flex-col">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:flex hidden flex-col gap-3 w-1/6">
+            <div class="flex lg:flex-col flex-row gap-3 lg:w-1/6 w-full lg:order-2 order-1">
                 <button type="button" class="w-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer px-3 py-2 rounded shadow hover:shadow-lg text-white font-medium text-center">
                     Reply
                 </button>
