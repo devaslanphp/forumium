@@ -8,7 +8,8 @@ module.exports = {
         './resources/**/*.js',
         './node_modules/flowbite/**/*.js',
         './vendor/filament/**/*.blade.php',
-        './app/Http/Livewire/**/*.php'
+        './app/Http/Livewire/**/*.php',
+        './app/Filament/Resources/**/*.php'
     ],
     theme: {
         extend: {
