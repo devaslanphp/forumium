@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
             // Customize user menu
             Filament::registerUserMenuItems([
                 UserMenuItem::make()
+                    ->label('Back to home')
+                    ->url(route('home'))
+                    ->icon('heroicon-s-home'),
+                UserMenuItem::make()
                     ->label('Settings')
                     ->url(route('settings'))
                     ->icon('heroicon-s-cog'),
