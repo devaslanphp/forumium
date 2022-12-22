@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,11 @@ Route::view('/registered', 'registered')
 Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('password-reset', compact('token'));
+})->middleware('guest')
+    ->name('password.reset');
 
 Route::middleware(['auth', 'verified'])
     ->group(function () {
