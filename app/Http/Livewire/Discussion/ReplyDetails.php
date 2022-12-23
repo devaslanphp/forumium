@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Discussion;
 
 use App\Models\Like;
 use App\Models\Reply;
-use Filament\Facades\Filament;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Livewire\Component;

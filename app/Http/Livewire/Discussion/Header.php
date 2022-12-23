@@ -13,6 +13,7 @@ class Header extends Component
 
     protected $listeners = [
         'replyAdded' => 'initData',
+        'replyUpdated' => 'initData',
         'replyDeleted' => 'initData'
     ];
 

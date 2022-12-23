@@ -8,7 +8,6 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Illuminate\Support\Facades\View;
 use Livewire\Component;
 
 class Reply extends Component implements HasForms
@@ -16,10 +15,15 @@ class Reply extends Component implements HasForms
     use InteractsWithForms;
 
     public Discussion $discussion;
+    public ReplyModel|null $reply = null;
 
     public function mount(): void
     {
-        $this->form->fill();
+        $data = [];
+        if ($this->reply) {
+            $data['content'] = $this->reply->content;
+        }
+        $this->form->fill($data);
     }
 
     public function render()
@@ -39,14 +43,26 @@ class Reply extends Component implements HasForms
     public function submit(): void
     {
         $data = $this->form->getState();
-        $reply = ReplyModel::create([
-            'user_id' => auth()->user()->id,
-            'discussion_id' => $this->discussion->id,
-            'content' => $data['content']
-        ]);
-        Filament::notify('success', 'Reply added successfully');
+        if ($this->reply) {
+            $this->reply->content = $data['content'];
+            $this->reply->save();
+            $message = 'Reply updated successfully';
+        } else {
+            ReplyModel::create([
+                'user_id' => auth()->user()->id,
+                'discussion_id' => $this->discussion->id,
+                'content' => $data['content']
+            ]);
+            $message = 'Reply added successfully';
+        }
+        Filament::notify('success', $message);
         $this->emit('replyAdded');
-        $this->dispatchBrowserEvent('replyAdded');
+        $this->emit('replyUpdated');
+        if ($this->reply) {
+            $this->dispatchBrowserEvent('replyUpdated', ['reply' => $this->reply->id]);
+        } else {
+            $this->dispatchBrowserEvent('replyAdded');
+        }
         $this->form->fill();
     }
 }

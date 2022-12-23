@@ -1,7 +1,7 @@
 <div class="w-full flex flex-col">
     <div class="w-full flex flex-col" id="replies">
         @foreach($replies as $reply)
-            <livewire:discussion.reply-details :reply="$reply" :key="'reply' . $reply->id" />
+            <livewire:discussion.reply-details :reply="$reply" :key="time() . 'reply' . $reply->id" />
         @endforeach
     </div>
     @if(!$replies->count())
