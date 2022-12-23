@@ -31,4 +31,9 @@ class Discussion extends Model
     {
         return $this->morphMany(Comment::class, 'source');
     }
+
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'followers', 'discussion_id', 'user_id')->withPivot('type');
+    }
 }

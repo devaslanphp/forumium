@@ -112,4 +112,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
+
+    public function followings(): BelongsToMany
+    {
+        return $this->belongsToMany(Discussion::class, 'followers', 'user_id', 'discussion_id')->withPivot('type');
+    }
 }
