@@ -112,6 +112,21 @@ class DiscussionDetails extends Component implements HasForms
         $this->initDetails();
     }
 
+    public function toggleCommentLike(int $comment): void
+    {
+        $like = Like::where('user_id', auth()->user()->id)->where('source_id', $comment)->where('source_type', Comment::class)->first();
+        if ($like) {
+            $like->delete();
+        } else {
+            Like::create([
+                'user_id' => auth()->user()->id,
+                'source_id' => $comment,
+                'source_type' => Comment::class
+            ]);
+        }
+        $this->discussion->refresh();
+    }
+
     public function toggleComments(): void
     {
         $this->showComments = !$this->showComments;

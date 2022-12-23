@@ -25,8 +25,15 @@
                 <div class="w-full flex flex-col gap-0 bg-slate-50 border-y border-slate-100">
                     @if($discussion->comments->count())
                         @foreach($discussion->comments as $c)
-                            <div class="w-full py-5 px-3 text-slate-700 text-sm {{ $loop->last ? '' : 'border-b border-slate-200' }}">
-                                <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
+                            <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }}">
+                                <div class="w-full text-slate-700 text-sm">
+                                    <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
+                                </div>
+                                <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
+                                    <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
+                                        <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
+                                    </button>
+                                </div>
                             </div>
                         @endforeach
                     @else
