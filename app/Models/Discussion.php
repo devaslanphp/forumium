@@ -33,6 +33,11 @@ class Discussion extends Model
         return $this->morphMany(Comment::class, 'source');
     }
 
+    public function likes(): MorphMany
+    {
+        return $this->morphMany(Like::class, 'source');
+    }
+
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class, 'discussion_id', 'id');

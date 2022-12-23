@@ -7,7 +7,7 @@
             {!! $discussion->content !!}
         </div>
         <div class="w-full flex items-center gap-5 text-slate-500 text-xs mt-5">
-            <button type="button" class="flex items-center gap-2 hover:cursor-pointer">
+            <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleLike()">
                 <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
             </button>
             <button type="button" class="flex items-center gap-2 hover:cursor-pointer">

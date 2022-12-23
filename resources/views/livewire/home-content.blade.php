@@ -14,7 +14,7 @@
             @php($type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value)
             <!-- Item -->
             <a href="{{ route('discussion', ['discussion' => $discussion, 'slug' => Str::slug($discussion->name)]) }}"
-               class="w-full flex items-start justify-between hover:bg-slate-100 hover:cursor-pointer p-3 hover:rounded transition-all">
+               class="w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer p-3 hover:rounded transition-all border-slate-200 {{ $loop->last ? '' : 'border-b pb-5 pb-5' }}">
                 <div class="flex gap-3">
                     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
                          class="rounded-full w-10 h-10"/>
@@ -47,6 +47,9 @@
                     <div class="flex items-center">
                         @include('partials.discussions.tags', ['tags' => $discussion->tags, 'ignore_first' => true])
                     </div>
+                    <span class="text-sm text-slate-500 flex items-center gap-1">
+                        <i class="fa-regular fa-thumbs-up"></i> {{ $discussion->likes()->count() }}
+                    </span>
                     <span class="text-sm text-slate-500 flex items-center gap-1">
                         <i class="fa-regular fa-comment"></i> {{ $discussion->replies()->count() + $discussion->comments()->count() }}
                     </span>

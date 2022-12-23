@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Discussion;
 
 use App\Models\Discussion;
+use App\Models\Like;
 use Livewire\Component;
 
 class DiscussionDetails extends Component
@@ -23,7 +24,23 @@ class DiscussionDetails extends Component
 
     private function initDetails(): void
     {
-        $this->likes = 0;
+        $this->likes = $this->discussion->likes()->count();
         $this->comments = $this->discussion->comments()->count();
+    }
+
+    public function toggleLike(): void
+    {
+        $like = Like::where('user_id', auth()->user()->id)->where('source_id', $this->discussion->id)->where('source_type', Discussion::class)->first();
+        if ($like) {
+            $like->delete();
+        } else {
+            Like::create([
+                'user_id' => auth()->user()->id,
+                'source_id' => $this->discussion->id,
+                'source_type' => Discussion::class
+            ]);
+        }
+        $this->discussion->refresh();
+        $this->initDetails();
     }
 }
