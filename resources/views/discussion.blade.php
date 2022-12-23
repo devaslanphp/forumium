@@ -20,16 +20,7 @@
     <div class="w-full flex justify-center items-center px-2 sm:px-4 py-10">
         <div class="container  mx-auto flex lg:flex-row flex-col gap-10">
             <div class="flex flex-col lg:w-5/6 w-full lg:order-1 order-2">
-                <div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5">
-                    <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
-                    <div class="w-full flex flex-col">
-                        <span class="text-slate-700 font-medium">{{ $discussion->user->name }}</span>
-                        <span class="text-slate-500 text-sm mt-1" wire:poll.5000ms>{{ $discussion->created_at->diffForHumans() }}</span>
-                        <div class="w-full max-w-full prose mt-3 lg:pr-5 pr-0">
-                            {!! $discussion->content !!}
-                        </div>
-                    </div>
-                </div>
+                @livewire('discussion.discussion-details', compact('discussion'))
                 @livewire('discussion.replies', compact('discussion'))
             </div>
             <div class="flex lg:flex-col flex-row gap-3 lg:w-1/6 w-full lg:order-2 order-1">

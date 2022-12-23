@@ -11,6 +11,7 @@
 <div class="w-full flex flex-col gap-5">
     @if($discussions->count())
         @foreach($discussions as $discussion)
+            @php($type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value)
             <!-- Item -->
             <a href="{{ route('discussion', ['discussion' => $discussion, 'slug' => Str::slug($discussion->name)]) }}"
                class="w-full flex items-start justify-between hover:bg-slate-100 hover:cursor-pointer p-3 hover:rounded transition-all">
@@ -18,9 +19,22 @@
                     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
                          class="rounded-full w-10 h-10"/>
                     <div class="flex flex-col gap-1">
-                        <span class="font-medium text-slate-500">
-                            {{ $discussion->name }}
-                        </span>
+                        <div class="flex items-center gap-1">
+                            @switch($type)
+                                @case(Followers::FOLLOWING->value)
+                                    <i class="fa-solid fa-star text-green-500" title="Following"></i>
+                                    @break
+                                @case(Followers::NOT_FOLLOWING->value)
+                                    <i class="fa-regular fa-star text-orange-500" title="Not following"></i>
+                                    @break
+                                @case(Followers::IGNORING->value)
+                                    <i class="fa-regular fa-eye-slash text-red-500" title="Ignoring"></i>
+                                    @break
+                            @endswitch
+                            <span class="font-medium text-slate-500">
+                                {{ $discussion->name }}
+                            </span>
+                        </div>
                         <span class="text-slate-400 text-sm">
                             Created by <span class="font-medium">{{ $discussion->user->name }}</span> (<span class="text-xs">{{ $discussion->created_at->diffForHumans() }}</span>)
                         </span>
