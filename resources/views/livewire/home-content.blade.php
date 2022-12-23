@@ -34,7 +34,7 @@
                         @include('partials.discussions.tags', ['tags' => $discussion->tags, 'ignore_first' => true])
                     </div>
                     <span class="text-sm text-slate-500 flex items-center gap-1">
-                        <i class="fa-regular fa-comment"></i> 0
+                        <i class="fa-regular fa-comment"></i> {{ $discussion->replies()->count() + $discussion->comments()->count() }}
                     </span>
                 </div>
             </a>
