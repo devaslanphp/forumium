@@ -8,13 +8,13 @@
     <option>Upvotes</option>
     <option>Most backed</option>
 </select>
-<div class="w-full flex flex-col gap-5">
+<div class="w-full flex flex-col">
     @if($discussions->count())
         @foreach($discussions as $discussion)
             @php($type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value)
             <!-- Item -->
             <a href="{{ route('discussion', ['discussion' => $discussion, 'slug' => Str::slug($discussion->name)]) }}"
-               class="w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer p-3 hover:rounded transition-all border-slate-200 {{ $loop->last ? '' : 'border-b pb-5 pb-5' }}">
+               class="w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer px-3 hover:rounded transition-all border-slate-200 py-5 {{ $loop->last ? '' : 'border-b' }}">
                 <div class="flex gap-3">
                     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
                          class="rounded-full w-10 h-10"/>

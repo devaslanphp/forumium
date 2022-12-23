@@ -13,6 +13,7 @@ class ReplyDetails extends Component
     public Reply $reply;
     public int $likes = 0;
     public int $comments = 0;
+    public bool $edit = false;
 
     protected $listeners = [
         'doDelete'
@@ -76,5 +77,10 @@ class ReplyDetails extends Component
     {
         Reply::where('id', $reply)->delete();
         $this->emit('replyDeleted');
+    }
+
+    public function edit(): void
+    {
+        $this->edit = true;
     }
 }

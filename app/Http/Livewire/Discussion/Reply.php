@@ -59,10 +59,13 @@ class Reply extends Component implements HasForms
         $this->emit('replyAdded');
         $this->emit('replyUpdated');
         if ($this->reply) {
-            $this->dispatchBrowserEvent('replyUpdated', ['reply' => $this->reply->id]);
+            $this->dispatchBrowserEvent('replyUpdated');
         } else {
             $this->dispatchBrowserEvent('replyAdded');
         }
-        $this->form->fill();
+        if ($this->reply) {
+            $data['content'] = $this->reply->content;
+        }
+        $this->form->fill($data);
     }
 }

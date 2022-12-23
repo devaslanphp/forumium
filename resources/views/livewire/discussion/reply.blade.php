@@ -1,6 +1,6 @@
 <!-- Modal body -->
 <div class="p-6 space-y-6">
-    <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">{{ $reply?->id ? 'Update reply content' : 'Post a reply' }}</h3>
+    <h3 class="text-xl font-medium text-slate-900 dark:text-white">{{ $reply?->id ? 'Update reply content' : 'Post a reply' }}</h3>
     <form>
         {{ $this->form }}
         <!-- Modal footer -->
@@ -17,12 +17,6 @@
     <script>
         window.addEventListener('replyAdded', () => {
             const hideReplyBtn = document.getElementById('hide-reply-modal');
-            hideReplyBtn.click();
-        });
-    </script>
-    <script>
-        window.addEventListener('replyUpdated', event => {
-            const hideReplyBtn = document.getElementById('hide-reply-modal-' + event.detail.reply);
             hideReplyBtn.click();
         });
     </script>

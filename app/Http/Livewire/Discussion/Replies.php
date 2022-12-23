@@ -3,12 +3,14 @@
 namespace App\Http\Livewire\Discussion;
 
 use App\Models\Discussion;
+use App\Models\Reply;
 use Livewire\Component;
 
 class Replies extends Component
 {
     public Discussion $discussion;
     public $replies;
+    public Reply|null $selectedReply = null;
 
     protected $listeners = [
         'replyAdded' => 'updateReplies',
@@ -29,5 +31,6 @@ class Replies extends Component
     public function updateReplies(): void
     {
         $this->replies = $this->discussion->replies()->get();
+        $this->selectedReply = null;
     }
 }
