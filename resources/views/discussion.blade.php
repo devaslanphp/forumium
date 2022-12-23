@@ -48,43 +48,7 @@
                 <button type="button" class="w-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer px-3 py-2 rounded shadow hover:shadow-lg text-white font-medium text-center">
                     Reply
                 </button>
-                <button type="button" id="follow-dropdown-btn" data-dropdown-toggle="follow-dropdown" class="w-full bg-slate-100 px-3 py-2 text-slate-500 border-slate-100 rounded hover:cursor-pointer hover:bg-slate-200">
-                    <i class="fa-regular fa-star"></i> Follow
-                </button>
-                <div id="follow-dropdown" class="hidden z-10 w-64 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700">
-                    <ul class="text-sm text-slate-700 dark:text-slate-200" aria-labelledby="follow-dropdown-btn">
-                        <li>
-                            <button type="button" class="text-left w-full flex flex-col gap-2 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                <div class="w-full flex items-center font-medium text-slate-700 gap-2">
-                                    <i class="fa-regular fa-star"></i> Not Following
-                                </div>
-                                <span class="text-slate-500 text-xs">
-                                    Be notified only when @mentioned.
-                                </span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="text-left w-full flex flex-col gap-2 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                <div class="w-full flex items-center font-medium text-slate-700 gap-2">
-                                    <i class="fa-solid fa-star"></i> Following
-                                </div>
-                                <span class="text-slate-500 text-xs">
-                                    Be notified of all replies.
-                                </span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="text-left w-full flex flex-col gap-2 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                <div class="w-full flex items-center font-medium text-slate-700 gap-2">
-                                    <i class="fa-regular fa-eye-slash"></i> Ignoring
-                                </div>
-                                <span class="text-slate-500 text-xs">
-                                    Never be notified. Hide from the discussion list.
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                @livewire('discussion.follow', ['discussion' => $discussion])
             </div>
         </div>
     </div>
