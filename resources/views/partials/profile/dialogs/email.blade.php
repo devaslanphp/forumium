@@ -9,7 +9,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">Change your email</h3>
-                @livewire('profile.dialogs.email')
+                <livewire:profile.dialogs.email />
             </div>
         </div>
     </div>

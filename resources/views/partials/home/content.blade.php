@@ -1,1 +1,1 @@
-@livewire('home-content')
+<livewire:home-content />

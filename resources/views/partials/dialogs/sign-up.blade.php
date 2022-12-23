@@ -9,7 +9,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">Sign up to {{ config('app.name') }}</h3>
-                @livewire('layout.dialogs.register')
+                <livwire:layout.dialogs.register />
                 @include('partials.dialogs.socials')
             </div>
         </div>

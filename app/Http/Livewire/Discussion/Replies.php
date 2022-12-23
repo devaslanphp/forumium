@@ -8,10 +8,16 @@ use Livewire\Component;
 class Replies extends Component
 {
     public Discussion $discussion;
+    public $replies;
 
     protected $listeners = [
         'replyAdded'
     ];
+
+    public function mount(): void
+    {
+        $this->replies = $this->discussion->replies()->get();
+    }
 
     public function render()
     {
@@ -20,6 +26,6 @@ class Replies extends Component
 
     public function replyAdded(): void
     {
-        $this->discussion->refresh();
+        $this->replies = $this->discussion->replies()->get();
     }
 }

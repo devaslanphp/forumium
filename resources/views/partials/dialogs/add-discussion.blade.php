@@ -10,7 +10,7 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <h3 class="mb-8 text-xl font-medium text-slate-900 dark:text-white">Start a discussion</h3>
-                @livewire('layout.dialogs.discussion')
+                <livewire:layout.dialogs.discussion />
             </div>
         </form>
     </div>

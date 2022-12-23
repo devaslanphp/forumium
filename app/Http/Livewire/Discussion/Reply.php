@@ -8,6 +8,7 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Facades\View;
 use Livewire\Component;
 
 class Reply extends Component implements HasForms
@@ -38,7 +39,7 @@ class Reply extends Component implements HasForms
     public function submit(): void
     {
         $data = $this->form->getState();
-        ReplyModel::create([
+        $reply = ReplyModel::create([
             'user_id' => auth()->user()->id,
             'discussion_id' => $this->discussion->id,
             'content' => $data['content']
