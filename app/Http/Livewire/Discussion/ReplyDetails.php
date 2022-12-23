@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Discussion;
 
-use App\Models\Discussion;
 use App\Models\Like;
 use App\Models\Reply;
+use Filament\Facades\Filament;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class ReplyDetails extends Component
@@ -12,6 +14,10 @@ class ReplyDetails extends Component
     public Reply $reply;
     public int $likes = 0;
     public int $comments = 0;
+
+    protected $listeners = [
+        'doDelete'
+    ];
 
     public function mount(): void
     {
@@ -43,5 +49,33 @@ class ReplyDetails extends Component
         }
         $this->reply->refresh();
         $this->initDetails();
+    }
+
+    public function delete(): void
+    {
+        Notification::make()
+            ->warning()
+            ->title('Delete confirmation')
+            ->body('Are you sure you wan to delete this reply?')
+            ->actions([
+                Action::make('confirm')
+                    ->label('Confirm')
+                    ->color('danger')
+                    ->button()
+                    ->close()
+                    ->emit('doDelete', ['reply' => $this->reply->id]),
+
+                Action::make('cancel')
+                    ->label('Cancel')
+                    ->close()
+            ])
+            ->persistent()
+            ->send();
+    }
+
+    public function doDelete(int $reply): void
+    {
+        Reply::where('id', $reply)->delete();
+        $this->emit('replyDeleted');
     }
 }

@@ -9,15 +9,14 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
 #body-container {
-    opacity:0;
+    opacity: 0;
     -webkit-transition: opacity 1.2s;
     -moz-transition: opacity 1.2s;
     -o-transition: opacity 1.2s;
     transition: opacity 1.2s;
 }
 
-*::-webkit-scrollbar-track
-{
+*::-webkit-scrollbar-track {
     @apply bg-slate-200;
 
     &:hover {
@@ -25,8 +24,7 @@
     }
 }
 
-*::-webkit-scrollbar
-{
+*::-webkit-scrollbar {
     @apply bg-slate-200;
 
     width: 8px;
@@ -36,11 +34,22 @@
     }
 }
 
-*::-webkit-scrollbar-thumb
-{
+*::-webkit-scrollbar-thumb {
     @apply bg-slate-400;
 
     &:hover {
         @apply hover:bg-slate-500;
+    }
+}
+
+.reply-item {
+    .hover-action {
+        @apply hidden;
+    }
+
+    &:hover {
+        .hover-action {
+            @apply flex;
+        }
     }
 }

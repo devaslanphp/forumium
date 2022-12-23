@@ -12,7 +12,8 @@ class Header extends Component
     public int $comments = 0;
 
     protected $listeners = [
-        'replyAdded' => 'initData'
+        'replyAdded' => 'initData',
+        'replyDeleted' => 'initData'
     ];
 
     public function mount(): void

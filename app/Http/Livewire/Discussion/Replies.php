@@ -11,7 +11,8 @@ class Replies extends Component
     public $replies;
 
     protected $listeners = [
-        'replyAdded' => 'updateReplies'
+        'replyAdded' => 'updateReplies',
+        'replyDeleted' => 'updateReplies'
     ];
 
     public function mount(): void
