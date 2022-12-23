@@ -25,7 +25,7 @@
                 <div class="w-full flex flex-col gap-0 bg-slate-50 border-y border-slate-100">
                     @if($discussion->comments->count())
                         @foreach($discussion->comments as $c)
-                            <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }}">
+                            <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section">
                                 <div class="w-full text-slate-700 text-sm">
                                     <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
@@ -33,6 +33,30 @@
                                     <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
                                         <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
                                     </button>
+                                    @if(
+                                        (
+                                            auth()->user()->id === $c->user_id
+                                            || auth()->user()->can(Permissions::EDIT_POSTS->value)
+                                        ) && (
+                                            !$comment
+                                        )
+                                    )
+                                        <button wire:click="editComment({{ $c->id }})" type="button" class="flex items-center gap-2 hover:cursor-pointer text-blue-500 hover:underline hover-action">
+                                            Edit
+                                        </button>
+                                    @endif
+                                    @if(
+                                        (
+                                            auth()->user()->id === $c->user_id
+                                            || auth()->user()->can(Permissions::DELETE_POSTS->value)
+                                        ) && (
+                                            !$comment
+                                        )
+                                    )
+                                        <button wire:click="deleteComment({{ $c->id }})" type="button" class="flex items-center gap-2 hover:cursor-pointer text-red-500 hover:underline hover-action">
+                                            Delete
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

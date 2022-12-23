@@ -1,4 +1,4 @@
-<div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5 reply-item">
+<div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5 hovered-section">
     <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
     <div class="w-full flex flex-col">
         <span class="text-slate-700 font-medium">{{ $reply->user->name }}</span>

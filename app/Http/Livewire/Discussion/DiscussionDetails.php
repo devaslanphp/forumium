@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Discussion;
 use App\Models\Comment;
 use App\Models\Discussion;
 use App\Models\Like;
+use App\Models\Reply;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class DiscussionDetails extends Component implements HasForms
@@ -22,7 +25,8 @@ class DiscussionDetails extends Component implements HasForms
     public Comment|null $comment = null;
 
     protected $listeners = [
-        'commentSaved'
+        'commentSaved',
+        'doDeleteComment'
     ];
 
     public function mount(): void
@@ -67,6 +71,34 @@ class DiscussionDetails extends Component implements HasForms
     {
         $this->comment = null;
         $this->form->fill();
+    }
+
+    public function deleteComment(int $comment): void
+    {
+        Notification::make()
+            ->warning()
+            ->title('Delete confirmation')
+            ->body('Are you sure you wan to delete this comment?')
+            ->actions([
+                Action::make('confirm')
+                    ->label('Confirm')
+                    ->color('danger')
+                    ->button()
+                    ->close()
+                    ->emit('doDeleteComment', ['comment' => $comment]),
+
+                Action::make('cancel')
+                    ->label('Cancel')
+                    ->close()
+            ])
+            ->persistent()
+            ->send();
+    }
+
+    public function doDeleteComment(int $comment): void
+    {
+        Comment::where('id', $comment)->delete();
+        $this->emit('commentSaved');
     }
 
     public function saveComment(): void
