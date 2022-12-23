@@ -15,3 +15,32 @@
     -o-transition: opacity 1.2s;
     transition: opacity 1.2s;
 }
+
+*::-webkit-scrollbar-track
+{
+    @apply bg-slate-200;
+
+    &:hover {
+        @apply hover:bg-slate-300;
+    }
+}
+
+*::-webkit-scrollbar
+{
+    @apply bg-slate-200;
+
+    width: 8px;
+
+    &:hover {
+        @apply hover:bg-slate-300;
+    }
+}
+
+*::-webkit-scrollbar-thumb
+{
+    @apply bg-slate-400;
+
+    &:hover {
+        @apply hover:bg-slate-500;
+    }
+}
