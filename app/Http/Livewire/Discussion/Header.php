@@ -12,12 +12,12 @@ class Header extends Component
     public int $comments = 0;
 
     protected $listeners = [
-        'replyAdded'
+        'replyAdded' => 'initData'
     ];
 
     public function mount(): void
     {
-        $this->replyAdded();
+        $this->initData();
     }
 
     public function render()
@@ -25,7 +25,7 @@ class Header extends Component
         return view('livewire.discussion.header');
     }
 
-    public function replyAdded(): void
+    public function initData(): void
     {
         $this->replies = $this->discussion->replies()->count();
         $this->comments = $this->discussion->comments()->count();

@@ -11,7 +11,7 @@ class Replies extends Component
     public $replies;
 
     protected $listeners = [
-        'replyAdded'
+        'replyAdded' => 'updateReplies'
     ];
 
     public function mount(): void
@@ -24,7 +24,7 @@ class Replies extends Component
         return view('livewire.discussion.replies');
     }
 
-    public function replyAdded(): void
+    public function updateReplies(): void
     {
         $this->replies = $this->discussion->replies()->get();
     }
