@@ -7,9 +7,15 @@
             {!! $discussion->content !!}
         </div>
         <div class="w-full flex items-center gap-5 text-slate-500 text-xs mt-5">
-            <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleLike()">
-                <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
-            </button>
+            @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleLike()">
+                    <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
+                </button>
+            @else
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
+                </div>
+            @endif
             <button wire:click="toggleComments()" type="button" class="flex items-center gap-2 hover:cursor-pointer">
                 <i class="fa-regular fa-comment"></i> {{ $comments }} {{ $comments > 1 ? 'Comments' : 'Comment' }}
             </button>
@@ -30,10 +36,17 @@
                                     <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
                                 <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
-                                    <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
-                                        <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
-                                    </button>
+                                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                                        <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
+                                            <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
+                                        </button>
+                                    @else
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
+                                        </div>
+                                    @endif
                                     @if(
+                                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
                                         (
                                             auth()->user()->id === $c->user_id
                                             || auth()->user()->can(Permissions::EDIT_POSTS->value)
@@ -46,6 +59,7 @@
                                         </button>
                                     @endif
                                     @if(
+                                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
                                         (
                                             auth()->user()->id === $c->user_id
                                             || auth()->user()->can(Permissions::DELETE_POSTS->value)
@@ -80,9 +94,11 @@
                         </div>
                     </form>
                 @else
-                    <button wire:click="addComment()" type="button" class="bg-slate-100 px-3 py-2 text-slate-500 text-sm border-slate-100 rounded hover:cursor-pointer w-fit hover:bg-slate-200">
-                        Add comment
-                    </button>
+                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                        <button wire:click="addComment()" type="button" class="bg-slate-100 px-3 py-2 text-slate-500 text-sm border-slate-100 rounded hover:cursor-pointer w-fit hover:bg-slate-200">
+                            Add comment
+                        </button>
+                    @endif
                 @endif
             </div>
         @endif

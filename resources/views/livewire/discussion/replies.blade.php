@@ -9,7 +9,9 @@
             No replies posted for now! Please come back later, or add a new reply.
         </span>
     @endif
-    <button wire:ignore type="button" data-modal-toggle="add-reply-modal" class="w-full bg-transparent hover:cursor-pointer px-3 py-10 border-2 border-transparent border-dashed hover:border-slate-200 rounded text-slate-500 hover:text-slate-700 font-medium text-left">
-        Write a reply...
-    </button>
+    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+        <button wire:ignore type="button" data-modal-toggle="add-reply-modal" class="w-full bg-transparent hover:cursor-pointer px-3 py-10 border-2 border-transparent border-dashed hover:border-slate-200 rounded text-slate-500 hover:text-slate-700 font-medium text-left">
+            Write a reply...
+        </button>
+    @endif
 </div>

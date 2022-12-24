@@ -42,7 +42,11 @@ class Follow extends Component
 
     private function initFollower(): void
     {
-        $this->follower = $this->discussion->followers()->where('user_id', auth()->user()->id)->first();
+        if (auth()->check()) {
+            $this->follower = $this->discussion->followers()->where('user_id', auth()->user()->id)->first();
+        } else {
+            $this->follower = null;
+        }
         $this->type = $this->follower?->pivot?->type ?? FollowerConstants::NONE->value;
         $this->bgClass = match ($this->type) {
             FollowerConstants::FOLLOWING->value => 'bg-green-400 hover:bg-green-500',

@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')
     ->name('home');
 
+Route::get('discussion/{discussion}/{slug}', function (Discussion $discussion) {
+    return view('discussion', compact('discussion'));
+})->name('discussion');
+
+Route::redirect('/redirect-to-home', '/')
+    ->name('login');
+
 Route::view('/registered', 'registered')
     ->name('verification.notice')
     ->middleware('just-registered');
@@ -50,9 +57,5 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('logout', LogoutController::class)
             ->name('logout');
-
-        Route::get('discussion/{discussion}/{slug}', function (Discussion $discussion) {
-            return view('discussion', compact('discussion'));
-        })->name('discussion');
 
     });

@@ -11,7 +11,13 @@
 <div class="w-full flex flex-col">
     @if($discussions->count())
         @foreach($discussions as $discussion)
-            @php($type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value)
+            @php
+                if(auth()->check()) {
+                    $type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value;
+                } else {
+                    $type = Followers::NONE->value;
+                }
+            @endphp
             <!-- Item -->
             <a href="{{ route('discussion', ['discussion' => $discussion, 'slug' => Str::slug($discussion->name)]) }}"
                class="w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer px-3 hover:rounded transition-all border-slate-200 py-5 {{ $loop->last ? '' : 'border-b' }}">
