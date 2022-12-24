@@ -1,13 +1,24 @@
 <div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5">
     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
     <div class="w-full flex flex-col">
-        <span class="text-slate-700 font-medium">{{ $discussion->user->name }}</span>
-        <span class="text-slate-500 text-sm mt-1">{{ $discussion->created_at->diffForHumans() }}</span>
+        <div class="w-full flex items-center justify-between gap-2">
+            <div class="flex flex-col">
+                <span class="text-slate-700 font-medium">{{ $discussion->user->name }}</span>
+                <span class="text-slate-500 text-sm mt-1">{{ $discussion->created_at->diffForHumans() }}</span>
+            </div>
+            <livewire:discussion.mark-as-resolved :discussion="$discussion" />
+        </div>
         <div class="w-full max-w-full prose mt-3 lg:pr-5 pr-0">
             {!! $discussion->content !!}
         </div>
         <div class="w-full flex items-center gap-5 text-slate-500 text-xs mt-5">
-            @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+            @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    (
+                        auth()->user()->id === $discussion->user_id
+                        || auth()->user()->can(Permissions::LIKE_POSTS->value)
+                    )
+                )
                 <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleLike()">
                     <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
                 </button>
@@ -36,7 +47,13 @@
                                     <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
                                 <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
-                                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                                    @if(
+                                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                                        (
+                                            auth()->user()->id === $c->user_id
+                                            || auth()->user()->can(Permissions::LIKE_POSTS->value)
+                                        )
+                                    )
                                         <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
                                             <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
                                         </button>
@@ -94,7 +111,13 @@
                         </div>
                     </form>
                 @else
-                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                    @if(
+                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                        (
+                            auth()->user()->id === $discussion->user_id
+                            || auth()->user()->can(Permissions::COMMENT_POSTS->value)
+                        )
+                    )
                         <button wire:click="addComment()" type="button" class="bg-slate-100 px-3 py-2 text-slate-500 text-sm border-slate-100 rounded hover:cursor-pointer w-fit hover:bg-slate-200">
                             Add comment
                         </button>

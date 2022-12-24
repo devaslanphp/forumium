@@ -11,7 +11,13 @@
             </div>
         @endif
         <div class="w-full flex items-center gap-5 text-slate-500 text-xs mt-5">
-            @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+            @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    (
+                        auth()->user()->id === $reply->user_id
+                        || auth()->user()->can(Permissions::LIKE_POSTS->value)
+                    )
+                )
                 <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleLike()">
                     <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
                 </button>
@@ -66,7 +72,13 @@
                                     <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
                                 <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
-                                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                                    @if(
+                                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                                        (
+                                            auth()->user()->id === $c->user_id
+                                            || auth()->user()->can(Permissions::LIKE_POSTS->value)
+                                        )
+                                    )
                                         <button type="button" class="flex items-center gap-2 hover:cursor-pointer" wire:click="toggleCommentLike({{ $c->id }})">
                                             <i class="fa-regular fa-thumbs-up"></i> {{ $c->likes->count() }} {{ $c->likes->count() > 1 ? 'Likes' : 'Like' }}
                                         </button>
@@ -124,7 +136,13 @@
                         </div>
                     </form>
                 @else
-                    @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                    @if(
+                        (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                        (
+                            auth()->user()->id === $reply->user_id
+                            || auth()->user()->can(Permissions::COMMENT_POSTS->value)
+                        )
+                    )
                         <button wire:click="addComment()" type="button" class="bg-slate-100 px-3 py-2 text-slate-500 text-sm border-slate-100 rounded hover:cursor-pointer w-fit hover:bg-slate-200">
                             Add comment
                         </button>

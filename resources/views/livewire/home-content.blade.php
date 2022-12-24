@@ -38,6 +38,9 @@
                                     @break
                             @endswitch
                             <span class="font-medium text-slate-500">
+                                @if($discussion->is_resolved)
+                                    <span class="font-bold">[Resolved]</span>
+                                @endif
                                 {{ $discussion->name }}
                             </span>
                         </div>

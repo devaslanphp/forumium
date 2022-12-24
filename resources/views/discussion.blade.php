@@ -32,10 +32,24 @@
                 <livewire:discussion.replies :discussion="$discussion" />
             </div>
             <div class="flex lg:flex-col flex-row gap-3 lg:w-1/6 w-full lg:order-2 order-1">
-                @if(auth()->user() && auth()->user()->hasVerifiedEmail())
+                @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    (
+                        auth()->user()->id === $discussion->user_id
+                        || auth()->user()->can(Permissions::REPLY_TO_DISCUSSIONS->value)
+                    )
+                )
                     <button type="button" data-modal-toggle="add-reply-modal" class="w-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer px-3 py-2 rounded shadow hover:shadow-lg text-white font-medium text-center">
                         Reply
                     </button>
+                @endif
+                @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    (
+                        auth()->user()->id === $discussion->user_id
+                        || auth()->user()->can(Permissions::EDIT_POSTS->value)
+                    )
+                )
                     <livewire:discussion.follow :discussion="$discussion" />
                 @endif
             </div>

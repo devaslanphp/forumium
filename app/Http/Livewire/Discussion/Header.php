@@ -10,11 +10,13 @@ class Header extends Component
     public Discussion $discussion;
     public int $replies = 0;
     public int $comments = 0;
+    public bool $isResolved = false;
 
     protected $listeners = [
         'replyAdded' => 'initData',
         'replyUpdated' => 'initData',
-        'replyDeleted' => 'initData'
+        'replyDeleted' => 'initData',
+        'resolvedFlagUpdated' => 'resolvedFlagUpdated'
     ];
 
     public function mount(): void
@@ -31,5 +33,12 @@ class Header extends Component
     {
         $this->replies = $this->discussion->replies()->count();
         $this->comments = $this->discussion->comments()->count();
+        $this->isResolved = $this->discussion->is_resolved;
+    }
+
+    public function resolvedFlagUpdated(): void
+    {
+        $this->discussion->refresh();
+        $this->isResolved = $this->discussion->is_resolved;
     }
 }

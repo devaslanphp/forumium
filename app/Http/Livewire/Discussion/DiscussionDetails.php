@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Discussion;
 use App\Models\Comment;
 use App\Models\Discussion;
 use App\Models\Like;
-use App\Models\Reply;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;

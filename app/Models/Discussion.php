@@ -15,7 +15,7 @@ class Discussion extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'content', 'user_id'
+        'name', 'content', 'user_id', 'is_resolved'
     ];
 
     public function user(): BelongsTo
