@@ -1,1 +1,0 @@
-<livewire:home-content />

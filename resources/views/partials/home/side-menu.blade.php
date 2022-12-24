@@ -17,5 +17,5 @@
     </a>
 </div>
 <div class="w-full flex flex-col gap-5">
-    <x-home.tags />
+    <x-home.tags :tag="$tag ?? null" />
 </div>

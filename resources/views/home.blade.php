@@ -9,7 +9,7 @@
                 @include('partials.home.side-menu')
             </div>
             <div class="flex flex-col gap-8 lg:w-5/6 w-full">
-                @include('partials.home.content')
+                <livewire:discussions />
             </div>
         </div>
     </div>

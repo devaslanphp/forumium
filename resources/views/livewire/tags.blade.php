@@ -1,7 +1,7 @@
 <div class="container mx-auto flex items-center flex-wrap">
     @if($tags->count())
         @foreach($tags as $tag)
-            <a href="#" class="lg:w-1/3 w-full p-6 text-white hover:shadow-xl shadow-slate-900 hover:scale-105 transition-all hover:rounded-xl" style="background-color: {{ $tag->color }};">
+            <a href="{{ route('tag', ['tag' => $tag, 'slug' => Str::slug($tag->name)]) }}" class="lg:w-1/3 w-full p-6 text-white hover:shadow-xl shadow-slate-900 hover:scale-105 transition-all hover:rounded-xl" style="background-color: {{ $tag->color }};">
                 <div class="w-full flex items-center gap-2 mb-5">
                     <i class="{{ $tag->icon }} mb-2 text-lg text-white"></i>
                     <h5 class="mb-2 text-2xl font-normal w-full">{{ $tag->name }}</h5>

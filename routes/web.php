@@ -4,6 +4,7 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SocialiteController;
 use App\Models\Discussion;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,11 @@ Route::get("callback/{provider}", [SocialiteController::class, 'callback'])
 
 Route::view('tags', 'tags')
     ->name('tags');
+
+Route::get('tag/{tag}/{slug}', function (Tag $tag) {
+    return view('tag', compact('tag'));
+})
+    ->name('tag');
 
 Route::middleware(['auth', 'verified'])
     ->group(function () {

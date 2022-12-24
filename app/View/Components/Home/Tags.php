@@ -8,14 +8,16 @@ use Illuminate\View\Component;
 class Tags extends Component
 {
     public $tags;
+    public $tag = null;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($tag = null)
     {
+        $this->tag = $tag;
         $this->tags = Tag::all();
     }
 
