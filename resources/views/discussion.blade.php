@@ -4,15 +4,7 @@
 
     <div class="w-full h-52 flex flex-row justify-center items-center lg:px-0 px-6" style="background-color: {{ $discussion->tags->first()->color }}CC">
         <div class="container flex flex-row justify-start items-center gap-5">
-            <div class="flex flex-col justify-center items-start gap-3">
-                <div class="flex flex-col gap-2">
-                    <span class="text-xl font-medium text-white text-shadow-lg">
-                        {{ $discussion->name }}
-                    </span>
-                    @include('partials.discussions.tags', ['tags' => $discussion->tags])
-                </div>
-                <livewire:discussion.header :discussion="$discussion" />
-            </div>
+            <livewire:discussion.header :discussion="$discussion" />
         </div>
     </div>
 
