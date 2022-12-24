@@ -78,7 +78,7 @@ class DiscussionDetails extends Component implements HasForms
         Notification::make()
             ->warning()
             ->title('Delete confirmation')
-            ->body('Are you sure you wan to delete this comment?')
+            ->body('Are you sure you want to delete this comment?')
             ->actions([
                 Action::make('confirm')
                     ->label('Confirm')

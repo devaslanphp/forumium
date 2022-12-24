@@ -68,4 +68,9 @@ class Reply extends Component implements HasForms
         }
         $this->form->fill($data);
     }
+
+    public function cancel(): void
+    {
+        $this->emit('replyUpdated');
+    }
 }
