@@ -46,6 +46,9 @@ Route::get("redirect/{provider}", [SocialiteController::class, 'redirect'])
 Route::get("callback/{provider}", [SocialiteController::class, 'callback'])
     ->name('socialite.callback');
 
+Route::view('tags', 'tags')
+    ->name('tags');
+
 Route::middleware(['auth', 'verified'])
     ->group(function () {
 

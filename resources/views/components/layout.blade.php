@@ -11,7 +11,7 @@
 </head>
 <body x-cloak x-data="sidebar()">
 
-    <div class="w-full absolute top-0 left-0 right-0 bottom-0 w-full h-full overflow-auto" id="body-container" style="opacity: 0;">
+    <div class="w-full absolute top-0 left-0 right-0 bottom-0 w-full h-full overflow-auto" id="body-container" style="display: none;">
         {{-- NAVBAR --}}
         @include('partials.navbar')
 

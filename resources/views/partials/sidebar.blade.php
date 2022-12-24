@@ -27,11 +27,11 @@
                                 </button>
                             @endif
                             <div class="w-full flex flex-col gap-5 my-8">
-                                <a href="/discussions.html" class="w-full flex items-center text-blue-500 font-medium">
+                                <a href="{{ route('home') }}" class="w-full flex items-center text-blue-500 font-medium">
                                     <span class="w-[30px]"><i class="fa-regular fa-comments"></i></span>
                                     <span>All discussions</span>
                                 </a>
-                                <a href="/tags.html" class="w-full flex items-center hover:text-blue-500 text-slate-500">
+                                <a href="{{ route('tags') }}" class="w-full flex items-center hover:text-blue-500 text-slate-500">
                                     <span class="w-[30px]"><i class="fa-solid fa-table-cells-large"></i></span>
                                     <span>Tags</span>
                                 </a>

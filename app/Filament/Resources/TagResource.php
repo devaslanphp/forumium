@@ -42,6 +42,11 @@ class TagResource extends Resource
                     ->label('Color')
                     ->required(),
 
+                Forms\Components\Textarea::make('description')
+                    ->label('Description')
+                    ->required()
+                    ->columnSpan(2),
+
                 Forms\Components\TextInput::make('icon')
                     ->label('Icon')
                     ->placeholder('e.g. fa-solid fa-house')
