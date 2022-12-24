@@ -11,7 +11,8 @@
                 </div>
                 <div class="w-full mb-2" style="height: 1px; background-color: rgba(0,0,0,.15);"></div>
                 <span class="flex justify-between items-center gap-2 items-center text-xs">
-                    View discussions <i class="fa-solid fa-arrow-right-long"></i>
+                    @php($discussions = $tag->discussions()->count())
+                    <span>View discussions @if($discussions) ({{ $discussions }}) @endif</span> <i class="fa-solid fa-arrow-right-long"></i>
                 </span>
             </a>
         @endforeach
