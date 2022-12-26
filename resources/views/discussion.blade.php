@@ -2,11 +2,7 @@
 
     <x-slot name="title">{{ $discussion->name }}</x-slot>
 
-    <div class="w-full h-52 flex flex-row justify-center items-center lg:px-0 px-6" style="background-color: {{ $discussion->tags->first()->color }}CC">
-        <div class="container flex flex-row justify-start items-center gap-5">
-            <livewire:discussion.header :discussion="$discussion" />
-        </div>
-    </div>
+    <livewire:discussion.header :discussion="$discussion" />
 
     <!-- Page content -->
     <div class="w-full flex justify-center items-center px-2 sm:px-4 py-10">

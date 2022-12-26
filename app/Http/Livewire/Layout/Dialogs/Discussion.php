@@ -19,9 +19,17 @@ class Discussion extends Component implements HasForms
 {
     use InteractsWithForms;
 
+    public DiscussionModel|null $discussion = null;
+
     public function mount(): void
     {
-        $this->form->fill();
+        $data = [];
+        if ($this->discussion) {
+            $data['name'] = $this->discussion->name;
+            $data['content'] = $this->discussion->content;
+            $data['tags'] = $this->discussion->tags->pluck('id')->toArray();
+        }
+        $this->form->fill($data);
     }
 
     public function render()
@@ -59,21 +67,44 @@ class Discussion extends Component implements HasForms
     public function submit(): void
     {
         $data = $this->form->getState();
-        $discussion = DiscussionModel::create([
-            'name' => $data['name'],
-            'user_id' => auth()->user()->id,
-            'content' => $data['content']
-        ]);
+        $update = false;
+        if ($this->discussion) {
+            $this->discussion->name = $data['name'];
+            $this->discussion->content = $data['content'];
+            $this->discussion->save();
+            DiscussionTag::where('discussion_id', $this->discussion->id)->delete();
+            $update = true;
+            $discussion = $this->discussion;
+        } else {
+            $discussion = DiscussionModel::create([
+                'name' => $data['name'],
+                'user_id' => auth()->user()->id,
+                'content' => $data['content']
+            ]);
+        }
         foreach ($data['tags'] as $tag) {
             DiscussionTag::create([
                 'discussion_id' => $discussion->id,
                 'tag_id' => $tag
             ]);
         }
-        Filament::notify('success', 'Discussion created successfully', true);
-        $this->redirect(route('discussion', [
-            'discussion' => $discussion,
-            'slug' => Str::slug($discussion->name)
-        ]));
+        Filament::notify(
+            'success',
+            ($update ? 'Discussion updated successfully' : 'Discussion created successfully'),
+            !$update
+        );
+        if ($update) {
+            $this->emit('discussionEdited');
+        } else {
+            $this->redirect(route('discussion', [
+                'discussion' => $discussion,
+                'slug' => Str::slug($discussion->name)
+            ]));
+        }
+    }
+
+    public function cancel(): void
+    {
+        $this->emit('updateDiscussionCanceled');
     }
 }

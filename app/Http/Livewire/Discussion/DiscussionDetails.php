@@ -22,10 +22,14 @@ class DiscussionDetails extends Component implements HasForms
     public int $comments = 0;
     public bool $showComments = false;
     public Comment|null $comment = null;
+    public bool $edit = false;
 
     protected $listeners = [
         'commentSaved',
-        'doDeleteComment'
+        'doDeleteComment',
+        'discussionEdited',
+        'updateDiscussionCanceled',
+        'doDeleteDiscussion'
     ];
 
     public function mount(): void
@@ -36,6 +40,9 @@ class DiscussionDetails extends Component implements HasForms
 
     public function render()
     {
+        if (!$this->discussion) {
+            $this->skipRender();
+        }
         return view('livewire.discussion.discussion-details');
     }
 
@@ -161,5 +168,50 @@ class DiscussionDetails extends Component implements HasForms
     public function toggleComments(): void
     {
         $this->showComments = !$this->showComments;
+    }
+
+    public function editDiscussion(): void
+    {
+        $this->edit = true;
+    }
+
+    public function discussionEdited(): void
+    {
+        $this->discussion->refresh();
+        $this->edit = false;
+    }
+
+    public function updateDiscussionCanceled(): void
+    {
+        $this->edit = false;
+    }
+
+    public function deleteDiscussion(): void
+    {
+        Notification::make()
+            ->warning()
+            ->title('Delete confirmation')
+            ->body('Are you sure you want to delete this discussion?')
+            ->actions([
+                Action::make('confirm')
+                    ->label('Confirm')
+                    ->color('danger')
+                    ->button()
+                    ->close()
+                    ->emit('doDeleteDiscussion', ['discussion' => $this->discussion->id]),
+
+                Action::make('cancel')
+                    ->label('Cancel')
+                    ->close()
+            ])
+            ->persistent()
+            ->send();
+    }
+
+    public function doDeleteDiscussion(int $discussion): void
+    {
+        Discussion::where('id', $discussion)->delete();
+        Filament::notify('success', 'Discussion deleted successfully', true);
+        $this->redirect(route('home'));
     }
 }

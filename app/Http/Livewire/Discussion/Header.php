@@ -16,6 +16,7 @@ class Header extends Component
         'replyAdded' => 'initData',
         'replyUpdated' => 'initData',
         'replyDeleted' => 'initData',
+        'discussionEdited' => 'initData',
         'resolvedFlagUpdated' => 'resolvedFlagUpdated'
     ];
 
