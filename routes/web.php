@@ -66,11 +66,27 @@ Route::get('search', function () {
 Route::middleware(['auth', 'verified'])
     ->group(function () {
 
-        Route::view('/profile', 'profile')
-            ->name('profile');
+        Route::group(
+            ['as' => 'profile.', 'prefix' => 'profile'],
+            function () {
 
-        Route::view('/settings', 'settings')
-            ->name('settings');
+                    Route::view('/', 'profile.index')
+                        ->name('index');
+
+                    Route::view('/settings', 'profile.settings')
+                        ->name('settings');
+
+                    Route::view('/replies', 'profile.replies')
+                        ->name('replies');
+
+                    Route::view('/discussions', 'profile.discussions')
+                        ->name('discussions');
+
+                    Route::view('/likes', 'profile.likes')
+                        ->name('likes');
+
+                }
+        );
 
         Route::get('logout', LogoutController::class)
             ->name('logout');

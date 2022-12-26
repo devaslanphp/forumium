@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
                     ->icon('heroicon-s-home'),
                 UserMenuItem::make()
                     ->label('Settings')
-                    ->url(route('settings'))
+                    ->url(route('profile.settings'))
                     ->icon('heroicon-s-cog'),
             ]);
         });

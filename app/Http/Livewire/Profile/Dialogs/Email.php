@@ -53,7 +53,7 @@ class Email extends Component implements HasForms
             $this->user->email = $data['email'];
             $this->user->save();
             Filament::notify('success', 'Your email address was successfully changed.', true);
-            $this->redirect(route('settings'));
+            $this->redirect(route('profile.settings'));
         } else {
             throw ValidationException::withMessages([
                 'password' => __('validation.current_password'),

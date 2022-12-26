@@ -52,7 +52,7 @@ class Password extends Component implements HasForms
             $this->user->password = bcrypt($data['password']);
             $this->user->save();
             Filament::notify('success', 'Your password was successfully changed.', true);
-            $this->redirect(route('settings'));
+            $this->redirect(route('profile.settings'));
         } else {
             throw ValidationException::withMessages([
                 'current_password' => __('validation.current_password'),

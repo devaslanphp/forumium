@@ -52,7 +52,7 @@ class Username extends Component implements HasForms
             $this->user->name = $data['name'];
             $this->user->save();
             Filament::notify('success', 'Your full name was successfully changed.', true);
-            $this->redirect(route('settings'));
+            $this->redirect(route('profile.settings'));
         } else {
             throw ValidationException::withMessages([
                 'password' => __('validation.current_password'),

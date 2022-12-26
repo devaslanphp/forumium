@@ -72,7 +72,7 @@ class SocialiteController extends Controller
             }
             if (session()->has('settings')) {
                 session()->remove('settings');
-                return redirect()->route('settings');
+                return redirect()->route('profile.settings');
             } else {
                 Auth::login($user);
                 return redirect()->route('home');
