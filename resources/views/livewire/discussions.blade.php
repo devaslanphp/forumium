@@ -12,6 +12,13 @@
     <form class="w-full">
         {{ $this->form }}
     </form>
+    @if(request('q'))
+        <div class="w-full">
+            <span class="px-3 text-slate-700 font-medium text-sm">
+                Search for: {{ request('q')}}
+            </span>
+        </div>
+    @endif
     <div class="w-full flex flex-col">
         @if($discussions->count())
             @foreach($discussions as $discussion)

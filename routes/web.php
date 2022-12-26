@@ -55,6 +55,14 @@ Route::get('tag/{tag}/{slug}', function (Tag $tag) {
 })
     ->name('tag');
 
+Route::get('search', function () {
+    if (!request('q')) {
+        return redirect()->route('home');
+    }
+    return view('search');
+})
+    ->name('search');
+
 Route::middleware(['auth', 'verified'])
     ->group(function () {
 

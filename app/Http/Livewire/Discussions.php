@@ -6,6 +6,7 @@ use App\Models\Discussion;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Filament\Forms\Contracts\HasForms;
 
@@ -16,7 +17,7 @@ class Discussions extends Component implements HasForms
     public $discussions;
     public $tag;
 
-    public function mount(): void
+    public function mount()
     {
         $this->form->fill([
             'sort' => 'latest'
@@ -89,6 +90,14 @@ class Discussions extends Component implements HasForms
                     ->orderBy('likes_count', 'desc')
                     ->orderBy('created_at', 'desc');
                 break;
+        }
+
+        if (request('q')) {
+            $query->where(
+                fn($query) => $query
+                    ->where('name', 'like', '%' . request('q') . '%')
+                    ->orWhere('content', 'like', '%' . request('q') . '%')
+            );
         }
 
         $this->discussions = $query->get();
