@@ -1,20 +1,25 @@
 <div class="w-full">
     <button type="button" id="follow-dropdown-btn" data-dropdown-toggle="follow-dropdown"
             class="w-full {{ $bgClass }} px-3 py-2 text-white border-slate-100 rounded hover:cursor-pointer">
-        @switch($type)
-            @case(Followers::NONE->value)
-                <i class="fa-regular fa-star"></i> Follow
-                @break
-            @case(Followers::FOLLOWING->value)
-                <i class="fa-solid fa-star"></i> Following
-                @break
-            @case(Followers::NOT_FOLLOWING->value)
-                <i class="fa-regular fa-star"></i> Not following
-                @break
-            @case(Followers::IGNORING->value)
-                <i class="fa-regular fa-eye-slash"></i> Ignoring
-                @break
-        @endswitch
+        <div wire:loading.remove>
+            @switch($type)
+                @case(Followers::NONE->value)
+                    <i class="fa-regular fa-star"></i> Follow
+                    @break
+                @case(Followers::FOLLOWING->value)
+                    <i class="fa-solid fa-star"></i> Following
+                    @break
+                @case(Followers::NOT_FOLLOWING->value)
+                    <i class="fa-regular fa-star"></i> Not following
+                    @break
+                @case(Followers::IGNORING->value)
+                    <i class="fa-regular fa-eye-slash"></i> Ignoring
+                    @break
+            @endswitch
+        </div>
+        <div wire:loading>
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
     </button>
     <div id="follow-dropdown" class="hidden z-10 w-64 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700" wire:ignore>
         <ul class="text-sm text-slate-700 dark:text-slate-200" aria-labelledby="follow-dropdown-btn">
