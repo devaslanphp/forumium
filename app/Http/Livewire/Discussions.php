@@ -97,6 +97,7 @@ class Discussions extends Component implements HasForms
                 fn($query) => $query
                     ->where('name', 'like', '%' . request('q') . '%')
                     ->orWhere('content', 'like', '%' . request('q') . '%')
+                    ->orWhereHas('tags', fn ($query) => $query->where('name', 'like', '%' . request('q') . '%'))
             );
         }
 

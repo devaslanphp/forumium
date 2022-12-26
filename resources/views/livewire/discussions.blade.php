@@ -78,7 +78,11 @@
             @endforeach
         @else
             <span class="px-3 text-slate-700 font-medium text-sm">
-                No discussions available for now! Please come back later, or start a new discussion.
+                @if(request('q'))
+                    No discussions available for your current search! Maybe you should start a new discussions.
+                @else
+                    No discussions available for now! Please come back later, or start a new discussion.
+                @endif
             </span>
         @endif
     </div>
