@@ -13,10 +13,15 @@ class Discussions extends Component implements HasForms
 {
     use InteractsWithForms;
 
-    public $discussions;
+    private $limitPerPage = 10;
+    public $disableLoadMore = false;
     public $tag;
     public $selectedSort;
     public $q;
+
+    protected $listeners = [
+        'loadMore'
+    ];
 
     public function mount()
     {
@@ -24,12 +29,17 @@ class Discussions extends Component implements HasForms
         $this->form->fill([
             'sort' => 'latest'
         ]);
-        $this->loadData();
     }
 
     public function render()
     {
-        return view('livewire.discussions');
+        $discussions = $this->loadData();
+        return view('livewire.discussions', compact('discussions'));
+    }
+
+    public function loadMore()
+    {
+        $this->limitPerPage = $this->limitPerPage + 6;
     }
 
     protected function getFormSchema(): array
@@ -62,7 +72,7 @@ class Discussions extends Component implements HasForms
         ];
     }
 
-    public function loadData(): void
+    public function loadData()
     {
         $data = $this->form->getState();
         $sort = $data['sort'] ?? 'latest';
@@ -108,6 +118,13 @@ class Discussions extends Component implements HasForms
             );
         }
 
-        $this->discussions = $query->get();
+        $data = $query->paginate($this->limitPerPage);
+        if ($data->hasMorePages()) {
+            $this->disableLoadMore = false;
+        } else {
+            $this->disableLoadMore = true;
+        }
+
+        return $data;
     }
 }
