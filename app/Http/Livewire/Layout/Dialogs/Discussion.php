@@ -46,6 +46,7 @@ class Discussion extends Component implements HasForms
                         ->required()
                         ->multiple()
                         ->columnSpan(2)
+                        ->maxItems(3)
                         ->options(Tag::all()->pluck('name', 'id'))
                 ]),
 

@@ -58,16 +58,18 @@
                             </span>
                         </div>
                     </div>
-                    <div class="flex flex-row items-center gap-3">
-                        <div class="flex items-center">
+                    <div class="flex flex-row items-center gap-3 lg:pl-0 pl-14">
+                        <div class="flex items-center lg:order-1 order-2">
                             @include('partials.discussions.tags', ['tags' => $discussion->tags, 'ignore_first' => true])
                         </div>
-                        <span class="text-sm text-slate-500 flex items-center gap-1">
-                            <i class="fa-regular fa-thumbs-up"></i> {{ $discussion->likes()->count() }}
-                        </span>
-                        <span class="text-sm text-slate-500 flex items-center gap-1">
-                            <i class="fa-regular fa-comment"></i> {{ $discussion->replies()->count() + $discussion->comments()->count() }}
-                        </span>
+                        <div class="flex items-center gap-3 lg:order-2 order-1">
+                            <span class="text-sm text-slate-500 flex items-center gap-1">
+                                <i class="fa-regular fa-thumbs-up"></i> {{ $discussion->likes()->count() }}
+                            </span>
+                                <span class="text-sm text-slate-500 flex items-center gap-1">
+                                <i class="fa-regular fa-comment"></i> {{ $discussion->replies()->count() + $discussion->comments()->count() }}
+                            </span>
+                        </div>
                     </div>
                 </a>
             @endforeach
