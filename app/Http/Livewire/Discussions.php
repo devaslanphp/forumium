@@ -6,9 +6,8 @@ use App\Models\Discussion;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Illuminate\Support\Facades\Route;
-use Livewire\Component;
 use Filament\Forms\Contracts\HasForms;
+use Livewire\Component;
 
 class Discussions extends Component implements HasForms
 {
@@ -16,9 +15,12 @@ class Discussions extends Component implements HasForms
 
     public $discussions;
     public $tag;
+    public $selectedSort;
+    public $q;
 
     public function mount()
     {
+        $this->q = request('q');
         $this->form->fill([
             'sort' => 'latest'
         ]);
@@ -74,30 +76,35 @@ class Discussions extends Component implements HasForms
         }
 
         switch ($sort) {
-            case 'latest':
-                $query->orderBy('created_at', 'desc');
-                break;
             case 'oldest':
                 $query->orderBy('created_at', 'asc');
+                $this->selectedSort = 'Oldest discussions';
                 break;
             case 'trending':
                 $query->withCount('comments')
                     ->orderBy('comments_count', 'desc')
                     ->orderBy('created_at', 'desc');
+                $this->selectedSort = 'Trending discussions (Most commented)';
                 break;
             case 'most-liked':
                 $query->withCount('likes')
                     ->orderBy('likes_count', 'desc')
                     ->orderBy('created_at', 'desc');
+                $this->selectedSort = 'Most liked discussions';
+                break;
+            case 'latest':
+            default:
+                $query->orderBy('created_at', 'desc');
+                $this->selectedSort = 'Latest discussions';
                 break;
         }
 
-        if (request('q')) {
+        if ($this->q) {
             $query->where(
                 fn($query) => $query
-                    ->where('name', 'like', '%' . request('q') . '%')
-                    ->orWhere('content', 'like', '%' . request('q') . '%')
-                    ->orWhereHas('tags', fn ($query) => $query->where('name', 'like', '%' . request('q') . '%'))
+                    ->where('name', 'like', '%' . $this->q . '%')
+                    ->orWhere('content', 'like', '%' . $this->q . '%')
+                    ->orWhereHas('tags', fn($query) => $query->where('name', 'like', '%' . $this->q . '%'))
             );
         }
 
