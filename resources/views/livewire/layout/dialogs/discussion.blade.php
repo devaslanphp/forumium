@@ -1,4 +1,4 @@
-<div class="space-y-6 w-full flex flex-col">
+<div class="space-y-6 w-full flex flex-col mt-5">
     <form class="flex flex-col gap-5">
         {{ $this->form }}
         <!-- Modal footer -->

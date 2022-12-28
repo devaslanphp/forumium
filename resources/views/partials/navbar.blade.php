@@ -76,13 +76,19 @@
                     </a>
                 </li>
                 @if(auth()->guest() || (!auth()->guest() && !auth()->user()->hasVerifiedEmail()))
-                    <li>
-                        <button type="button" data-modal-toggle="sign-up-modal"
-                                class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Sign up</button>
-                    </li>
+                    @if(Configurations::case('Enable registration'))
+                        <li>
+                            <button type="button" data-modal-toggle="sign-up-modal"
+                                    class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
+                                Sign up
+                            </button>
+                        </li>
+                    @endif
                     <li>
                         <button type="button" data-modal-toggle="login-modal"
-                                class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">Log in</button>
+                                class="block py-2 pl-3 pr-4 text-slate-700 rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
+                            Log in
+                        </button>
                     </li>
                 @endif
                 @if(!auth()->guest() && auth()->user()->hasVerifiedEmail())

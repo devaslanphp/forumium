@@ -214,6 +214,7 @@ return [
         'Notifications' => App\Core\NotificationConstants::class,
         'Followers' => App\Core\FollowerConstants::class,
         'Socials' => App\Core\SocialConstants::class,
+        'Configurations' => App\Core\ConfigurationConstants::class,
     ])->toArray(),
 
 ];

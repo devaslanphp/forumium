@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Layout\Dialogs;
 
+use App\Core\ConfigurationConstants;
 use App\Models\Discussion as DiscussionModel;
 use App\Models\DiscussionTag;
 use App\Models\Tag;
@@ -10,6 +11,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\Str;
@@ -28,6 +30,7 @@ class Discussion extends Component implements HasForms
             $data['name'] = $this->discussion->name;
             $data['content'] = $this->discussion->content;
             $data['tags'] = $this->discussion->tags->pluck('id')->toArray();
+            $data['is_public'] = $this->discussion->is_public;
         }
         $this->form->fill($data);
     }
@@ -40,9 +43,14 @@ class Discussion extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
+            Toggle::make('is_public')
+                ->label('Is this discussion public?')
+                ->visible(fn () => ConfigurationConstants::case('Enable public discussions')),
+
             Grid::make()
                 ->columns(5)
                 ->schema([
+
                     TextInput::make('name')
                         ->label('Discussion title')
                         ->required()
@@ -55,12 +63,13 @@ class Discussion extends Component implements HasForms
                         ->multiple()
                         ->columnSpan(2)
                         ->maxItems(3)
-                        ->options(Tag::all()->pluck('name', 'id'))
+                        ->options(Tag::all()->pluck('name', 'id')),
+
                 ]),
 
             RichEditor::make('content')
                 ->label('Discussion content')
-                ->required()
+                ->required(),
         ];
     }
 
@@ -71,6 +80,7 @@ class Discussion extends Component implements HasForms
         if ($this->discussion) {
             $this->discussion->name = $data['name'];
             $this->discussion->content = $data['content'];
+            $this->discussion->is_public = $data['is_public'] ?? false;
             $this->discussion->save();
             DiscussionTag::where('discussion_id', $this->discussion->id)->delete();
             $update = true;
@@ -79,7 +89,8 @@ class Discussion extends Component implements HasForms
             $discussion = DiscussionModel::create([
                 'name' => $data['name'],
                 'user_id' => auth()->user()->id,
-                'content' => $data['content']
+                'content' => $data['content'],
+                'is_public' => $data['is_public'] ?? false
             ]);
         }
         foreach ($data['tags'] as $tag) {

@@ -20,11 +20,11 @@
                 @include('partials.layouts.discussion-item', compact('discussion'))
             @endforeach
         @else
-            <span class="px-3 text-slate-700 font-medium text-sm">
+            <span class="text-slate-700 font-medium text-sm">
                 @if($q)
-                    No discussions available for your current search! Maybe you should start a new discussions.
+                    No discussions available for your current search! @if(auth()->user() && auth()->user()->hasVerifiedEmail()) Maybe you should start a new discussions. @endif
                 @else
-                    No discussions available for now! Please come back later, or start a new discussion.
+                    No discussions available for now! @if(auth()->user() && auth()->user()->hasVerifiedEmail()) Please come back later, or start a new discussion. @else Please come back later. @endif
                 @endif
             </span>
         @endif

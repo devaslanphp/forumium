@@ -22,6 +22,11 @@
                 <span class="lg:flex lg:flex-row block justify-center lg:items-center items-start gap-2">
                     <i class="fa-regular fa-comments"></i> {{ $replies }} {{ $replies > 1 ? 'replies' : 'reply' }} / {{ $comments }} {{ $comments > 1 ? 'comments' : 'comment' }}
                 </span>
+                @if($isPublic)
+                    <span class="lg:flex lg:flex-row block justify-center lg:items-center items-start gap-2">
+                        <i class="fa-solid fa-globe"></i> Public discussion
+                    </span>
+                @endif
             </div>
         </div>
     </div>

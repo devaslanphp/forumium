@@ -79,6 +79,10 @@ class Discussions extends Component implements HasForms
 
         $query = Discussion::query();
 
+        if (!auth()->user() || !auth()->user()->hasVerifiedEmail()) {
+            $query->where('is_public', true);
+        }
+
         if ($this->tag) {
             $query->whereHas('tags', function ($query) {
                 return $query->where('tags.id', $this->tag);
