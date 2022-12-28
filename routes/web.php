@@ -24,7 +24,7 @@ Route::view('/', 'home')
 
 Route::get('discussion/{discussion}/{slug}', function (Discussion $discussion) {
     return view('discussion', compact('discussion'));
-})->name('discussion');
+})->name('discussion')->middleware('discussion');
 
 Route::redirect('/redirect-to-home', '/')
     ->name('login');
