@@ -13,7 +13,7 @@ class Reply extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'content', 'user_id', 'discussion_id'
+        'content', 'user_id', 'discussion_id', 'is_best'
     ];
 
     public function user(): BelongsTo

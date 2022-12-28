@@ -1,5 +1,18 @@
-<div class="flex flex-row gap-5 w-full border-b border-slate-200 py-5 hovered-section" id="reply-{{ $reply->id }}">
-    <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
+<div class="flex flex-row w-full border-b border-slate-200 py-5 hovered-section" id="reply-{{ $reply->id }}">
+    <div class="flex flex-col gap-5 w-20">
+        <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
+        @if(
+            (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+            (
+                auth()->user()->id === $reply->user_id
+                || auth()->user()->can(Permissions::EDIT_POSTS->value)
+            )
+        )
+            <button wire:click="toggleBestFlag()" class="w-16 text-center bg-transparent text-4xl flex justify-center items-center {{ $reply->is_best ? 'text-green-500 hover:text-green-500/80' : 'text-slate-500 hover:text-slate-500/80 hover-action' }}">
+                <i class="fa-solid fa-check"></i>
+            </button>
+        @endif
+    </div>
     <div class="w-full flex flex-col">
         <span class="text-slate-700 font-medium">{{ $reply->user->name }}</span>
         <span class="text-slate-500 text-sm mt-1">{{ $reply->created_at->diffForHumans() }}</span>

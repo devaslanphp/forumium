@@ -204,4 +204,11 @@ class ReplyDetails extends Component implements HasForms
     {
         $this->reply->refresh();
     }
+
+    public function toggleBestFlag(): void
+    {
+        $this->reply->is_best = !$this->reply->is_best;
+        $this->reply->save();
+        $this->reply->refresh();
+    }
 }

@@ -20,7 +20,7 @@
                         <i class="lg:flex hidden fa-solid fa-sign-in"></i> Joined {{ $user->created_at->diffForHumans() }}
                     </span>
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
-                        <i class="lg:flex hidden fa-solid fa-check"></i> 0 best answer
+                        <i class="lg:flex hidden fa-solid fa-check"></i> {{ $bestAnswers }} best {{ $bestAnswers > 1 ? 'answers' : 'answer' }}
                     </span>
                     <span class="flex lg:flex-row flex-col justify-center lg:items-center items-start gap-2">
                         <i class="lg:flex hidden fa-solid fa-medal"></i> 0 points

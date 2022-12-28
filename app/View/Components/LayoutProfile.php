@@ -9,6 +9,7 @@ class LayoutProfile extends Component
 {
     public string|null $title;
     public Authenticatable $user;
+    public int $bestAnswers = 0;
 
     /**
      * Create a new component instance.
@@ -19,6 +20,7 @@ class LayoutProfile extends Component
     {
         $this->user = auth()->user();
         $this->title = $title;
+        $this->bestAnswers = $this->user->replies()->where('is_best', true)->count();
     }
 
     /**
