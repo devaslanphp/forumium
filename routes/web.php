@@ -85,6 +85,9 @@ Route::middleware(['auth', 'verified'])
                     Route::view('/likes', 'profile.likes')
                         ->name('likes');
 
+                    Route::view('/comments', 'profile.comments')
+                        ->name('comments');
+
                 }
         );
 

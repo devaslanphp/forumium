@@ -60,5 +60,21 @@
         </div>
     @endif
 
+    @push('scripts')
+        @if(request('reply'))
+            <script>
+                window.addEventListener('load', function () {
+                    setTimeout(() => {
+                        const element = document.getElementById("discussion-reply-{{ request('reply') }}");
+                        element.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        element.classList.add('bg-yellow-50');
+                    }, 200)
+                });
+            </script>
+        @endif
+    @endpush
+
 
 </x-layout>
