@@ -89,7 +89,7 @@
                     <li>
                         <button type="button" id="profile-dropdown" data-dropdown-toggle="dropdown"
                                 class="flex items-center gap-2 py-2 pl-3 pr-4 {{ Route::is('profile.*') ? 'text-blue-700' : 'text-slate-700' }} rounded hover:bg-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-slate-400 md:dark:hover:text-white dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700" aria-current="page">
-                            <img src="{{ auth()->user()->avatarUrl }}" alt="Avatar" class="rounded-full w-6 h-6" /> {{ auth()->user()->name }}
+                            <img src="{{ auth()->user()->avatarUrl }}" alt="Avatar" class="rounded-full w-6 h-6 border order-slate-200 shadow" /> {{ auth()->user()->name }}
                         </button>
 
                         <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-slate-100 shadow dark:bg-slate-700">

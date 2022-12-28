@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5" id="discussion">
-    <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
+    <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16 border border-slate-200 shadow" />
     <div class="w-full flex flex-col">
         <div class="w-full flex items-center justify-between gap-2">
             <div class="flex flex-col">

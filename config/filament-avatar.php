@@ -10,7 +10,7 @@ return [
     | This value is the provider to use when generating the user's avatar url
     |
     */
-    'default_provider' => 'ui-avatar',
+    'default_provider' => 'custom-avatar',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +58,15 @@ return [
 
             // User's field used to generate avatar
             'name_field' => 'email'
+        ],
+
+        // Custom avatar (user's picture field)
+        'custom-avatar' => [
+            // Class used to generate the user avatar
+            'class' => \App\Core\CustomUserAvatar::class,
+
+            // User's field used to generate avatar
+            'name_field' => 'picture'
         ],
     ],
 

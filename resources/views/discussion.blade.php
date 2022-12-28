@@ -9,14 +9,6 @@
         <div class="container  mx-auto flex lg:flex-row flex-col gap-10">
             <div class="flex flex-col lg:w-5/6 w-full lg:order-1 order-2">
                 <livewire:discussion.discussion-details :discussion="$discussion" />
-                @php($replies = $discussion->replies()->count())
-                @if($replies)
-                    <div class="w-full flex flex-col gap-5 mb-10">
-                        <span class="text-slate-700 text-lg">
-                            {{ $replies }} {{ $replies > 1 ? 'Replies' : 'Reply' }}
-                        </span>
-                    </div>
-                @endif
                 <livewire:discussion.replies :discussion="$discussion" />
             </div>
             <div class="flex lg:flex-col flex-row gap-3 lg:w-1/6 w-full lg:order-2 order-1">
