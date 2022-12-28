@@ -213,6 +213,7 @@ return [
         'Permissions' => App\Core\PermissionConstants::class,
         'Notifications' => App\Core\NotificationConstants::class,
         'Followers' => App\Core\FollowerConstants::class,
+        'Socials' => App\Core\SocialConstants::class,
     ])->toArray(),
 
 ];
