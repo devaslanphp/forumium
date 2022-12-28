@@ -22,7 +22,7 @@
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-1">
                                 <span class="font-medium text-slate-500">
-                                    <span class="font-medium text-slate-400">You commented</span>
+                                    <span class="font-medium text-slate-400">You added a comment to</span>
                                     @if($discussion->is_resolved)
                                         <span class="font-normal">[Resolved]</span>
                                     @endif

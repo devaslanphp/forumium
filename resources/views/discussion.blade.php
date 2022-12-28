@@ -101,6 +101,12 @@
                     scrollToElement("reply-{{ request('r') }}", true);
                 });
             </script>
+        @elseif(request('d'))
+            <script>
+                window.addEventListener('load', function () {
+                    scrollToElement("discussion", true);
+                });
+            </script>
         @endif
 
     @endpush
