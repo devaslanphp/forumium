@@ -16,7 +16,7 @@
         @endif
     </div>
     <div class="w-full flex flex-col">
-        <a href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}" class="hover:underline text-slate-700 font-medium">{{ $reply->user->name }}</span>
+        <a href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}" class="hover:underline text-slate-700 font-medium">{{ $reply->user->name }}</a>
         <span class="text-slate-500 text-sm mt-1">{{ $reply->created_at->diffForHumans() }}</span>
         @if($edit)
             <livewire:discussion.reply :discussion="$reply->discussion" :reply="$reply" />
