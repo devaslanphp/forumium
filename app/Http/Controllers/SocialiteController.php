@@ -16,7 +16,7 @@ class SocialiteController extends Controller
 
     public function __construct()
     {
-        $this->providers = array_column(SocialConstants::cases(), 'value');
+        $this->providers = SocialConstants::enabledCases();
     }
 
     public function redirect(Request $request)

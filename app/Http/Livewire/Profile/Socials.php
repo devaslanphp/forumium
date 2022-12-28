@@ -14,7 +14,7 @@ class Socials extends Component
 
     public function mount()
     {
-        $this->providers = array_column(SocialConstants::cases(), 'value');
+        $this->providers = SocialConstants::enabledCases();
         $this->user = auth()->user();
     }
 
