@@ -1,7 +1,7 @@
 <div class="flex flex-row w-full border-b border-slate-200 py-5 hovered-section" id="reply-{{ $reply->id }}">
     <div class="flex flex-col gap-5 w-20">
         <a href="{{ route('user', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}">
-            <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16 border border-slate-200 shadow" />
+            <div class="bg-cover bg-center rounded-full w-16 h-16 border border-slate-200 shadow" style="background-image: url({{ $reply->user->avatarUrl }})"></div>
         </a>
         @if(
             (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
