@@ -61,19 +61,48 @@
     @endif
 
     @push('scripts')
-        @if(request('reply'))
+        <script>
+            function scrollToElement(id, color) {
+                setTimeout(() => {
+                    const element = document.getElementById(id);
+                    element.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (color) {
+                        element.classList.add('bg-yellow-50');
+                    }
+                }, 200)
+            }
+        </script>
+        @if(request('c') && request('r'))
             <script>
                 window.addEventListener('load', function () {
-                    setTimeout(() => {
-                        const element = document.getElementById("discussion-reply-{{ request('reply') }}");
-                        element.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                        element.classList.add('bg-yellow-50');
-                    }, 200)
+                    const reply = document.getElementById("reply-{{ request('r') }}");
+                    scrollToElement("reply-{{ request('r') }}", false);
+                    reply.querySelector('.toggle-comments').click();
+                    window.addEventListener('replyCommentsLoaded', function () {
+                        scrollToElement("comment-{{ request('c') }}", true);
+                    });
+                });
+            </script>
+        @elseif(request('c') && request('d'))
+            <script>
+                window.addEventListener('load', function () {
+                    const discussion = document.getElementById("discussion");
+                    discussion.querySelector('.toggle-comments').click();
+                    window.addEventListener('discussionCommentsLoaded', function () {
+                        scrollToElement("comment-{{ request('c') }}", true);
+                    });
+                });
+            </script>
+        @elseif(request('r'))
+            <script>
+                window.addEventListener('load', function () {
+                    scrollToElement("reply-{{ request('r') }}", true);
                 });
             </script>
         @endif
+
     @endpush
 
 

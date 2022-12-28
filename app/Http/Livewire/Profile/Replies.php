@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Profile;
 
-use App\Models\Discussion;
 use App\Models\Reply;
 use Livewire\Component;
 

@@ -1,4 +1,4 @@
-<div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5">
+<div class="flex flex-row gap-5 w-full border-b border-slate-200 pb-5 mb-5" id="discussion">
     <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16" />
     <div class="w-full flex flex-col">
         <div class="w-full flex items-center justify-between gap-2">
@@ -31,7 +31,7 @@
                             <i class="fa-regular fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
                         </div>
                     @endif
-                    <button wire:click="toggleComments()" type="button" class="flex items-center gap-2 hover:cursor-pointer">
+                    <button wire:click="toggleComments()" type="button" class="flex items-center gap-2 hover:cursor-pointer toggle-comments">
                         <i class="fa-regular fa-comment"></i> {{ $comments }} {{ $comments > 1 ? 'Comments' : 'Comment' }}
                     </button>
                     @if(
@@ -63,13 +63,13 @@
             </div>
             @if($showComments)
                 <div class="w-full flex flex-col gap-2 mt-5">
-                <span class="text-slate-700 text-lg">
-                    {{ $comments }} {{ $comments > 1 ? 'Comments' : 'Comment' }}
-                </span>
+                    <span class="text-slate-700 text-lg">
+                        {{ $comments }} {{ $comments > 1 ? 'Comments' : 'Comment' }}
+                    </span>
                     <div class="w-full flex flex-col gap-0 bg-slate-50 border-y border-slate-100">
                         @if($discussion->comments->count())
                             @foreach($discussion->comments as $c)
-                                <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section">
+                                <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section" id="comment-{{ $c->id }}">
                                     <div class="w-full text-slate-700 text-sm">
                                         <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                     </div>

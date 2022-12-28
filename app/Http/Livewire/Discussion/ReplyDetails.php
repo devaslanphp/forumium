@@ -195,6 +195,9 @@ class ReplyDetails extends Component implements HasForms
     public function toggleComments(): void
     {
         $this->showComments = !$this->showComments;
+        if ($this->showComments) {
+            $this->dispatchBrowserEvent('replyCommentsLoaded');
+        }
     }
 
     public function replyCommentSaved(): void
