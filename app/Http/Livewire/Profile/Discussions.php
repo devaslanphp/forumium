@@ -15,11 +15,6 @@ class Discussions extends Component
         'loadMore'
     ];
 
-    public function mount()
-    {
-        $this->user = auth()->user();
-    }
-
     public function render()
     {
         $discussions = $this->loadData();

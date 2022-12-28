@@ -16,9 +16,9 @@ class LayoutProfile extends Component
      *
      * @return void
      */
-    public function __construct(string|null $title = null)
+    public function __construct($user, string|null $title = null)
     {
-        $this->user = auth()->user();
+        $this->user = $user ?? auth()->user();
         $this->title = $title;
         $this->bestAnswers = $this->user->replies()->where('is_best', true)->count();
     }

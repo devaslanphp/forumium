@@ -95,12 +95,46 @@ Route::middleware(['auth', 'verified'])
             }
         );
 
+        Route::group(
+            ['as' => 'user.', 'prefix' => 'user/{user}/{slug}'],
+            function () {
+                Route::get('', function (User $user) {
+                    if ($user->id == auth()->user()->id) {
+                        return redirect()->route('profile.index');
+                    }
+                    return view('profile.index', compact('user'));
+                })
+                    ->name('index');
+
+                Route::get('/replies', function (User $user) {
+                    return view('profile.replies', compact('user'));
+                })
+                    ->name('replies');
+
+                Route::get('/best-replies', function (User $user) {
+                    return view('profile.best-replies', compact('user'));
+                })
+                    ->name('best-replies');
+
+                Route::get('/discussions', function (User $user) {
+                    return view('profile.discussions', compact('user'));
+                })
+                    ->name('discussions');
+
+                Route::get('/likes', function (User $user) {
+                    return view('profile.likes', compact('user'));
+                })
+                    ->name('likes');
+
+                Route::get('/comments', function (User $user) {
+                    return view('profile.comments', compact('user'));
+                })
+                    ->name('comments');
+
+            }
+        );
+
         Route::get('logout', LogoutController::class)
             ->name('logout');
-
-        Route::get('user/{user}/{slug}', function (User $user) {
-            return view('user', compact('user'));
-        })
-            ->name('user');
 
     });

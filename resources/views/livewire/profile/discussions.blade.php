@@ -1,6 +1,11 @@
 <div class="w-full flex flex-col">
     <div class="text-slate-700 text-lg flex items-center gap-2">
-        Your discussions <div wire:loading><i class="fa fa-spinner fa-spin"></i></div>
+        @if(auth()->user()->id == $user->id)
+            Your discussions
+        @else
+            Discussions
+        @endif
+        <div wire:loading><i class="fa fa-spinner fa-spin"></i></div>
     </div>
     <div class="w-full flex flex-col">
         @if($discussions->count())

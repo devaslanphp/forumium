@@ -16,11 +16,6 @@ class Comments extends Component
         'loadMore'
     ];
 
-    public function mount()
-    {
-        $this->user = auth()->user();
-    }
-
     public function render()
     {
         $comments = $this->loadData();

@@ -1,4 +1,5 @@
-<x-layout-profile>
+@php($user = $user ?? auth()->user())
+<x-layout-profile :user="$user">
 
     <x-slot name="title">Settings</x-slot>
 

@@ -15,11 +15,6 @@ class Likes extends Component
         'loadMore'
     ];
 
-    public function mount()
-    {
-        $this->user = auth()->user();
-    }
-
     public function render()
     {
         $likes = $this->loadData();
