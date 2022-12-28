@@ -12,6 +12,10 @@
         <span class="w-[30px]"><i class="fa-regular fa-comment"></i></span>
         <span>Replies</span>
     </a>
+    <a href="{{ route('profile.best-replies') }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-r-0 border-r border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is('profile.best-replies') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
+        <span class="w-[30px]"><i class="fa-solid fa-check-to-slot"></i></span>
+        <span>Best replies</span>
+    </a>
     <a href="{{ route('profile.comments') }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-r-0 border-r border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is('profile.comments') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
         <span class="w-[30px]"><i class="fa-regular fa-comments"></i></span>
         <span>Comments</span>

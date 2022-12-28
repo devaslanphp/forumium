@@ -79,6 +79,9 @@ Route::middleware(['auth', 'verified'])
                     Route::view('/replies', 'profile.replies')
                         ->name('replies');
 
+                    Route::view('/best-replies', 'profile.best-replies')
+                        ->name('best-replies');
+
                     Route::view('/discussions', 'profile.discussions')
                         ->name('discussions');
 

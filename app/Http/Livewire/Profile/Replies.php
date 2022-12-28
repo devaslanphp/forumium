@@ -11,6 +11,8 @@ class Replies extends Component
     private $limitPerPage = 10;
     public $disableLoadMore = false;
 
+    public bool $isBest = false;
+
     protected $listeners = [
         'loadMore'
     ];
@@ -35,6 +37,10 @@ class Replies extends Component
     {
         $query = Reply::query();
         $query->where('user_id', $this->user->id);
+
+        if ($this->isBest) {
+            $query->where('is_best', true);
+        }
 
         $data = $query->paginate($this->limitPerPage);
         if ($data->hasMorePages()) {
