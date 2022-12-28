@@ -1,6 +1,6 @@
 <div class="flex flex-row w-full border-b border-slate-200 py-5 hovered-section" id="reply-{{ $reply->id }}">
     <div class="flex flex-col gap-5 w-20">
-        <a href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}">
+        <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer">
             <div class="bg-cover bg-center rounded-full w-16 h-16 border border-slate-200 shadow" style="background-image: url({{ $reply->user->avatarUrl }})"></div>
         </a>
         @if(
@@ -16,7 +16,7 @@
         @endif
     </div>
     <div class="w-full flex flex-col">
-        <a href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}" class="hover:underline text-slate-700 font-medium">{{ $reply->user->name }}</a>
+        <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer hover:underline text-slate-700 font-medium">{{ $reply->user->name }}</a>
         <span class="text-slate-500 text-sm mt-1">{{ $reply->created_at->diffForHumans() }}</span>
         @if($edit)
             <livewire:discussion.reply :discussion="$reply->discussion" :reply="$reply" />
@@ -84,7 +84,7 @@
                         @foreach($reply->comments as $c)
                             <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section" id="comment-{{ $c->id }}">
                                 <div class="w-full text-slate-700 text-sm">
-                                    <a href="{{ route('user.index', ['user' => $c->user, 'slug' => Str::slug($c->user->name)]) }}" class="hover:underline font-medium">{{ $c->user->name }}</a> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
+                                    <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $c->user, 'slug' => Str::slug($c->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer hover:underline font-medium">{{ $c->user->name }}</a> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
                                 <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
                                     @if(
