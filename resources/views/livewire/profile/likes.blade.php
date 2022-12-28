@@ -32,8 +32,10 @@
                 <a href="{{ route('discussion', $params) }}"
                    class="lg:w-1/2 w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer hover:rounded transition-all">
                     <div class="w-full flex gap-3 border-slate-200 py-5 border-b mx-3">
-                        <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
-                             class="rounded-full w-10 h-10"/>
+                        <a href="{{ route('user', ['user' => $discussion->user, 'slug' => Str::slug($discussion->user->name)]) }}">
+                            <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
+                                 class="rounded-full w-10 h-10"/>
+                        </a>
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-1">
                                 <span class="font-medium text-slate-500">

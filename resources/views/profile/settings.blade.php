@@ -36,6 +36,13 @@
         </span>
         <livewire:profile.notifications />
     </div>
+    <div class="w-full flex flex-col gap-3">
+        <span class="font-medium text-slate-700">Profile details</span>
+        <span class="text-xs text-slate-700 mb-5">
+            Update your profile information
+        </span>
+        <livewire:profile.details />
+    </div>
 
     {{-- DIALOGS --}}
     @include('partials.profile.dialogs.password')

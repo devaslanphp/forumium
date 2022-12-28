@@ -1,5 +1,5 @@
 <div class="w-full flex flex-wrap">
-    <a href="{{ route('profile.discussions') }}" class="lg:w-1/4 w-full p-3">
+    <a @if($user->id == auth()->user()->id) href="{{ route('profile.discussions') }}" @endif class="lg:w-1/4 w-full p-3">
         <div class="w-full rounded-lg hover:shadow border border-slate-200 bg-white flex justify-start items-center gap-5 p-5">
             <span class="w-12 h-12 flex justify-center items-center text-center bg-orange-100 text-orange-500 rounded-full">
                 <i class="fa-solid fa-bars"></i>
@@ -11,7 +11,7 @@
         </div>
     </a>
 
-    <a href="{{ route('profile.replies') }}" class="lg:w-1/4 w-full p-3">
+    <a @if($user->id == auth()->user()->id) href="{{ route('profile.replies') }}" @endif class="lg:w-1/4 w-full p-3">
         <div class="w-full rounded-lg hover:shadow border border-slate-200 bg-white flex justify-start items-center gap-5 p-5">
             <span class="w-12 h-12 flex justify-center items-center text-center bg-blue-100 text-blue-500 rounded-full">
                 <i class="fa-regular fa-comment"></i>
@@ -23,7 +23,7 @@
         </div>
     </a>
 
-    <a href="{{ route('profile.comments') }}" class="lg:w-1/4 w-full p-3">
+    <a @if($user->id == auth()->user()->id) href="{{ route('profile.comments') }}" @endif class="lg:w-1/4 w-full p-3">
         <div class="w-full rounded-lg hover:shadow border border-slate-200 bg-white flex justify-start items-center gap-5 p-5">
             <span class="w-12 h-12 flex justify-center items-center text-center bg-purple-100 text-purple-500 rounded-full">
                 <i class="fa-regular fa-comments"></i>
@@ -35,7 +35,7 @@
         </div>
     </a>
 
-    <a href="{{ route('profile.likes') }}" class="lg:w-1/4 w-full p-3">
+    <a @if($user->id == auth()->user()->id) href="{{ route('profile.likes') }}" @endif class="lg:w-1/4 w-full p-3">
         <div class="w-full rounded-lg hover:shadow border border-slate-200 bg-white flex justify-start items-center gap-5 p-5">
             <span class="w-12 h-12 flex justify-center items-center text-center bg-green-100 text-green-500 rounded-full">
                 <i class="fa-regular fa-thumbs-up"></i>

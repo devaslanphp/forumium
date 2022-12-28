@@ -5,6 +5,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SocialiteController;
 use App\Models\Discussion;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,31 +71,36 @@ Route::middleware(['auth', 'verified'])
             ['as' => 'profile.', 'prefix' => 'profile'],
             function () {
 
-                    Route::view('/', 'profile.index')
-                        ->name('index');
+                Route::view('/', 'profile.index')
+                    ->name('index');
 
-                    Route::view('/settings', 'profile.settings')
-                        ->name('settings');
+                Route::view('/settings', 'profile.settings')
+                    ->name('settings');
 
-                    Route::view('/replies', 'profile.replies')
-                        ->name('replies');
+                Route::view('/replies', 'profile.replies')
+                    ->name('replies');
 
-                    Route::view('/best-replies', 'profile.best-replies')
-                        ->name('best-replies');
+                Route::view('/best-replies', 'profile.best-replies')
+                    ->name('best-replies');
 
-                    Route::view('/discussions', 'profile.discussions')
-                        ->name('discussions');
+                Route::view('/discussions', 'profile.discussions')
+                    ->name('discussions');
 
-                    Route::view('/likes', 'profile.likes')
-                        ->name('likes');
+                Route::view('/likes', 'profile.likes')
+                    ->name('likes');
 
-                    Route::view('/comments', 'profile.comments')
-                        ->name('comments');
+                Route::view('/comments', 'profile.comments')
+                    ->name('comments');
 
-                }
+            }
         );
 
         Route::get('logout', LogoutController::class)
             ->name('logout');
+
+        Route::get('user/{user}/{slug}', function (User $user) {
+            return view('user', compact('user'));
+        })
+            ->name('user');
 
     });

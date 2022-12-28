@@ -17,8 +17,10 @@
                 <a href="{{ route('discussion', ['discussion' => $discussion, 'slug' => Str::slug($discussion->name), 'c' => $comment->id, $key => $comment->source_id]) }}"
                    class="w-full flex lg:flex-row flex-col lg:gap-0 gap-3 items-start justify-between hover:bg-slate-100 hover:cursor-pointer px-3 hover:rounded transition-all border-slate-200 py-5 {{ $loop->last ? '' : 'border-b' }}">
                     <div class="flex gap-3">
-                        <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
-                             class="rounded-full w-10 h-10"/>
+                        <a href="{{ route('user', ['user' => $discussion->user, 'slug' => Str::slug($discussion->user->name)]) }}">
+                            <img src="{{ $discussion->user->avatarUrl }}" alt="Avatar"
+                                 class="rounded-full w-10 h-10"/>
+                        </a>
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-1">
                                 <span class="font-medium text-slate-500">

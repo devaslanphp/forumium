@@ -7,6 +7,7 @@ use Devaslanphp\FilamentAvatar\Core\HasAvatarUrl;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -124,5 +125,17 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
     public function followings(): BelongsToMany
     {
         return $this->belongsToMany(Discussion::class, 'followers', 'user_id', 'discussion_id')->withPivot('type');
+    }
+
+    public function lastActivity(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->discussions
+                    ->merge($this->replies)
+                    ->merge($this->comments)
+                    ->merge($this->likes)
+                    ->sortByDesc('updated_at')
+                    ->first()?->updated_at ?? $this->updated_at
+        );
     }
 }

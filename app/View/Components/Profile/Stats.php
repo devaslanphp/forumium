@@ -17,9 +17,9 @@ class Stats extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        $this->user = auth()->user();
+        $this->user = $user;
         $this->discussions = $this->user->discussions()->count();
         $this->replies = $this->user->replies()->count();
         $this->comments = $this->user->comments()->count();

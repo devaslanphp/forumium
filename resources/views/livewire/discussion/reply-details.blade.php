@@ -1,6 +1,8 @@
 <div class="flex flex-row w-full border-b border-slate-200 py-5 hovered-section" id="reply-{{ $reply->id }}">
     <div class="flex flex-col gap-5 w-20">
-        <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16 border border-slate-200 shadow" />
+        <a href="{{ route('user', ['user' => $reply->user, 'slug' => Str::slug($reply->user->name)]) }}">
+            <img src="{{ $reply->user->avatarUrl }}" alt="Avatar" class="rounded-full w-16 h-16 border border-slate-200 shadow" />
+        </a>
         @if(
             (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
             (
@@ -82,7 +84,7 @@
                         @foreach($reply->comments as $c)
                             <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section" id="comment-{{ $c->id }}">
                                 <div class="w-full text-slate-700 text-sm">
-                                    <span class="font-medium">{{ $c->user->name }}</span> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
+                                    <a href="{{ route('user', ['user' => $c->user, 'slug' => Str::slug($c->user->name)]) }}" class="hover:underline font-medium">{{ $c->user->name }}</a> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
                                 </div>
                                 <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
                                     @if(
