@@ -13,15 +13,11 @@ class Discussions extends Component implements HasForms
 {
     use InteractsWithForms;
 
-    private $limitPerPage = 10;
+    public $limitPerPage = 10;
     public $disableLoadMore = false;
     public $tag;
     public $selectedSort;
     public $q;
-
-    protected $listeners = [
-        'loadMore'
-    ];
 
     public function mount()
     {
@@ -39,7 +35,7 @@ class Discussions extends Component implements HasForms
 
     public function loadMore()
     {
-        $this->limitPerPage = $this->limitPerPage + 6;
+        $this->limitPerPage = $this->limitPerPage + 10;
     }
 
     protected function getFormSchema(): array
@@ -95,10 +91,10 @@ class Discussions extends Component implements HasForms
                 $this->selectedSort = 'Oldest discussions';
                 break;
             case 'trending':
-                $query->withCount('comments')
-                    ->orderBy('comments_count', 'desc')
+                $query->withCount('replies')
+                    ->orderBy('replies_count', 'desc')
                     ->orderBy('created_at', 'desc');
-                $this->selectedSort = 'Trending discussions (Most commented)';
+                $this->selectedSort = 'Trending discussions (Most replied)';
                 break;
             case 'most-liked':
                 $query->withCount('likes')

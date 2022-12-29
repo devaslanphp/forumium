@@ -10,7 +10,7 @@ class Replies extends Component
 {
     public Discussion $discussion;
     public Reply|null $selectedReply = null;
-    private $limitPerPage = 10;
+    public $limitPerPage = 10;
     public $disableLoadMore = false;
     public $onlyBest = false;
     public $onlyBestEnabled = false;

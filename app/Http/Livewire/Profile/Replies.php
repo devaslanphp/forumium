@@ -8,7 +8,7 @@ use Livewire\Component;
 class Replies extends Component
 {
     public $user;
-    private $limitPerPage = 10;
+    public $limitPerPage = 10;
     public $disableLoadMore = false;
 
     public bool $isBest = false;
