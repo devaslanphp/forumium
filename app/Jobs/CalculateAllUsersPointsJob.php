@@ -43,30 +43,30 @@ class CalculateAllUsersPointsJob implements ShouldQueue
                 // Discussions
                 $user->discussions
                     ->each(function (Discussion $discussion) use ($user) {
-                        dispatch(new CalculateUserPointsJob($user, $discussion, PointsConstants::START_DISCUSSION->value, false));
+                        dispatch(new CalculateUserPointsJob($user, $discussion, PointsConstants::START_DISCUSSION->value));
                     });
 
                 // Replies
                 $user->replies
                     ->each(function (Reply $reply) use ($user) {
-                        dispatch(new CalculateUserPointsJob($user, $reply, PointsConstants::NEW_REPLY->value, false));
+                        dispatch(new CalculateUserPointsJob($user, $reply, PointsConstants::NEW_REPLY->value));
                     });
 
                 // Comments
                 $user->comments
                     ->each(function (Comment $comment) use ($user) {
-                        dispatch(new CalculateUserPointsJob($user, $comment, PointsConstants::NEW_COMMENT->value, false));
+                        dispatch(new CalculateUserPointsJob($user, $comment, PointsConstants::NEW_COMMENT->value));
                     });
 
                 // Likes
                 $user->likes
                     ->each(function (Like $like) {
                         if ($like->source instanceof Discussion) {
-                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::DISCUSSION_LIKED->value, false));
+                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::DISCUSSION_LIKED->value));
                         } elseif ($like->source instanceof Reply) {
-                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::REPLY_LIKED->value, false));
+                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::REPLY_LIKED->value));
                         } elseif ($like->source instanceof Comment) {
-                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::COMMENT_LIKED->value, false));
+                            dispatch(new CalculateUserPointsJob($like->source->user, $like, PointsConstants::COMMENT_LIKED->value));
                         }
                     });
 
@@ -74,7 +74,7 @@ class CalculateAllUsersPointsJob implements ShouldQueue
                 $user->replies()->where('is_best', true)
                     ->get()
                     ->each(function (Reply $reply) use ($user) {
-                        dispatch(new CalculateUserPointsJob($reply->user, $reply, PointsConstants::BEST_REPLY->value, false));
+                        dispatch(new CalculateUserPointsJob($reply->user, $reply, PointsConstants::BEST_REPLY->value));
                     });
             });
     }

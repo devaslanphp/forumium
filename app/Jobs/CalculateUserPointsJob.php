@@ -64,7 +64,10 @@ class CalculateUserPointsJob implements ShouldQueue
             $this->user->total_points = $this->user->total_points + $points;
             $this->user->save();
             if ($this->notify) {
-                dispatch(new DispatchNotificationsJob($this->user, NotificationConstants::POINTS_UPDATED->value, $point));
+                dispatch(new DispatchNotificationsJob($this->user, NotificationConstants::POINTS_UPDATED->value, [
+                    'added' => $point->value,
+                    'current' => $this->user->total_points
+                ]));
             }
         }
     }

@@ -113,7 +113,7 @@ class DispatchNotificationsJob implements ShouldQueue
                 break;
             case NotificationConstants::POINTS_UPDATED->value:
                 $title = 'Points updated';
-                $body = 'Your points are updated (' . ($this->object->value > 0 ? '+' : '-') . $this->object->value . '), you have now ' . $this->user->total_points;
+                $body = 'Your points are updated (' . ($this->object['added'] > 0 ? '+' : '-') . $this->object['added'] . '), you have now ' . $this->object['current'];
                 $url = route('profile.index');
                 break;
         }
