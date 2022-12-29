@@ -16,5 +16,6 @@ enum NotificationConstants: string
     case MY_POSTS_LIKED = "Someone likes one of my posts";
     case MOD_WARNS_ME = "A moderator warns me";
     case DISCUSSION_CREATED_TAG_FOLLOWING = "Someone creates a discussion in a tag I'm following";
+    case POINTS_UPDATED = "My account points are updated after an action";
 
 }
