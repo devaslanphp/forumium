@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Permissions;
 
+use App\Core\RoleConstants;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -22,6 +23,7 @@ class UserRolesSeeder extends Seeder
         $user = User::where('email', $admin)->first();
         $role = Role::where('name', $adminRole)->first();
         if ($user && $role) {
+            UserRole::where('user_id', $user->id)->where('role_id', Role::where('name', RoleConstants::MEMBER->value)->first()->id)->delete();
             if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
                 UserRole::create([
                     'user_id' => $user->id,
@@ -36,26 +38,13 @@ class UserRolesSeeder extends Seeder
         $user = User::where('email', $mod)->first();
         $role = Role::where('name', $modRole)->first();
         if ($user && $role) {
+            UserRole::where('user_id', $user->id)->where('role_id', Role::where('name', RoleConstants::MEMBER->value)->first()->id)->delete();
             if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
                 UserRole::create([
                     'user_id' => $user->id,
                     'role_id' => $role->id
                 ]);
             }
-        }
-
-        // Members
-        $memberRole = RolesSeeder::$memberRole;
-        if ($role = Role::where('name', $memberRole)->first()) {
-            User::whereNotIn('email', [$admin, $mod])
-                ->each(function ($user) use ($role) {
-                    if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
-                        UserRole::create([
-                            'user_id' => $user->id,
-                            'role_id' => $role->id
-                        ]);
-                    }
-                });
         }
     }
 }
