@@ -6,7 +6,7 @@
         $routeParams['slug'] = Str::slug($user->name);
     }
 @endphp
-<div class="w-full flex lg:flex-col flex-row lg:overflow-hidden overflow-auto">
+<div class="w-full flex lg:flex-col flex-row lg:overflow-hidden overflow-auto lg:text-base text-xs">
 
     <a href="{{ route($routePrefix . '.index', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-r-0 border-r border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.index') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
         <span class="w-[30px]"><i class="fa-regular fa-user"></i></span>
@@ -23,7 +23,21 @@
         <span class="w-[30px]"><i class="fa-solid fa-bars"></i></span>
         <span>Discussions</span>
     </a>
-    <a href="{{ route($routePrefix . '.replies', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-r-0 border-r border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.replies') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
+    @if(auth()->user()->id == $user->id)
+        <a href="{{ route($routePrefix . '.following-discussions', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.following-discussions') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
+            <span class="w-[30px]"><i class="fa-solid fa-star"></i></span>
+            <span>Following</span>
+        </a>
+        <a href="{{ route($routePrefix . '.not-following-discussions', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.not-following-discussions') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
+            <span class="w-[30px]"><i class="fa-regular fa-star"></i></span>
+            <span>Not following</span>
+        </a>
+        <a href="{{ route($routePrefix . '.ignoring-discussions', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.ignoring-discussions') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
+            <span class="w-[30px]"><i class="fa-regular fa-eye-slash"></i></span>
+            <span>Ignoring</span>
+        </a>
+    @endif
+    <a href="{{ route($routePrefix . '.replies', $routeParams) }}" class="lg:min-w-full min-w-[150px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-r-0 border-r border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center {{ Route::is($routePrefix . '.replies') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }} lg:mt-5 mt-0">
         <span class="w-[30px]"><i class="fa-regular fa-comment"></i></span>
         <span>Replies</span>
     </a>

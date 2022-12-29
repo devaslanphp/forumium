@@ -36,8 +36,10 @@
                 Load more
             </button>
         @endif
-        <span class="text-xs text-slate-600">
-            Showing {{ min($limitPerPage, $totalCount) }} of {{ $totalCount }} {{ $totalCount > 1 ? 'discussions' : 'discussion' }}
-        </span>
+        @if($totalCount)
+            <span class="text-xs text-slate-600">
+                Showing {{ min($limitPerPage, $totalCount) }} of {{ $totalCount }} {{ $totalCount > 1 ? 'discussions' : 'discussion' }}
+            </span>
+        @endif
     </div>
 </div>

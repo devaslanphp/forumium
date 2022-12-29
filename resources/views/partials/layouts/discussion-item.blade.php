@@ -1,8 +1,11 @@
 @php
-    if(auth()->check()) {
-        $type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value;
-    } else {
-        $type = Followers::NONE->value;
+    $type = $type ?? null;
+    if (!$type) {
+        if(auth()->check()) {
+            $type = $discussion->followers()->where('user_id', auth()->user()->id)->first()?->pivot?->type ?? Followers::NONE->value;
+        } else {
+            $type = Followers::NONE->value;
+        }
     }
 @endphp
 <!-- Item -->

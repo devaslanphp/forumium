@@ -25,10 +25,7 @@
                 @endif
                 @if(
                     (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
-                    (
-                        auth()->user()->id === $discussion->user_id
-                        || auth()->user()->can(Permissions::EDIT_POSTS->value)
-                    )
+                    (auth()->user()->id != $discussion->user_id)
                 )
                     <livewire:discussion.follow :discussion="$discussion" />
                 @endif

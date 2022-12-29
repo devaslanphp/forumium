@@ -86,6 +86,15 @@ Route::middleware(['auth', 'verified'])
                 Route::view('/discussions', 'profile.discussions')
                     ->name('discussions');
 
+                Route::view('/following-discussions', 'profile.following-discussions')
+                    ->name('following-discussions');
+
+                Route::view('/not-following-discussions', 'profile.not-following-discussions')
+                    ->name('not-following-discussions');
+
+                Route::view('/ignoring-discussions', 'profile.ignoring-discussions')
+                    ->name('ignoring-discussions');
+
                 Route::view('/likes', 'profile.likes')
                     ->name('likes');
 
@@ -120,6 +129,21 @@ Route::middleware(['auth', 'verified'])
                     return view('profile.discussions', compact('user'));
                 })
                     ->name('discussions');
+
+                Route::get('/following-discussions', function (User $user) {
+                    return view('profile.following-discussions', compact('user'));
+                })
+                    ->name('following-discussions');
+
+                Route::get('/not-following-discussions', function (User $user) {
+                    return view('profile.not-following-discussions', compact('user'));
+                })
+                    ->name('not-following-discussions');
+
+                Route::get('/ignoring-discussions', function (User $user) {
+                    return view('profile.ignoring-discussions', compact('user'));
+                })
+                    ->name('ignoring-discussions');
 
                 Route::get('/likes', function (User $user) {
                     return view('profile.likes', compact('user'));

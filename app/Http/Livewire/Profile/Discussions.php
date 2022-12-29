@@ -10,6 +10,8 @@ class Discussions extends Component
     public $user;
     public $limitPerPage = 10;
     public $disableLoadMore = false;
+    public $follow = null;
+    public $totalCount = 0;
 
     protected $listeners = [
         'loadMore'
@@ -29,7 +31,17 @@ class Discussions extends Component
     public function loadData()
     {
         $query = Discussion::query();
-        $query->where('user_id', $this->user->id);
+
+        if ($this->follow) {
+            $query->whereHas('followers', function ($query) {
+                return $query->where('followers.user_id', $this->user->id)
+                    ->where('type', $this->follow);
+            });
+        } else {
+            $query->where('user_id', $this->user->id);
+        }
+
+        $this->totalCount = $query->count();
 
         $data = $query->paginate($this->limitPerPage);
         if ($data->hasMorePages()) {
