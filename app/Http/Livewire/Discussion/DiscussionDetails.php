@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
 use App\Jobs\CalculateUserPointsJob;
+use App\Jobs\DispatchNotificationsJob;
 use App\Models\Comment;
 use App\Models\Discussion;
 use App\Models\Like;
@@ -133,6 +135,8 @@ class DiscussionDetails extends Component implements HasForms
 
         if ($isCreation) {
             dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $this->comment, type: PointsConstants::NEW_COMMENT->value));
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::POST_IN_DISCUSSION->value, $this->discussion));
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_COMMENTED->value, $this->comment));
         }
     }
 
@@ -164,6 +168,7 @@ class DiscussionDetails extends Component implements HasForms
                 'source_id' => $this->discussion->id,
                 'source_type' => Discussion::class
             ]);
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->discussion->refresh();
         $this->initDetails();
@@ -186,6 +191,7 @@ class DiscussionDetails extends Component implements HasForms
                 'source_id' => $comment,
                 'source_type' => Comment::class
             ]);
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->discussion->refresh();
 

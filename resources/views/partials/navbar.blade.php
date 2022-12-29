@@ -1,5 +1,5 @@
 <!-- Nav bar -->
-<nav class="min-h-[80px] bg-white border-slate-200 px-2 sm:px-4 py-2.5 rounded dark:bg-slate-900 border-b w-full z-50 items-center justify-center flex">
+<nav class="min-h-[80px] bg-white border-slate-200 px-2 sm:px-4 py-2.5 rounded dark:bg-slate-900 border-b w-full items-center justify-center flex">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <div class="flex items-center gap-2">
             <button @click="sidebarOpen = true" class="inline-flex items-center p-2 text-sm text-slate-500 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600">
@@ -13,6 +13,8 @@
             </a>
         </div>
         <div class="flex md:order-2">
+            <livewire:layout.notifications />
+
             <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
                     aria-expanded="false"
                     class="md:hidden text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5 mr-1">

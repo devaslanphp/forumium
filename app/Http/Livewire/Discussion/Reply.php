@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
 use App\Jobs\CalculateUserPointsJob;
+use App\Jobs\DispatchNotificationsJob;
 use App\Models\Discussion;
 use App\Models\Reply as ReplyModel;
 use Filament\Facades\Filament;
@@ -56,6 +58,7 @@ class Reply extends Component implements HasForms
                 'content' => $data['content']
             ]);
             $message = 'Reply added successfully';
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::POST_IN_DISCUSSION->value, $this->discussion));
         }
         Filament::notify('success', $message);
         $this->emit('replyAdded');

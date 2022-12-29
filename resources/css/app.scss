@@ -8,6 +8,10 @@
 
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
+[x-cloack] {
+    display: none;
+}
+
 *::-webkit-scrollbar-track {
     @apply bg-slate-200;
 

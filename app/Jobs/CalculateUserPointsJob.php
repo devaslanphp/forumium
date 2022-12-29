@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
 use App\Models\Point;
 use App\Models\User;
@@ -18,17 +19,19 @@ class CalculateUserPointsJob implements ShouldQueue
     public $user;
     public $source;
     public $type;
+    public $notify;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $source, $type)
+    public function __construct($user, $source, $type, $notify = true)
     {
         $this->user = $user;
         $this->source = $source;
         $this->type = $type;
+        $this->notify = $notify;
     }
 
     /**
@@ -51,7 +54,7 @@ class CalculateUserPointsJob implements ShouldQueue
             }
         } else {
             $points = PointsConstants::value($this->type);
-            Point::create([
+            $point = Point::create([
                 'user_id' => $this->user->id,
                 'source_type' => get_class($this->source),
                 'source_id' => $this->source->id,
@@ -60,6 +63,9 @@ class CalculateUserPointsJob implements ShouldQueue
             ]);
             $this->user->total_points = $this->user->total_points + $points;
             $this->user->save();
+            if ($this->notify) {
+                dispatch(new DispatchNotificationsJob($this->user, NotificationConstants::POINTS_UPDATED->value, $point));
+            }
         }
     }
 

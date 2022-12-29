@@ -18,28 +18,13 @@ class NotificationSeeder extends Seeder
             "name" => "Someone locks my discussion",
         ],
         [
-            "name" => "When one of my posts is up/down voted",
-        ],
-        [
             "name" => "Someone sets my reply as a best answer",
-        ],
-        [
-            "name" => "A best answer is set in a discussion I participated in",
         ],
         [
             "name" => "Someone commented to one of my posts",
         ],
         [
-            "name" => "Someone mentions me in a post",
-        ],
-        [
             "name" => "Someone likes one of my posts",
-        ],
-        [
-            "name" => "A moderator warns me",
-        ],
-        [
-            "name" => "Someone creates a discussion in a tag I'm following",
         ],
         [
             "name" => "My account points are updated after an action",

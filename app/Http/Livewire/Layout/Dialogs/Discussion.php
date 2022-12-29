@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Layout\Dialogs;
 
 use App\Core\ConfigurationConstants;
+use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
 use App\Jobs\CalculateUserPointsJob;
+use App\Jobs\DispatchNotificationsJob;
 use App\Models\Discussion as DiscussionModel;
 use App\Models\DiscussionTag;
 use App\Models\Tag;
@@ -87,6 +89,7 @@ class Discussion extends Component implements HasForms
             DiscussionTag::where('discussion_id', $this->discussion->id)->delete();
             $update = true;
             $discussion = $this->discussion;
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_DISCUSSION_EDITED->value, $this->discussion));
         } else {
             $discussion = DiscussionModel::create([
                 'name' => $data['name'],

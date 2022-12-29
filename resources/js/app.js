@@ -19,5 +19,7 @@ window.Alpine = Alpine
 Alpine.start()
 
 window.addEventListener('load', function () {
-    document.getElementById('body-container').style.display = 'block';
+    const element = document.getElementById('loading-page');
+    element.style.opacity = 0;
+    setTimeout(() => element.remove(), 500)
 })

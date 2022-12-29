@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
 use App\Jobs\CalculateUserPointsJob;
+use App\Jobs\DispatchNotificationsJob;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Reply;
@@ -63,6 +65,7 @@ class ReplyDetails extends Component implements HasForms
                 'source_id' => $this->reply->id,
                 'source_type' => Reply::class
             ]);
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->reply->refresh();
         $this->initDetails();
@@ -191,6 +194,7 @@ class ReplyDetails extends Component implements HasForms
 
         if ($isCreation) {
             dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $this->comment, type: PointsConstants::NEW_COMMENT->value));
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_COMMENTED->value, $this->comment));
         }
     }
 
@@ -216,6 +220,7 @@ class ReplyDetails extends Component implements HasForms
                 'source_id' => $comment,
                 'source_type' => Comment::class
             ]);
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->reply->refresh();
 
@@ -243,5 +248,9 @@ class ReplyDetails extends Component implements HasForms
 
         $pointsType = $this->reply->is_best ? PointsConstants::BEST_REPLY : PointsConstants::BEST_REPLY_REMOVED;
         dispatch(new CalculateUserPointsJob(user: $this->reply->user, source: $this->reply, type: $pointsType));
+
+        if ($this->reply->is_best) {
+            dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_REPLY_BEST_ANSWER->value, $this->reply));
+        }
     }
 }
