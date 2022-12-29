@@ -10,7 +10,7 @@ class Notifications extends Component
 
     public function render()
     {
-        $this->unreadNotificationsCount = auth()->user()->unreadNotifications()->count();
+        $this->unreadNotificationsCount = auth()->user()?->unreadNotifications()?->count() ?? 0;
         return view('livewire.layout.notifications');
     }
 }

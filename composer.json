@@ -43,7 +43,8 @@
             "@php artisan db:wipe",
             "@php artisan migrate",
             "@php artisan db:seed",
-            "@php artisan db:seed --class=ContentSeeder"
+            "@php artisan db:seed --class=ContentSeeder",
+            "@php artisan db:seed --class=NotificationSeeder"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
