@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\Content\CommentsSeeder;
-use Database\Seeders\Content\DiscussionsSeeder;
-use Database\Seeders\Content\LikesSeeder;
-use Database\Seeders\Content\RepliesSeeder;
 use Database\Seeders\Permissions\PermissionsSeeder;
 use Database\Seeders\Permissions\RolePermissionsSeeder;
 use Database\Seeders\Permissions\RolesSeeder;
@@ -36,11 +32,5 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionsSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(UserRolesSeeder::class);
-
-        // Content
-        $this->call(DiscussionsSeeder::class);
-        $this->call(RepliesSeeder::class);
-        $this->call(CommentsSeeder::class);
-        $this->call(LikesSeeder::class);
     }
 }
