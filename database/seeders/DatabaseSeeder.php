@@ -2,7 +2,14 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Permissions\PermissionsSeeder;
+use Database\Seeders\Permissions\RolePermissionsSeeder;
+use Database\Seeders\Permissions\RolesSeeder;
+use Database\Seeders\Permissions\UserRolesSeeder;
+use Database\Seeders\Permissions\UsersSeeder;
+use Database\Seeders\Referential\ConfigurationSeeder;
+use Database\Seeders\Referential\NotificationSeeder;
+use Database\Seeders\Referential\TagsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +21,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Referential
+        $this->call(TagsSeeder::class);
+        $this->call(NotificationSeeder::class);
+        $this->call(ConfigurationSeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Permissions
+        $this->call(PermissionsSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(RolePermissionsSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(UserRolesSeeder::class);
     }
 }
