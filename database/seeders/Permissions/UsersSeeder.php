@@ -2,7 +2,9 @@
 
 namespace Database\Seeders\Permissions;
 
+use App\Models\Notification;
 use App\Models\User;
+use App\Models\UserNotification;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -33,6 +35,8 @@ class UsersSeeder extends Seeder
             $data = self::$admin;
             $data['email_verified_at'] = now();
             $data['password'] = $this->password;
+            $data['bio'] = fake()->paragraph();
+            $data['is_email_visible'] = collect([true, false])->random();
             User::create($data);
         }
 
@@ -41,10 +45,27 @@ class UsersSeeder extends Seeder
             $data = self::$mod;
             $data['email_verified_at'] = now();
             $data['password'] = $this->password;
+            $data['bio'] = fake()->paragraph();
+            $data['is_email_visible'] = collect([true, false])->random();
             User::create($data);
         }
 
         // Members
-        User::factory()->count($this->members)->create();
+        User::factory()
+            ->count($this->members)
+            ->create();
+
+        // Notifications
+        User::all()->each(function ($user) {
+            Notification::all()
+                ->each(function ($notification) use ($user) {
+                    UserNotification::create([
+                        'notification_id' => $notification->id,
+                        'user_id' => $user->id,
+                        'via_web' => collect([true, false])->random(),
+                        'via_email' => collect([true, false])->random()
+                    ]);
+                });
+        });
     }
 }

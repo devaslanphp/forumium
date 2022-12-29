@@ -22,10 +22,12 @@ class UserRolesSeeder extends Seeder
         $user = User::where('email', $admin)->first();
         $role = Role::where('name', $adminRole)->first();
         if ($user && $role) {
-            UserRole::create([
-                'user_id' => $user->id,
-                'role_id' => $role->id
-            ]);
+            if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => $role->id
+                ]);
+            }
         }
 
         // Mod
@@ -34,22 +36,26 @@ class UserRolesSeeder extends Seeder
         $user = User::where('email', $mod)->first();
         $role = Role::where('name', $modRole)->first();
         if ($user && $role) {
-            UserRole::create([
-                'user_id' => $user->id,
-                'role_id' => $role->id
-            ]);
+            if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => $role->id
+                ]);
+            }
         }
 
         // Members
         $memberRole = RolesSeeder::$memberRole;
         if ($role = Role::where('name', $memberRole)->first()) {
-            $members = User::whereNotIn('email', [$admin, $mod])->get();
-            foreach ($members as $member) {
-                UserRole::create([
-                    'user_id' => $member->id,
-                    'role_id' => $role->id
-                ]);
-            }
+            User::whereNotIn('email', [$admin, $mod])
+                ->each(function ($user) use ($role) {
+                    if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
+                        UserRole::create([
+                            'user_id' => $user->id,
+                            'role_id' => $role->id
+                        ]);
+                    }
+                });
         }
     }
 }

@@ -215,6 +215,7 @@ return [
         'Followers' => App\Core\FollowerConstants::class,
         'Socials' => App\Core\SocialConstants::class,
         'Configurations' => App\Core\ConfigurationConstants::class,
+        'Points' => App\Core\PointsConstants::class,
     ])->toArray(),
 
 ];
