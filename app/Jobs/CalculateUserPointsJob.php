@@ -39,7 +39,6 @@ class CalculateUserPointsJob implements ShouldQueue
     public function handle()
     {
         if (PointsConstants::caseToDelete($this->type)) {
-            $points = 0;
             $toDelete = Point::where('source_type', get_class($this->source))
                 ->where('source_id', $this->source->id)
                 ->get();
