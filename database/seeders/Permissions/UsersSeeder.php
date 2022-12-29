@@ -45,6 +45,6 @@ class UsersSeeder extends Seeder
         }
 
         // Members
-        User::factory($this->members)->create();
+        User::factory()->count($this->members)->create();
     }
 }

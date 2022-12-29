@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="flex flex-row items-center gap-3 lg:pl-0 pl-14">
-        <div class="flex items-center lg:order-1 order-2">
+        <div class="flex items-center lg:order-1 order-2 min-w-fit">
             @include('partials.discussions.tags', ['tags' => $discussion->tags, 'ignore_first' => true])
         </div>
         <div class="flex items-center gap-3 lg:order-2 order-1">
