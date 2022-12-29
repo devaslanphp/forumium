@@ -18,6 +18,7 @@ class Discussions extends Component implements HasForms
     public $tag;
     public $selectedSort;
     public $q;
+    public $totalCount = 0;
 
     public function mount()
     {
@@ -25,6 +26,7 @@ class Discussions extends Component implements HasForms
         $this->form->fill([
             'sort' => 'latest'
         ]);
+        $this->totalCount = Discussion::count();
     }
 
     public function render()
@@ -116,6 +118,7 @@ class Discussions extends Component implements HasForms
                     ->orWhere('content', 'like', '%' . $this->q . '%')
                     ->orWhereHas('tags', fn($query) => $query->where('name', 'like', '%' . $this->q . '%'))
             );
+            $this->totalCount = $query->count();
         }
 
         $data = $query->paginate($this->limitPerPage);
