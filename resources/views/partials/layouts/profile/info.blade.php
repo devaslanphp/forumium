@@ -16,7 +16,7 @@
             <i class="fa-solid fa-check"></i> {{ $bestAnswers }} best {{ $bestAnswers > 1 ? 'answers' : 'answer' }}
         </span>
         <span class="lg:flex lg:flex-row block justify-center lg:items-center items-start gap-2">
-            <i class="fa-solid fa-medal"></i> 0 points
+            <i class="fa-solid fa-medal"></i> {{ $user->total_points }} {{ $user->total_points > 1 ? 'points' : 'point' }}
         </span>
     </div>
 </div>

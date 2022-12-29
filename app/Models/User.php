@@ -30,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
         'password',
         'bio',
         'is_email_visible',
-        'picture'
+        'picture',
+        'total_points'
     ];
 
     /**

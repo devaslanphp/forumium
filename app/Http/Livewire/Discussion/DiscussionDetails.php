@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\PointsConstants;
+use App\Jobs\CalculateUserPointsJob;
 use App\Models\Comment;
 use App\Models\Discussion;
 use App\Models\Like;
@@ -103,22 +105,35 @@ class DiscussionDetails extends Component implements HasForms
 
     public function doDeleteComment(int $comment): void
     {
-        Comment::where('id', $comment)->delete();
-        $this->emit('commentSaved');
+        $source = Comment::where('id', $comment)->first();
+        if ($source) {
+            $source->delete();
+            $this->emit('commentSaved');
+
+            dispatch(new CalculateUserPointsJob(user: $source->user, source: $source, type: PointsConstants::COMMENT_DELETED->value));
+        }
     }
 
     public function saveComment(): void
     {
         $data = $this->form->getState();
+        $isCreation = false;
+
         $this->comment->content = $data['content'];
         if (!$this->comment->id) {
             $this->comment->user_id = auth()->user()->id;
             $this->comment->source_id = $this->discussion->id;
             $this->comment->source_type = Discussion::class;
+
+            $isCreation = true;
         }
         $this->comment->save();
         $this->emit('commentSaved');
         Filament::notify('success', 'Comment successfully saved.');
+
+        if ($isCreation) {
+            dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $this->comment, type: PointsConstants::NEW_COMMENT->value));
+        }
     }
 
     public function commentSaved(): void
@@ -138,9 +153,13 @@ class DiscussionDetails extends Component implements HasForms
     {
         $like = Like::where('user_id', auth()->user()->id)->where('source_id', $this->discussion->id)->where('source_type', Discussion::class)->first();
         if ($like) {
+            $pointsType = PointsConstants::DISCUSSION_DISLIKED->value;
+            $source = $like;
+
             $like->delete();
         } else {
-            Like::create([
+            $pointsType = PointsConstants::DISCUSSION_LIKED->value;
+            $source = Like::create([
                 'user_id' => auth()->user()->id,
                 'source_id' => $this->discussion->id,
                 'source_type' => Discussion::class
@@ -148,21 +167,29 @@ class DiscussionDetails extends Component implements HasForms
         }
         $this->discussion->refresh();
         $this->initDetails();
+
+        dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
 
     public function toggleCommentLike(int $comment): void
     {
         $like = Like::where('user_id', auth()->user()->id)->where('source_id', $comment)->where('source_type', Comment::class)->first();
         if ($like) {
+            $pointsType = PointsConstants::COMMENT_DISLIKED->value;
+            $source = $like;
+
             $like->delete();
         } else {
-            Like::create([
+            $pointsType = PointsConstants::COMMENT_LIKED->value;
+            $source = Like::create([
                 'user_id' => auth()->user()->id,
                 'source_id' => $comment,
                 'source_type' => Comment::class
             ]);
         }
         $this->discussion->refresh();
+
+        dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
 
     public function toggleComments(): void
@@ -213,8 +240,12 @@ class DiscussionDetails extends Component implements HasForms
 
     public function doDeleteDiscussion(int $discussion): void
     {
-        Discussion::where('id', $discussion)->delete();
-        Filament::notify('success', 'Discussion deleted successfully', true);
-        $this->redirect(route('home'));
+        $source = Discussion::where('id', $discussion)->first();
+        if ($source) {
+            $source->delete();
+            Filament::notify('success', 'Discussion deleted successfully', true);
+            dispatch(new CalculateUserPointsJob(user: $source->user, source: $source, type: PointsConstants::DISCUSSION_DELETED->value));
+            $this->redirect(route('home'));
+        }
     }
 }

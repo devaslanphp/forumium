@@ -2,7 +2,7 @@
 <nav class="min-h-[80px] bg-white border-slate-200 px-2 sm:px-4 py-2.5 rounded dark:bg-slate-900 border-b w-full z-50 items-center justify-center flex">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <div class="flex items-center gap-2">
-            <button @click="sidebarOpen = true" class="inline-flex items-center p-2 text-sm text-slate-500 rounded-lg md:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600">
+            <button @click="sidebarOpen = true" class="inline-flex items-center p-2 text-sm text-slate-500 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600">
                 <svg viewBox="0 0 20 20" class="w-6 h-6 fill-current" :class="{'text-slate-600': !sidebarOpen, 'text-slate-300': sidebarOpen}">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                 </svg>

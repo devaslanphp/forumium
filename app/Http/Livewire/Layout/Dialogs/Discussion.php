@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Layout\Dialogs;
 
 use App\Core\ConfigurationConstants;
+use App\Core\PointsConstants;
+use App\Jobs\CalculateUserPointsJob;
 use App\Models\Discussion as DiscussionModel;
 use App\Models\DiscussionTag;
 use App\Models\Tag;
@@ -45,7 +47,7 @@ class Discussion extends Component implements HasForms
         return [
             Toggle::make('is_public')
                 ->label('Is this discussion public?')
-                ->visible(fn () => ConfigurationConstants::case('Enable public discussions')),
+                ->visible(fn() => ConfigurationConstants::case('Enable public discussions')),
 
             Grid::make()
                 ->columns(5)
@@ -92,6 +94,7 @@ class Discussion extends Component implements HasForms
                 'content' => $data['content'],
                 'is_public' => $data['is_public'] ?? false
             ]);
+            dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $discussion, type: PointsConstants::START_DISCUSSION->value));
         }
         foreach ($data['tags'] as $tag) {
             DiscussionTag::create([

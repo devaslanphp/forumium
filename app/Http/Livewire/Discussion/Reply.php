@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\PointsConstants;
+use App\Jobs\CalculateUserPointsJob;
 use App\Models\Discussion;
 use App\Models\Reply as ReplyModel;
 use Filament\Facades\Filament;
@@ -62,6 +64,8 @@ class Reply extends Component implements HasForms
             $this->dispatchBrowserEvent('replyUpdated');
         } else {
             $this->dispatchBrowserEvent('replyAdded');
+
+            dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $this->reply, type: PointsConstants::NEW_REPLY->value));
         }
         if ($this->reply) {
             $data['content'] = $this->reply->content;

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Discussion;
 
+use App\Core\PointsConstants;
+use App\Jobs\CalculateUserPointsJob;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Reply;
@@ -50,9 +52,13 @@ class ReplyDetails extends Component implements HasForms
     {
         $like = Like::where('user_id', auth()->user()->id)->where('source_id', $this->reply->id)->where('source_type', Reply::class)->first();
         if ($like) {
+            $pointsType = PointsConstants::REPLY_DISLIKED->value;
+            $source = $like;
+
             $like->delete();
         } else {
-            Like::create([
+            $pointsType = PointsConstants::REPLY_LIKED->value;
+            $source = Like::create([
                 'user_id' => auth()->user()->id,
                 'source_id' => $this->reply->id,
                 'source_type' => Reply::class
@@ -60,6 +66,8 @@ class ReplyDetails extends Component implements HasForms
         }
         $this->reply->refresh();
         $this->initDetails();
+
+        dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
 
     public function delete(): void
@@ -86,8 +94,12 @@ class ReplyDetails extends Component implements HasForms
 
     public function doDelete(int $reply): void
     {
-        Reply::where('id', $reply)->delete();
-        $this->emit('replyDeleted');
+        $source = Reply::where('id', $reply)->first();
+        if ($source) {
+            $source->delete();
+            $this->emit('replyDeleted');
+            dispatch(new CalculateUserPointsJob(user: $source->user, source: $source, type: PointsConstants::REPLY_DELETED->value));
+        }
     }
 
     public function edit(): void
@@ -152,22 +164,34 @@ class ReplyDetails extends Component implements HasForms
 
     public function doDeleteReplyComment(int $comment): void
     {
-        Comment::where('id', $comment)->delete();
-        $this->emit('replyCommentSaved');
+        $source = Comment::where('id', $comment)->first();
+        if ($source) {
+            $source->delete();
+            $this->emit('replyCommentSaved');
+            dispatch(new CalculateUserPointsJob(user: $source->user, source: $source, type: PointsConstants::COMMENT_DELETED->value));
+        }
     }
 
     public function saveComment(): void
     {
         $data = $this->form->getState();
         $this->comment->content = $data['content'];
+        $isCreation = false;
+
         if (!$this->comment->id) {
             $this->comment->user_id = auth()->user()->id;
             $this->comment->source_id = $this->reply->id;
             $this->comment->source_type = Reply::class;
+
+            $isCreation = true;
         }
         $this->comment->save();
         $this->emit('replyCommentSaved', $this->reply->id);
         Filament::notify('success', 'Comment successfully saved.');
+
+        if ($isCreation) {
+            dispatch(new CalculateUserPointsJob(user: auth()->user(), source: $this->comment, type: PointsConstants::NEW_COMMENT->value));
+        }
     }
 
     public function commentSaved(): void
@@ -181,15 +205,21 @@ class ReplyDetails extends Component implements HasForms
     {
         $like = Like::where('user_id', auth()->user()->id)->where('source_id', $comment)->where('source_type', Comment::class)->first();
         if ($like) {
+            $pointsType = PointsConstants::COMMENT_DISLIKED->value;
+            $source = $like;
+
             $like->delete();
         } else {
-            Like::create([
+            $pointsType = PointsConstants::COMMENT_LIKED->value;
+            $source = Like::create([
                 'user_id' => auth()->user()->id,
                 'source_id' => $comment,
                 'source_type' => Comment::class
             ]);
         }
         $this->reply->refresh();
+
+        dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
 
     public function toggleComments(): void
@@ -210,5 +240,8 @@ class ReplyDetails extends Component implements HasForms
         $this->reply->is_best = !$this->reply->is_best;
         $this->reply->save();
         $this->reply->refresh();
+
+        $pointsType = $this->reply->is_best ? PointsConstants::BEST_REPLY : PointsConstants::BEST_REPLY_REMOVED;
+        dispatch(new CalculateUserPointsJob(user: $this->reply->user, source: $this->reply, type: $pointsType));
     }
 }
