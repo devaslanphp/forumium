@@ -34,12 +34,12 @@
                     )
                 )
                 <button type="button" class="flex items-center gap-2 hover:cursor-pointer">
-                    <i class="@if($reply->likes()->where('user_id', auth()->user()->id)->count()) fa-solid text-red-500 @else fa-regular @endif fa-thumbs-up" wire:click="toggleLike()"></i>
+                    <i class="@if(auth()->user() && auth()->user()->hasVerifiedEmail() && $reply->likes()->where('user_id', auth()->user()->id)->count()) fa-solid text-red-500 @else fa-regular @endif fa-thumbs-up" wire:click="toggleLike()"></i>
                     <span onclick="window.openModal('reply-likes-modal-{{ $reply->id }}')">{{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}</span>
                 </button>
             @else
                 <div class="flex items-center gap-2">
-                    <i class="@if($reply->likes()->where('user_id', auth()->user()->id)->count()) fa-solid text-red-500 @else fa-regular @endif fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
+                    <i class="@if(auth()->user() && auth()->user()->hasVerifiedEmail() && $reply->likes()->where('user_id', auth()->user()->id)->count()) fa-solid text-red-500 @else fa-regular @endif fa-thumbs-up"></i> {{ $likes }} {{ $likes > 1 ? 'Likes' : 'Like' }}
                 </div>
             @endif
             <button type="button" wire:click="toggleComments()" class="flex items-center gap-2 hover:cursor-pointer toggle-comments">

@@ -4,6 +4,7 @@ namespace Database\Seeders\Content;
 
 use App\Models\DiscussionVisit;
 use Illuminate\Database\Seeder;
+use Stevebauman\Location\Facades\Location;
 
 class VisitsSeeder extends Seeder
 {
@@ -17,6 +18,16 @@ class VisitsSeeder extends Seeder
     public function run()
     {
         DiscussionVisit::factory()->count($this->count)
-            ->create();
+            ->create()
+            ->each(function (DiscussionVisit $visit) {
+                $ip = fake()->ipv4();
+                $location = Location::get($ip);
+                $visit->meta = [
+                    'ip' => $ip,
+                    'browser' => fake()->userAgent(),
+                    'location' => $location ? $location->toArray() : []
+                ];
+                $visit->save();
+            });
     }
 }

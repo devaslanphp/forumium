@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\DiscussionVisit;
 use Closure;
 use Illuminate\Http\Request;
+use Stevebauman\Location\Facades\Location;
 
 class DiscussionMiddleware
 {
@@ -22,12 +23,14 @@ class DiscussionMiddleware
             return redirect()->route('home');
         }
         if (auth()->user() && auth()->user()->hasVerifiedEmail() && $discussion) {
+            $location = Location::get($request->ip());
             DiscussionVisit::create([
                 'user_id' => auth()->user()->id,
                 'discussion_id' => $discussion->id,
                 'meta' => [
                     'ip' => $request->ip(),
-                    'browser' => $request->header('User-Agent')
+                    'browser' => $request->header('User-Agent'),
+                    'location' => $location ? $location->toArray() : []
                 ]
             ]);
         }
