@@ -7,6 +7,7 @@ use Database\Seeders\Content\DiscussionsSeeder;
 use Database\Seeders\Content\LikesSeeder;
 use Database\Seeders\Content\PointsSeeder;
 use Database\Seeders\Content\RepliesSeeder;
+use Database\Seeders\Content\VisitsSeeder;
 use Illuminate\Database\Seeder;
 
 class ContentSeeder extends Seeder
@@ -24,5 +25,6 @@ class ContentSeeder extends Seeder
         $this->call(CommentsSeeder::class);
         $this->call(LikesSeeder::class);
         $this->call(PointsSeeder::class);
+        $this->call(VisitsSeeder::class);
     }
 }

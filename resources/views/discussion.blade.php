@@ -33,6 +33,22 @@
                 )
                     <livewire:discussion.lock :discussion="$discussion" />
                 @endif
+                @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    (
+                        auth()->user()->id === $discussion->user_id
+                        || auth()->user()->can(Permissions::VIEW_POSTS_STATS->value)
+                    )
+                )
+                    <div class="w-full flex gap-1 justify-between items-center text-sm text-slate-500">
+                        <div>
+                            <i class="fa-regular fa-eye"></i> <span class="font-medium">Total views:</span> {{ $discussion->visits }}
+                        </div>
+                        <div>
+                            <i class="fa-regular fa-user"></i> <span class="font-medium">Unique views:</span> {{ $discussion->unique_visits }}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

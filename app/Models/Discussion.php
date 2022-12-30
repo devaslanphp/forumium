@@ -47,4 +47,16 @@ class Discussion extends Model
     {
         return $this->belongsToMany(User::class, 'followers', 'discussion_id', 'user_id')->withPivot('type');
     }
+
+    public function discussionVisits(): HasMany
+    {
+        return $this->hasMany(DiscussionVisit::class, 'discussion_id', 'id');
+    }
+
+    public function updateVisits(): void
+    {
+        $this->visits = $this->discussionVisits()->count();
+        $this->unique_visits = $this->discussionVisits()->groupBy('user_id')->select('user_id')->get()->count();
+        $this->save();
+    }
 }

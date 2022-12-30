@@ -128,6 +128,25 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
         return $this->belongsToMany(Discussion::class, 'followers', 'user_id', 'discussion_id')->withPivot('type');
     }
 
+    public function discussionVisits(): HasMany
+    {
+        return $this->hasMany(DiscussionVisit::class, 'user_id', 'id');
+    }
+
+    public function discussionsTotalViews(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->discussions()->sum('visits')
+        );
+    }
+
+    public function discussionsTotalUniqueViews(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->discussions()->sum('unique_visits')
+        );
+    }
+
     public function lastActivity(): Attribute
     {
         return new Attribute(

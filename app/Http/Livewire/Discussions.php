@@ -92,10 +92,9 @@ class Discussions extends Component implements HasForms
                 $this->selectedSort = 'Oldest discussions';
                 break;
             case 'trending':
-                $query->withCount('replies')
-                    ->orderBy('replies_count', 'desc')
+                $query->orderBy('unique_visits', 'desc')
                     ->orderBy('created_at', 'desc');
-                $this->selectedSort = 'Trending discussions (Most replied)';
+                $this->selectedSort = 'Trending discussions';
                 break;
             case 'most-liked':
                 $query->withCount('likes')

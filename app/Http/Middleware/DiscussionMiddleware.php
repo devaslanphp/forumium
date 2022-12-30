@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\DiscussionVisit;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,12 @@ class DiscussionMiddleware
         $discussion = request()->route('discussion');
         if ($discussion && !$discussion->is_public && (!auth()->user() || !auth()->user()->hasVerifiedEmail())) {
             return redirect()->route('home');
+        }
+        if (auth()->user() && auth()->user()->hasVerifiedEmail() && $discussion) {
+            DiscussionVisit::create([
+                'user_id' => auth()->user()->id,
+                'discussion_id' => $discussion->id
+            ]);
         }
         return $next($request);
     }
