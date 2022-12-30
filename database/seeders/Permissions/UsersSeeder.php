@@ -36,7 +36,7 @@ class UsersSeeder extends Seeder
             $data['email_verified_at'] = now();
             $data['password'] = $this->password;
             $data['bio'] = fake()->paragraph();
-            $data['is_email_visible'] = collect([true, false])->random();
+            $data['is_email_visible'] = false;
             User::create($data);
         }
 
@@ -46,7 +46,7 @@ class UsersSeeder extends Seeder
             $data['email_verified_at'] = now();
             $data['password'] = $this->password;
             $data['bio'] = fake()->paragraph();
-            $data['is_email_visible'] = collect([true, false])->random();
+            $data['is_email_visible'] = false;
             User::create($data);
         }
 
