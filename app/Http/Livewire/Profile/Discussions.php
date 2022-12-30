@@ -41,14 +41,14 @@ class Discussions extends Component
             $query->where('user_id', $this->user->id);
         }
 
-        $this->totalCount = $query->count();
-
         $data = $query->paginate($this->limitPerPage);
         if ($data->hasMorePages()) {
             $this->disableLoadMore = false;
         } else {
             $this->disableLoadMore = true;
         }
+
+        $this->totalCount = $data->total();
 
         return $data;
     }

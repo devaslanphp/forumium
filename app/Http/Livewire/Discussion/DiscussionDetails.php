@@ -27,6 +27,7 @@ class DiscussionDetails extends Component implements HasForms
     public bool $showComments = false;
     public Comment|null $comment = null;
     public bool $edit = false;
+    public $selectedComment = null;
 
     protected $listeners = [
         'commentSaved',
@@ -172,6 +173,7 @@ class DiscussionDetails extends Component implements HasForms
         }
         $this->discussion->refresh();
         $this->initDetails();
+        $this->emit('likesUpdated', $source->source_id);
 
         dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
@@ -194,6 +196,7 @@ class DiscussionDetails extends Component implements HasForms
             dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->discussion->refresh();
+        $this->emit('likesUpdated', $source->source_id);
 
         dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
@@ -253,5 +256,11 @@ class DiscussionDetails extends Component implements HasForms
             dispatch(new CalculateUserPointsJob(user: $source->user, source: $source, type: PointsConstants::DISCUSSION_DELETED->value));
             $this->redirect(route('home'));
         }
+    }
+
+    public function selectComment(int $comment)
+    {
+        $this->selectedComment = $this->discussion->comments()->where('id', $comment)->first();
+        $this->dispatchBrowserEvent('discussionCommentSelected');
     }
 }

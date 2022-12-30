@@ -119,14 +119,14 @@ class Discussions extends Component implements HasForms
             );
         }
 
-        $this->totalCount = $query->count();
-
         $data = $query->paginate($this->limitPerPage);
         if ($data->hasMorePages()) {
             $this->disableLoadMore = false;
         } else {
             $this->disableLoadMore = true;
         }
+
+        $this->totalCount = $data->total();
 
         return $data;
     }

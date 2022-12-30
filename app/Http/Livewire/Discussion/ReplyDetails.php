@@ -27,6 +27,7 @@ class ReplyDetails extends Component implements HasForms
     public bool $edit = false;
     public bool $showComments = false;
     public Comment|null $comment = null;
+    public $selectedComment = null;
 
     protected $listeners = [
         'doDelete',
@@ -69,6 +70,7 @@ class ReplyDetails extends Component implements HasForms
         }
         $this->reply->refresh();
         $this->initDetails();
+        $this->emit('likesUpdated', $source->source_id);
 
         dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
@@ -223,6 +225,7 @@ class ReplyDetails extends Component implements HasForms
             dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_POSTS_LIKED->value, $source));
         }
         $this->reply->refresh();
+        $this->emit('likesUpdated', $source->source_id);
 
         dispatch(new CalculateUserPointsJob(user: $source->source->user, source: $source, type: $pointsType));
     }
@@ -252,5 +255,11 @@ class ReplyDetails extends Component implements HasForms
         if ($this->reply->is_best) {
             dispatch(new DispatchNotificationsJob(auth()->user(), NotificationConstants::MY_REPLY_BEST_ANSWER->value, $this->reply));
         }
+    }
+
+    public function selectComment(int $comment)
+    {
+        $this->selectedComment = $this->reply->comments()->where('id', $comment)->first();
+        $this->dispatchBrowserEvent('replyCommentSelected');
     }
 }

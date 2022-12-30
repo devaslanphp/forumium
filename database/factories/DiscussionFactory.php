@@ -19,7 +19,7 @@ class DiscussionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->text(100),
             'content' => '<p>' . fake()->paragraphs(3, true) . '</p>',
             'user_id' => User::all()->random()->id,
             'is_resolved' => collect([true, false])->random(),
