@@ -18,7 +18,8 @@
             <ul class="lg:w-1/2 w-full min-w-fit text-sm font-medium text-slate-900 bg-white rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600 dark:text-white">
                 <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                     <span class="text-slate-700 font-medium">Email address:</span>
-                    <span class="text-slate-500 @if(!$user->is_email_visible) italic font-light @endif">{{ $user->is_email_visible ? $user->email : 'Hidden' }}</span>
+                    <span
+                        class="text-slate-500 @if(!$user->is_email_visible) italic font-light @endif">{{ $user->is_email_visible ? $user->email : 'Hidden' }}</span>
                 </li>
                 <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                     <span class="text-slate-700 font-medium">Account created:</span>
@@ -46,6 +47,8 @@
         </div>
     </div>
 
-    <x-profile.stats :user="$user" />
+    <x-profile.stats :user="$user"/>
+
+    <livewire:profile.world-map-visits :user="$user" />
 
 </x-layout-profile>

@@ -15,7 +15,7 @@ class DiscussionVisit extends Model
     ];
 
     protected $casts = [
-        'meta' => 'array'
+        'meta' => 'object'
     ];
 
     public static function boot()
