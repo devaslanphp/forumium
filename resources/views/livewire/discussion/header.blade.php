@@ -3,7 +3,11 @@
         <div class="flex flex-col justify-center items-start gap-3">
             <div class="flex flex-col gap-2">
                 <span class="text-xl font-medium text-white text-shadow-lg">
-                    <span class="font-normal">{{ $isResolved ? '[Resolved]' : '' }}</span> {{ $discussion->name }}
+                    @if($discussion->is_locked)
+                        <i class="fa-solid fa-lock"></i>
+                    @endif
+                    <span class="font-normal">{{ $isResolved ? '[Resolved]' : '' }}</span>
+                    {{ $discussion->name }}
                 </span>
                 @include('partials.discussions.tags', ['tags' => $discussion->tags])
             </div>

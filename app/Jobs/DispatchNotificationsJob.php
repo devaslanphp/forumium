@@ -121,10 +121,25 @@ class DispatchNotificationsJob implements ShouldQueue
                 }
                 break;
             case NotificationConstants::POINTS_UPDATED->value:
+                // $this->object = array (containing 'added' and 'current')
                 $title = 'Points updated';
                 $body = 'Your points are updated (' . ($this->object['added'] > 0 ? '+' : '-') . $this->object['added'] . '), you have now ' . $this->object['current'];
                 $url = route('profile.index');
                 $recipient = $this->user;
+                break;
+            case NotificationConstants::DISCUSSION_LOCKED->value:
+                // $this->object = Discussion
+                $title = 'Discussion locked';
+                $body = 'Your discussion ' . $this->object->name . ' is now locked by ' . $this->user->name;
+                $url = route('discussion', ['discussion' => $this->object, 'slug' => Str::slug($this->object->name)]);
+                $recipient = $this->object->user;
+                break;
+            case NotificationConstants::DISCUSSION_UNLOCKED->value:
+                // $this->object = Discussion
+                $title = 'Discussion unlocked';
+                $body = 'Your discussion ' . $this->object->name . ' is now unlocked by ' . $this->user->name;
+                $url = route('discussion', ['discussion' => $this->object, 'slug' => Str::slug($this->object->name)]);
+                $recipient = $this->object->user;
                 break;
         }
         if ($title && $body && $recipient) {

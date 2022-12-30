@@ -95,7 +95,7 @@
                 (
                     auth()->user()->id === $model->user_id
                     || auth()->user()->can(Permissions::COMMENT_POSTS->value)
-                )
+                ) && !$isLocked
             )
                 <button wire:click="addComment()" type="button" class="bg-slate-100 px-3 py-2 text-slate-500 text-sm border-slate-100 rounded hover:cursor-pointer w-fit hover:bg-slate-200">
                     Add comment

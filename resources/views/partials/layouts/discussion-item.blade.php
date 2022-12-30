@@ -16,6 +16,9 @@
              class="rounded-full w-10 h-10 border border-slate-200 shadow"/>
         <div class="flex flex-col gap-1">
             <div class="flex items-center gap-1">
+                @if($discussion->is_locked)
+                    <i class="fa-solid fa-lock text-slate-400"></i>
+                @endif
                 @switch($type)
                     @case(Followers::FOLLOWING->value)
                         <i class="fa-solid fa-star text-green-500" title="Following"></i>

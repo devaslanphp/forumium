@@ -1,7 +1,7 @@
 @if(auth()->user() && auth()->user()->hasVerifiedEmail())
     <button type="button"
             x-data="{}"
-            x-on:click="$dispatch('open-modal', { id: 'database-notifications' })"
+            wire:click="openNotifications()"
             wire:poll.2000ms
             class="text-slate-700 font-medium text-lg w-10 h-10 flex items-center justify-center text-center relative mx-1 hover:bg-slate-100 rounded-full">
         <i class="fa-regular fa-bell"></i>

@@ -19,15 +19,19 @@
                         || auth()->user()->can(Permissions::REPLY_TO_DISCUSSIONS->value)
                     )
                 )
-                    <button type="button" data-modal-toggle="add-reply-modal" class="w-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer px-3 py-2 rounded shadow hover:shadow-lg text-white font-medium text-center">
-                        Reply
-                    </button>
+                    <livewire:discussion.reply-btn :discussion="$discussion" />
                 @endif
                 @if(
                     (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
                     (auth()->user()->id != $discussion->user_id)
                 )
                     <livewire:discussion.follow :discussion="$discussion" />
+                @endif
+                @if(
+                    (auth()->user() && auth()->user()->hasVerifiedEmail()) &&
+                    auth()->user()->can(Permissions::LOCK_DISCUSSIONS->value)
+                )
+                    <livewire:discussion.lock :discussion="$discussion" />
                 @endif
             </div>
         </div>

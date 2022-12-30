@@ -29,6 +29,12 @@ class NotificationSeeder extends Seeder
         [
             "name" => "My account points are updated after an action",
         ],
+        [
+            "name" => "My discussion is locked by a moderator / administrator",
+        ],
+        [
+            "name" => "My discussion is unlocked by a moderator / administrator",
+        ],
     ];
 
     /**

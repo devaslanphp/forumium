@@ -24,6 +24,7 @@ class DiscussionFactory extends Factory
             'user_id' => User::all()->random()->id,
             'is_resolved' => collect([true, false])->random(),
             'is_public' => collect([true, false])->random(),
+            'is_locked' => collect([true, false])->random(),
         ];
     }
 }

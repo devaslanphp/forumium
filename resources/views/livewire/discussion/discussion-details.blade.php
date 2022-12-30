@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            @include('partials.discussions.comments-section', ['showComments' => $showComments, 'model' => $discussion, 'comments' => $comments, 'comment' => $comment])
+            @include('partials.discussions.comments-section', ['isLocked' => $discussion->is_locked, 'showComments' => $showComments, 'model' => $discussion, 'comments' => $comments, 'comment' => $comment])
         @endif
     </div>
 

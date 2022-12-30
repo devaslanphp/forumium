@@ -12,6 +12,7 @@ class Header extends Component
     public int $comments = 0;
     public bool $isResolved = false;
     public bool $isPublic = false;
+    public bool $isLocked = false;
 
     protected $listeners = [
         'replyAdded' => 'initData',
@@ -37,6 +38,7 @@ class Header extends Component
         $this->comments = $this->discussion->comments()->count();
         $this->isResolved = $this->discussion->is_resolved;
         $this->isPublic = $this->discussion->is_public;
+        $this->isLocked = $this->discussion->is_locked;
     }
 
     public function resolvedFlagUpdated(): void

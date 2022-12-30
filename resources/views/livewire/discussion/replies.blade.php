@@ -39,9 +39,9 @@
         (
             auth()->user()->id === $discussion->user_id
             || auth()->user()->can(Permissions::REPLY_TO_DISCUSSIONS->value)
-        )
+        ) && !$discussion->is_locked
     )
-        <button wire:ignore type="button" data-modal-toggle="add-reply-modal" class="w-full bg-transparent hover:cursor-pointer px-3 py-10 border-2 border-transparent border-dashed hover:border-slate-200 rounded text-slate-500 hover:text-slate-700 font-medium text-left">
+        <button wire:ignore type="button" data-modal-toggle="add-reply-modal" class="mt-5 w-full bg-transparent hover:cursor-pointer px-3 py-10 border-2 border-transparent border-dashed hover:border-slate-200 rounded text-slate-500 hover:text-slate-700 font-medium text-left">
             Write a reply...
         </button>
     @endif

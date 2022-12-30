@@ -11,5 +11,7 @@ enum NotificationConstants: string
     case MY_POSTS_COMMENTED = "Someone commented to one of my posts";
     case MY_POSTS_LIKED = "Someone likes one of my posts";
     case POINTS_UPDATED = "My account points are updated after an action";
+    case DISCUSSION_LOCKED = "My discussion is locked by a moderator / administrator";
+    case DISCUSSION_UNLOCKED = "My discussion is unlocked by a moderator / administrator";
 
 }

@@ -75,7 +75,7 @@
                 <i class="fa fa-spinner fa-spin"></i>
             </div>
         </div>
-        @include('partials.discussions.comments-section', ['showComments' => $showComments, 'model' => $reply, 'comments' => $comments, 'comment' => $comment])
+        @include('partials.discussions.comments-section', ['isLocked' => $reply->discussion->is_locked, 'showComments' => $showComments, 'model' => $reply, 'comments' => $comments, 'comment' => $comment])
     </div>
 
     <!-- Reply likes modal -->
