@@ -8,7 +8,7 @@
                 @foreach($model->comments as $c)
                     <div class="w-full flex flex-col py-5 px-3 gap-2 {{ $loop->last ? '' : 'border-b border-slate-200' }} hovered-section" id="comment-{{ $c->id }}">
                         <div class="w-full text-slate-700 text-sm">
-                            <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $c->user, 'slug' => Str::slug($c->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer hover:underline font-medium">{{ $c->user->name }}</a> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{{ nl2br(e($c->content)) }}</span>
+                            <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $c->user, 'slug' => Str::slug($c->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer hover:underline font-medium">{{ $c->user->name }}</a> (<span class="text-xs">{{ $c->created_at->diffForHumans() }}</span>) - <span>{!! nl2br(e($c->content)) !!}</span>
                         </div>
                         <div class="w-full flex items-center gap-5 text-slate-500 text-xs">
                             @if(
