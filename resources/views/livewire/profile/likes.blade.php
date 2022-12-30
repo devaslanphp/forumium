@@ -14,15 +14,18 @@
                     $params = [
                         'l' => $like->id
                     ];
+                    $type = 'Discussion';
                     if ($like->source_type == \App\Models\Discussion::class) {
                         $discussion = $like->source;
                         $params['d'] = $like->source_id;
                     } elseif ($like->source_type == \App\Models\Reply::class) {
                         $discussion = $like->source->discussion;
                         $params['r'] = $like->source_id;
+                        $type = 'Reply';
                     } elseif ($like->source_type == \App\Models\Comment::class) {
                         $params['c'] = $like->source_id;
                         $source = $like->source;
+                        $type = 'Comment';
                         if ($source->source_type == \App\Models\Discussion::class) {
                             $discussion = $source->source;
                             $params['d'] = $source->source_id;
@@ -42,7 +45,15 @@
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center gap-1">
                                 <span class="font-medium text-slate-500">
-                                    <span class="font-medium text-slate-400">You added a like to</span>
+                                    <span class="font-medium text-slate-400">
+                                        @if($type == 'Discussion')
+                                            You liked the <span class="bg-slate-100 text-blue-500 px-2 py-1 text-xs rounded">discussion</span>
+                                        @elseif($type == 'Reply')
+                                            You liked a <span class="bg-slate-100 text-purple-500 px-2 py-1 text-xs rounded">reply</span> in
+                                        @else
+                                            You liked a <span class="bg-slate-100 text-green-500 px-2 py-1 text-xs rounded">comment</span> in
+                                        @endif
+                                    </span>
                                     @if($discussion->is_resolved)
                                         <span class="font-normal">[Resolved]</span>
                                     @endif
