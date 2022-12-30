@@ -32,13 +32,13 @@
             <div class="lg:w-1/2 w-full flex justify-center items-center gap-10">
                 <div class="flex flex-col justify-center items-center gap-1">
                     <div class="w-32 h-32 rounded-full border-8 border-blue-500 flex justify-center items-center">
-                        <p class="text-blue-500 text-3xl">{{ $user->discussionsTotalViews }}</p>
+                        <p class="text-blue-500 text-4xl">{{ $user->discussionsTotalViews > 999 ? '999+' : $user->discussionsTotalViews }}</p>
                     </div>
                     <span class="text-blue-500 text-sm">Total discussions views</span>
                 </div>
                 <div class="flex flex-col justify-center items-center gap-1">
                     <div class="w-32 h-32 rounded-full border-8 border-green-500 flex justify-center items-center">
-                        <p class="text-green-500 text-3xl">{{ $user->discussionsTotalUniqueViews }}</p>
+                        <p class="text-green-500 text-4xl">{{ $user->discussionsTotalUniqueViews > 999 ? '999+' : $user->discussionsTotalUniqueViews }}</p>
                     </div>
                     <span class="text-green-500 text-sm">Total discussions unique views</span>
                 </div>
