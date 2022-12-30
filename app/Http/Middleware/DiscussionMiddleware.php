@@ -24,7 +24,11 @@ class DiscussionMiddleware
         if (auth()->user() && auth()->user()->hasVerifiedEmail() && $discussion) {
             DiscussionVisit::create([
                 'user_id' => auth()->user()->id,
-                'discussion_id' => $discussion->id
+                'discussion_id' => $discussion->id,
+                'meta' => [
+                    'ip' => $request->ip(),
+                    'browser' => $request->header('User-Agent')
+                ]
             ]);
         }
         return $next($request);

@@ -20,7 +20,11 @@ class DiscussionVisitFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'discussion_id' => Discussion::all()->random()->id
+            'discussion_id' => Discussion::all()->random()->id,
+            'meta' => [
+                'ip' => fake()->ipv4(),
+                'browser' => fake()->userAgent()
+            ]
         ];
     }
 }
