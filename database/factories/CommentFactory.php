@@ -22,7 +22,7 @@ class CommentFactory extends Factory
     {
         $source = $this->randomSource();
         return [
-            'content' => fake()->paragraphs(3, true),
+            'content' => fake()->text(300),
             'user_id' => User::all()->random()->id,
             'source_id' => $source->id,
             'source_type' => get_class($source),
