@@ -8,7 +8,9 @@
                 <a @if(auth()->user() && auth()->user()->hasVerifiedEmail()) href="{{ route('user.index', ['user' => $discussion->user, 'slug' => Str::slug($discussion->user->name)]) }}" @else data-modal-toggle="login-modal" @endif class="hover:cursor-pointer hover:underline text-slate-700 font-medium">{{ $discussion->user->name }}</a>
                 <span class="text-slate-500 text-sm mt-1">{{ $discussion->created_at->diffForHumans() }}</span>
             </div>
-            <livewire:discussion.mark-as-resolved :discussion="$discussion" />
+            @if(!$discussion->is_locked)
+                <livewire:discussion.mark-as-resolved :discussion="$discussion" />
+            @endif
         </div>
         @if($edit)
             <livewire:layout.dialogs.discussion :discussion="$discussion" />
@@ -42,7 +44,7 @@
                             (
                                 auth()->user()->id === $discussion->user_id
                                 || auth()->user()->can(Permissions::EDIT_POSTS->value)
-                            )
+                            ) && !$discussion->is_locked
                         )
                         <button wire:click="editDiscussion()" type="button" class="flex items-center gap-2 hover:cursor-pointer text-blue-500 hover:underline hover-action">
                             Edit
@@ -53,7 +55,7 @@
                             (
                                 auth()->user()->id === $discussion->user_id
                                 || auth()->user()->can(Permissions::DELETE_POSTS->value)
-                            )
+                            ) && !$discussion->is_locked
                         )
                         <button wire:click="deleteDiscussion()" type="button" class="flex items-center gap-2 hover:cursor-pointer text-red-500 hover:underline hover-action">
                             Delete

@@ -34,7 +34,7 @@
                                     || auth()->user()->can(Permissions::EDIT_POSTS->value)
                                 ) && (
                                     !$comment
-                                )
+                                ) && !$isLocked
                             )
                                 <button wire:click="editComment({{ $c->id }})" type="button" class="flex items-center gap-2 hover:cursor-pointer text-blue-500 hover:underline hover-action">
                                     Edit
@@ -47,7 +47,7 @@
                                     || auth()->user()->can(Permissions::DELETE_POSTS->value)
                                 ) && (
                                     !$comment
-                                )
+                                ) && !$isLocked
                             )
                                 <button wire:click="deleteComment({{ $c->id }})" type="button" class="flex items-center gap-2 hover:cursor-pointer text-red-500 hover:underline hover-action">
                                     Delete

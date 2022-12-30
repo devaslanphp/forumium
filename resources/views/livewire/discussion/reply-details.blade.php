@@ -52,7 +52,7 @@
                     || auth()->user()->can(Permissions::EDIT_POSTS->value)
                 ) && (
                     !$edit
-                )
+                ) && !$reply->discussion->is_locked
             )
                 <button wire:click="edit()" type="button" class="flex items-center gap-2 hover:cursor-pointer text-blue-500 hover:underline hover-action">
                     Edit
@@ -65,7 +65,7 @@
                     || auth()->user()->can(Permissions::DELETE_POSTS->value)
                 ) && (
                     !$edit
-                )
+                ) && !$reply->discussion->is_locked
             )
                 <button wire:click="delete()" type="button" class="flex items-center gap-2 hover:cursor-pointer text-red-500 hover:underline hover-action">
                     Delete
