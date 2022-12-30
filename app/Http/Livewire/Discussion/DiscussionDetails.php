@@ -261,6 +261,8 @@ class DiscussionDetails extends Component implements HasForms
     public function selectComment(int $comment)
     {
         $this->selectedComment = $this->discussion->comments()->where('id', $comment)->first();
-        $this->dispatchBrowserEvent('discussionCommentSelected');
+        $this->dispatchBrowserEvent('discussionCommentSelected', [
+            'id' => $comment
+        ]);
     }
 }

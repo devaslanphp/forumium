@@ -260,6 +260,8 @@ class ReplyDetails extends Component implements HasForms
     public function selectComment(int $comment)
     {
         $this->selectedComment = $this->reply->comments()->where('id', $comment)->first();
-        $this->dispatchBrowserEvent('replyCommentSelected');
+        $this->dispatchBrowserEvent('replyCommentSelected', [
+            'id' => $comment
+        ]);
     }
 }
