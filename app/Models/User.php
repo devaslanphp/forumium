@@ -158,4 +158,16 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
                     ->first()?->updated_at ?? $this->updated_at
         );
     }
+
+    public function hasNotification(string $notification, bool $isWeb, bool $isMail): bool
+    {
+        $query = $this->appNotifications()->where('name', $notification);
+        if ($isWeb) {
+            $query->where('via_web', true);
+        }
+        if ($isMail) {
+            $query->where('via_email', true);
+        }
+        return $query->count() > 0;
+    }
 }
