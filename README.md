@@ -7,7 +7,7 @@
     <a href="https://php.net"><img alt="PHP 8.0" src="https://img.shields.io/badge/PHP-8.0-777BB4?style=for-the-badge&logo=php"></a>
     <br/>
     <a href="https://github.com/devaslanphp/forumium/releases/">
-        <img src="https://img.shields.io/github/tag/devaslanphp/forumium?include_prereleases=&sort=semver&color=blue&style=for-the-badge" alt="GitHub tag">
+        <img src="https://img.shields.io/github/tag/devaslanphp/forumium?include_prereleases=&sort=semver&color=blue&style=for-the-badge&version=05012023_2322" alt="GitHub tag">
     </a>
     <a href="#license">
         <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
