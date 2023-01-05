@@ -21,8 +21,6 @@ class UsersSeeder extends Seeder
         'email' => 'mod@forumium.app'
     ];
 
-    private $members = 30;
-
     /**
      * Run the database seeds.
      *
@@ -49,11 +47,6 @@ class UsersSeeder extends Seeder
             $data['is_email_visible'] = false;
             User::create($data);
         }
-
-        // Members
-        User::factory()
-            ->count($this->members)
-            ->create();
 
         // Notifications
         User::all()->each(function ($user) {
