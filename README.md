@@ -1,55 +1,65 @@
 # Forumium
-<img src="./public/favicon.svg" width="50" />
 
-**Fast**, **Clean**, **Easy to use** and **Open Source** Forum to boost collaboration
+<p align="center">
+    <a href="https://laravel.com"><img alt="Laravel v9.x" src="https://img.shields.io/badge/Laravel-v9.x-FF2D20?style=for-the-badge&logo=laravel"></a>
+    <a href="https://laravel-livewire.com"><img alt="Livewire v2.x" src="https://img.shields.io/badge/Livewire-v2.x-FB70A9?style=for-the-badge"></a>
+    <a href="https://filamentphp.com/"><img alt="Filament v2.x" src="https://img.shields.io/badge/Filament-v2.x-e9b228?style=for-the-badge"></a>
+    <a href="https://php.net"><img alt="PHP 8.0" src="https://img.shields.io/badge/PHP-8.0-777BB4?style=for-the-badge&logo=php"></a>
+    <br/>
+    <a href="https://github.com/devaslanphp/forumium/releases/">
+        <img src="https://img.shields.io/github/tag/devaslanphp/forumium?include_prereleases=&sort=semver&color=blue&style=for-the-badge" alt="GitHub tag">
+    </a>
+    <a href="#license">
+        <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+    </a>
+    <a href="https://github.com/devaslanphp/forumium/issues">
+        <img src="https://img.shields.io/github/issues/devaslanphp/forumium?style=for-the-badge" alt="issues - forumium">
+    </a>
+    <br/>
+    <a href="https://devaslanphp.github.io/forumium-docs-docs" title="Go to project documentation">
+        <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
+    </a>
+</p>
 
+# Introduction
 
-## Installation
+Forumium is a simple Forum platform made with the [**Laravel Framework**](https://laravel.com) and the elegant TALLkit [**Filament**](https://filamentphp.com/).
 
-- Clone the repository
-- Install backend dependencies: `composer install`
-- Install frontend dependencies: `npm install` (or `yarn`)
-- Generate assets: `npm run build` (or `yarn build`)
-- Create a new file `.env` based on `.env.example`: `cp .env.example .env` (or any other compatible command)
-- Update `.env` file by adding your database information and your SMTP server information
+## Prerequisites
 
-> **IMPORTANT:** The queue is activated by default in this configuration (based on .env.example file), and it's recommanded to have it enabled at least for the configuration step
-- Generate an application key: `php artisan key:generate`
+- Good knowledge of [Laravel](https://laravel.com/) Framework
+- Good knowledge of [Filament](https://filamentphp.com/) TALLkit 
 
-## Database configuration 
+## Screenshots
 
-There is 2 ways to configure your database : 
+<div>
+    <img src="github-contents/1.jpg" width="45%"></img> 
+    <img src="github-contents/2.jpg" width="45%"></img> 
+    <img src="github-contents/3.jpg" width="45%"></img> 
+    <img src="github-contents/4.png" width="45%"></img> 
+</div>
 
-### Manually 
+## Documentation
 
-By executing the commands:
+Full documentation can be viewed online: [Docs](https://devaslanphp.github.io/forumium-docs)
 
-`php artisan migrate`
+## Work in progress
 
-`php artisan db:seed`
-    
-> Here the database configuration is done, you got the database structure and the minimal data inserted by the seeder to make the application work, if you want demo data to be inserted, you need to run the following commands:
-> Before you execute demo data seeder, you need to run queue listener: `php artisan queue:work`, because there is some data that will be inserted via jobs
->    - `php artisan db:seed --class=ContentSeeder`
->    - `php artisan db:seed --class=NotificationSeeder`
+We are always working to make Forumium platform a better application, all contributions are welcome.
 
-### Automatically
+## Credits
 
-By executing the command: `composer run app-install`
+- [All Contributors](https://github.com/devaslanphp/forumium/graphs/contributors)
 
-> Before you execute the composer command, you need to run queue listener: `php artisan queue:work`, because there is some data that will be inserted via jobs
+## License
 
-> Please note that this command will insert also demo data into your database (if you don't need demo data, please use the manual configuration above)
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## Serve the application
+## Releases
 
-- After you have configured the database you can serve the application: `php artisan serve`
-- The database seeder already executed will create at least two users:
-  - **Administrator** 
-    - Email address: *admin@forumium.app*
-    - Password : *password*
-  - **Moderator** 
-    - Email address: *mod@forumium.app*
-    - Password: *password*
+- **Release 1.0.0** (January 5th, 2023)
+  - The first stable release of Forumium
 
-> **IMPORTANT:** if you have executed the demo data seeders, you will have 30 other users (with the **Member** role) inserted also, you can check the database (table: `users`) to get their email addresses, and all their passwords will be *password* (the same as Administrator and Moderator)
+## Support us
+
+<a href="https://www.buymeacoffee.com/heloufir" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
