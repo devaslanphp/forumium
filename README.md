@@ -16,7 +16,7 @@
         <img src="https://img.shields.io/github/issues/devaslanphp/forumium?style=for-the-badge" alt="issues - forumium">
     </a>
     <br/>
-    <a href="https://devaslanphp.github.io/forumium-docs-docs" title="Go to project documentation">
+    <a href="https://devaslanphp.github.io/forumium-docs" title="Go to project documentation">
         <img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation">
     </a>
 </p>
