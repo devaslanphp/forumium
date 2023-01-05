@@ -24,9 +24,9 @@ There is 2 ways to configure your database :
 
 By executing the commands:
 
-    - `php artisan migrate`
+`php artisan migrate`
 
-    - `php artisan db:seed`
+`php artisan db:seed`
     
 > Here the database configuration is done, you got the database structure and the minimal data inserted by the seeder to make the application work, if you want demo data to be inserted, you need to run the following commands:
 >    - `php artisan db:seed --class=ContentSeeder`
