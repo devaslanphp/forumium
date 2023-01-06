@@ -25,6 +25,10 @@
 
 Forumium is a simple Forum platform made with the [**Laravel Framework**](https://laravel.com) and the elegant TALLkit [**Filament**](https://filamentphp.com/).
 
+## Special mention
+
+First of all, we must mention that the development of the **graphical part**, and what gave us the **majority of the development ideas**, was based on the Open Source [Flarum](https://flarum.org/) discussion system.
+
 ## Prerequisites
 
 - Good knowledge of [Laravel](https://laravel.com/) Framework
