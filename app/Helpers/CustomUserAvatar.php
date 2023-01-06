@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Helpers;
 
 use Devaslanphp\FilamentAvatar\Core\UiAvatarsProvider;
 use Illuminate\Database\Eloquent\Model;
