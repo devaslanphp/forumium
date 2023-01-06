@@ -177,7 +177,7 @@ class DispatchNotificationsJob implements ShouldQueue
         }
         // Via email
         if ($this->user->hasNotification($this->notification, false, true)) {
-            $this->user->notify(new EmailNotification($title, $body, $recipient, $url));
+            $this->user->notify(new EmailNotification($title, $body, $url));
         }
     }
 }
