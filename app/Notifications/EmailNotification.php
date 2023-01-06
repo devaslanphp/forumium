@@ -12,7 +12,6 @@ class EmailNotification extends Notification
 
     private string $title;
     private string $body;
-    private $recipient;
     private string|null $url;
 
     /**
@@ -20,11 +19,10 @@ class EmailNotification extends Notification
      *
      * @return void
      */
-    public function __construct(string $title, string $body, $recipient, string|null $url)
+    public function __construct(string $title, string $body, string|null $url)
     {
         $this->title = $title;
         $this->body = $body;
-        $this->recipient = $recipient;
         $this->url = $url;
     }
 
