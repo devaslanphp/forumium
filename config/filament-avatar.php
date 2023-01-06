@@ -63,7 +63,7 @@ return [
         // Custom avatar (user's picture field)
         'custom-avatar' => [
             // Class used to generate the user avatar
-            'class' => \App\Core\CustomUserAvatar::class,
+            'class' => \App\Helpers\CustomUserAvatar::class,
 
             // User's field used to generate avatar
             'name_field' => 'picture'
