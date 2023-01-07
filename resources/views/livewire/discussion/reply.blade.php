@@ -21,7 +21,7 @@
 @push('scripts')
     <script>
         window.addEventListener('replyAdded', () => {
-            const hideReplyBtn = document.getElementById('add-reply-modal');
+            const hideReplyBtn = document.getElementById('hide-reply-modal');
             hideReplyBtn.click();
         });
     </script>

@@ -4,14 +4,17 @@ namespace App\Http\Livewire\Discussion;
 
 use App\Core\NotificationConstants;
 use App\Core\PointsConstants;
+use App\Forms\Components\MentionsRichEditor;
 use App\Jobs\CalculateUserPointsJob;
 use App\Jobs\DispatchNotificationsJob;
 use App\Models\Discussion;
 use App\Models\Reply as ReplyModel;
+use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Reply extends Component implements HasForms
@@ -38,8 +41,20 @@ class Reply extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            RichEditor::make('content')
+            MentionsRichEditor::make('content')
                 ->label('Reply content')
+                ->mentionsItems(
+                    User::all()
+                        ->map(
+                            fn (User $user) => [
+                                'key' => $user->name,
+                                'link' => route('user.index', [
+                                    'user' => $user,
+                                    'slug' => Str::slug($user->name)
+                                ])
+                            ])
+                        ->toArray()
+                )
                 ->required()
         ];
     }
