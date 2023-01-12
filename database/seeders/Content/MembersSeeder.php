@@ -5,6 +5,8 @@ namespace Database\Seeders\Content;
 use App\Models\Comment;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Notification;
+use App\Models\UserNotification;
 use Database\Seeders\Permissions\UsersSeeder;
 
 class MembersSeeder extends Seeder
