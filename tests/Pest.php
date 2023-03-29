@@ -11,9 +11,18 @@
 |
 */
 
+use App\Models\User;
+use Database\Seeders\Permissions\PermissionsSeeder;
+use Database\Seeders\Permissions\RolePermissionsSeeder;
+use Database\Seeders\Permissions\RolesSeeder;
+use Database\Seeders\Permissions\UserRolesSeeder;
+use Database\Seeders\Permissions\UsersSeeder;
+
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+     Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
+//     Illuminate\Foundation\Testing\RefreshDatabase::class,
+     Illuminate\Foundation\Testing\DatabaseMigrations::class,
 )->in('Feature');
 
 /*
@@ -41,8 +50,24 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function something()
+function asAdmin()
 {
-    // ..
+    // Permissions
+    app(PermissionsSeeder::class)->run();
+    app(RolesSeeder::class)->run();
+    app(RolePermissionsSeeder::class)->run();
+    app(UsersSeeder::class)->run();
+    app(UserRolesSeeder::class)->run();
+    /* create admin user */
+    $adminUser = User::factory()->create([
+        'name' => 'Administrator',
+        'email' => fake()->email(),
+        'email_verified_at' => now(),
+        'bio' => fake()->paragraph(),
+        'is_email_visible' => false,
+        'password' => '$2a$12$72TkvzkAKhAMyPS9asI3C.1/VGqSt/jM2yDQikv.DzNi9EqHgMwUu',
+    ]);
+
+    return test()->actingAs($adminUser);
+
 }

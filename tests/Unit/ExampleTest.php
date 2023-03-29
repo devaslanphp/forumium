@@ -1,5 +1,5 @@
 <?php
 
-test('that true is true', function () {
+test('sanity check', function () {
     expect(true)->toBeTrue();
 });
