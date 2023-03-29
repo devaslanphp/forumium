@@ -25,6 +25,9 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "pestphp/pest": "^2.3",
+        "pestphp/pest-plugin-faker": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "pestphp/pest-plugin-livewire": "^2.0",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -41,6 +44,9 @@
         }
     },
     "scripts": {
+        "test": [
+            "./vendor/bin/pest"
+        ],
         "app-install": [
             "@php artisan db:wipe",
             "@php artisan migrate",
