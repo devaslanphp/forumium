@@ -19,6 +19,12 @@ module.exports = {
                 success: colors.green,
                 warning: colors.yellow,
             },
+            maxWidth:{
+                '5xl': '1075px',
+            },
+            fontFamily:{
+                'sans': 'Roboto',
+            }
         },
     },
     plugins: [
