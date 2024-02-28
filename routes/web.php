@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\SocialiteController;
-use App\Models\Discussion;
 use App\Models\Tag;
 use App\Models\User;
+use Livewire\Livewire;
+use App\Models\Discussion;
+use App\Http\Livewire\Calendar;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,3 +164,11 @@ Route::middleware(['auth', 'verified'])
             ->name('logout');
 
     });
+
+
+Route::view('classroom', 'classroom')
+->name('classroom');
+Route::view('calendar', 'calendar')
+->name('calendar');
+
+// Livewire::component('calendar', Calendar::class);

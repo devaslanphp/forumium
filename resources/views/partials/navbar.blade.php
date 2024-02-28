@@ -180,31 +180,29 @@ items-center justify-center flex">
     </nav>
     <nav class="">
         <div class="container mx-auto max-w-5xl">
-            <div class="flex items-center">
-                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                    <li>
-                        <a href="#" class="font-semibold dark:text-white hover:underline pb-3 block
-                        border-b-4
-                        border-black text-base"
-                           aria-current="page">Community</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Classroom</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Calendar</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Members</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Leaderboards</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">About</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="flex items-center">
+        <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+            <li>
+                <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('/') ? 'page' : '' }}">Community</a>
+            </li>
+            <li>
+                <a href="{{ route('classroom') }}" class="{{ request()->is('classroom') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('classroom') ? 'page' : '' }}">Classroom</a>
+            </li>
+            <li>
+                <a href="{{ route('calendar') }}" class="{{ request()->is('calendar') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('calendar') ? 'page' : '' }}">Calendar</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Members</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Leaderboards</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">About</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
     </nav>
 </div>

@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@thoughtbot/trix-mentions-element": "^0.1.2",
+        "fullcalendar": "^6.1.11",
         "tributejs": "^5.1.3"
     }
 }
