@@ -1,6 +1,6 @@
 <!-- Nav bar -->
-<div class="border-b">
-    <nav class="bg-white p-2 sm:px-4 rounded w-full
+<div class="border-b bg-white">
+    <nav class="p-2 sm:px-4 rounded w-full
 items-center justify-center flex">
         <div class="container flex flex-wrap items-center justify-between mx-auto gap-3 max-w-5xl">
             <div class="flex items-center gap-2">
@@ -32,7 +32,8 @@ items-center justify-center flex">
                     rounded-lg shadow-lg w-80 border dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="#" class="text-lg block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600
+                                <a href="/signup" class="text-lg block px-4 py-2 hover:bg-gray-100
+                                dark:hover:bg-gray-600
                                 dark:hover:text-white flex items-center gap-2 px-[15px] py-[14px] font-semibold">
                                     <i class="fa fa-plus text-xl w-10 h-10 grid place-items-center bg-stone-300
                                     text-stone-400 rounded-lg"></i> Create a Community</a>
@@ -183,13 +184,23 @@ items-center justify-center flex">
     <div class="flex items-center">
         <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
             <li>
-                <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('/') ? 'page' : '' }}">Community</a>
+                <a href="{{ route('home') }}"
+                   wire:navigate.hover
+                   class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                ('/') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is('/') ? 'page'
+                : '' }}">Community</a>
             </li>
             <li>
-                <a href="{{ route('classroom') }}" class="{{ request()->is('classroom') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('classroom') ? 'page' : '' }}">Classroom</a>
+                <a href="{{ route('classroom') }}"
+                   wire:navigate.hover
+                   class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('classroom') ? 'border-b-4 border-black' : 'text-gray-400' }}"
+                   aria-current="{{ request()->is('classroom') ? 'page' : '' }}"
+                >Classroom</a>
             </li>
             <li>
-                <a href="{{ route('calendar') }}" class="{{ request()->is('calendar') ? 'font-semibold dark:text-white hover:underline pb-3 block border-b-4 border-black text-base' : 'font-semibold text-gray-400' }}" aria-current="{{ request()->is('calendar') ? 'page' : '' }}">Calendar</a>
+                <a href="{{ route('calendar') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                ('calendar') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
+                ('calendar') ? 'page' : '' }}">Calendar</a>
             </li>
             <li>
                 <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">Members</a>
