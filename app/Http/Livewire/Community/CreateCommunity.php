@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -50,7 +51,10 @@ class CreateCommunity extends Component implements HasForms
         ];
     }
 
-    public function submit(): void
+    /**
+     * @return RedirectResponse
+     */
+    public function submit()
     {
         $data = $this->form->getState();
 
@@ -59,5 +63,7 @@ class CreateCommunity extends Component implements HasForms
         $this->community->creator()->associate(auth()->user());
 
         $this->community->save();
+
+        return redirect()->to(route('profile.communities'));
     }
 }

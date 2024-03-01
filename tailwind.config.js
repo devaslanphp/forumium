@@ -14,6 +14,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                'custom-primary': "#f8d481",
                 danger: colors.rose,
                 primary: colors.stone,
                 success: colors.green,

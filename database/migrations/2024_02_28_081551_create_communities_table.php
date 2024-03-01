@@ -13,17 +13,25 @@ return new class extends Migration {
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->id();
+            $table->text('logo')->nullable();
+            $table->text('feature_image')->nullable();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->boolean('is_public');
-            $table->boolean('is_paid');
-            $table->text('description')->nullable();
-            $table->decimal('monthly_payment')->nullable();
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->json('banner_youtube_urls')->nullable();
+            $table->json('banner_images')->nullable();
 
+            $table->text('long_description')->nullable();
+            $table->text('short_description')->nullable();
+
+            $table->json('links')->nullable();
+
+            $table->boolean('is_public');
+            $table->boolean('is_paid');
+            $table->decimal('monthly_payment')->nullable();
             $table->timestamps();
         });
     }

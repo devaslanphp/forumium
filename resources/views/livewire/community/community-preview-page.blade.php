@@ -34,15 +34,20 @@
             </div>
         </div>
         <div>
-            {{$community->description}}
+            {!!  nl2br($community->long_description) ?? ""!!}
         </div>
     </div>
 
     <div class="w-1/4">
         <div class="border rounded-lg bg-white overflow-hidden">
-            <div class="h-[144px] w-full bg-gray-200">
 
+            <div class="h-[144px] w-full bg-gray-200">
+                @if($community->feature_image)
+                    <img src="{{asset('storage/'.$community->feature_image)}}"
+                         class="object-cover object-center w-full h-full">
+                @endif
             </div>
+
             <div class="py-5 px-4 flex gap-5 flex-col">
                 @if(!$community->is_public)
                     <div class="text-xs text-stone-400">
@@ -51,11 +56,15 @@
                 @endif
 
                 <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, delectus dicta
+                    {{$community->short_description ?? ""}}
                 </div>
 
                 <div class="text-stone-400">
-                    <a href="#"> <i class="fa-solid fa-link"></i> [User's instagram]</a>
+                    @foreach($community->links as $link)
+                        <a class="block hover:underline" href="{{$link['url']}}"> <i class="fa-solid
+                        fa-link mr-3 text-xs"></i>{{$link['name']}}</a>
+                    @endforeach
+
                 </div>
 
                 <div class="py-2 border-b border-t">

@@ -12,11 +12,22 @@ class Community extends Model
     use Sluggable;
 
     protected $fillable =[
+        'feature_image',
         'name',
-        'description',
+        'banner_youtube_urls',
+        'banner_images',
+        'long_description',
+        'short_description',
+        'links',
         'is_public',
         'is_paid',
         'monthly_payment',
+    ];
+
+    protected $casts =[
+        'banner_youtube_urls'=>'array',
+        'banner_images'=>'array',
+        'links'=>'array',
     ];
 
     public function creator()

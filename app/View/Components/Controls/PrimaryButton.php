@@ -1,21 +1,21 @@
 <?php
 
-namespace App\View\Components\App;
+namespace App\View\Components\Controls;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Logo extends Component
+class PrimaryButton extends Component
 {
-    public string $logo_url;
-
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public string $customClass
+    )
     {
-        $this->logo_url = asset('img/logo-placeholder-image.png');
+        //
     }
 
     /**
@@ -23,6 +23,6 @@ class Logo extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.app.logo');
+        return view('components.controls.primary-button');
     }
 }

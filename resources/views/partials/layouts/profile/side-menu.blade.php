@@ -28,7 +28,8 @@
         <a href="{{ route($routePrefix . '.communities', $routeParams) }}" class="lg:min-w-full min-w-[130px] lg:w-full
         w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x
         border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center gap-1 {{
-        Route::is($routePrefix . '.communities') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' :
+        Route::is($routePrefix . '.communities') || Route::is($routePrefix . '.communities.community.settings') ?
+        'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' :
         'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
             <i class="fa-solid fa-people-group"></i>
             <span>Communities</span>
@@ -38,10 +39,12 @@
             <i class="fa-solid fa-star"></i>
             <span>Following</span>
         </a>
+
         <a href="{{ route($routePrefix . '.not-following-discussions', $routeParams) }}" class="lg:min-w-full min-w-[130px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center gap-1 {{ Route::is($routePrefix . '.not-following-discussions') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
             <i class="fa-regular fa-star"></i>
             <span>Not following</span>
         </a>
+
         <a href="{{ route($routePrefix . '.ignoring-discussions', $routeParams) }}" class="lg:min-w-full min-w-[130px] lg:w-full w-fit lg:p-0 p-3 lg:bg-transparent lg:mb-5 mb-0 lg:border-y-0 border-y lg:border-x-0 border-x border-slate-200 flex lg:justify-start justify-center lg:text-left text-center items-center gap-1 {{ Route::is($routePrefix . '.ignoring-discussions') ? 'lg:text-blue-500 lg:bg-transparent text-white bg-blue-500' : 'lg:hover:text-blue-500 lg:text-slate-500 lg:hover:bg-transparent hover:bg-blue-500 hover:text-white' }}">
             <i class="fa-regular fa-eye-slash"></i>
             <span>Ignoring</span>

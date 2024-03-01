@@ -3,7 +3,7 @@
 
     <x-slot name="title">Profile - Communities</x-slot>
 
-    <div class="w-full bg-white border p-8 rounded-xl">
+    <div class="w-full">
         <div class="mb-10">
             <div class="text-slate-700 text-xl flex items-center gap-2 mb-2 font-semibold">
                 @if(auth()->user()->id == $user->id)
