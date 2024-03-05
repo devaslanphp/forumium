@@ -170,4 +170,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword,
         }
         return $query->count() > 0;
     }
+
+    public function communities(): HasMany
+    {
+        return $this->hasMany(Community::class);
+    }
 }

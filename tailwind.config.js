@@ -14,8 +14,11 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                'custom-primary': "#f8d481",
+                'custom-primary-hover': "#f1d07c",
+                'custom-foreground-primary': '#202124',
                 danger: colors.rose,
-                primary: colors.blue,
+                primary: colors.stone,
                 success: colors.green,
                 warning: colors.yellow,
             },

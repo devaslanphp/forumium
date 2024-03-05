@@ -1,14 +1,12 @@
 <?php
 
-use App\Models\Tag;
-use App\Models\User;
-use Livewire\Livewire;
-use App\Models\Discussion;
-use App\Http\Livewire\Calendar;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SocialiteController;
-use App\Http\Controllers\EmailVerificationController;
+use App\Models\Discussion;
+use App\Models\Tag;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +86,9 @@ Route::middleware(['auth', 'verified'])
                 Route::view('/discussions', 'profile.discussions')
                     ->name('discussions');
 
+                Route::view('/communities', 'profile.communities')
+                    ->name('communities');
+
                 Route::view('/following-discussions', 'profile.following-discussions')
                     ->name('following-discussions');
 
@@ -162,7 +163,6 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('logout', LogoutController::class)
             ->name('logout');
-
     });
 
 

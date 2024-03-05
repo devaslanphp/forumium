@@ -1,4 +1,15 @@
 @tailwind base;
+
+@layer base{
+    html{
+        @apply text-[#202124]
+    }
+
+    h1{
+        @apply text-[45px] font-bold text-center
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
 
