@@ -19,6 +19,6 @@
             </div>
         </div>
 
-        <livewire:community.components.community-list/>
+        <livewire:communities.components.community-list/>
     </div>
 </x-layout-profile>

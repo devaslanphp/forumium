@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Livewire\Community\Components;
+namespace App\Http\Livewire\Communities\Components;
 
-use App\Models\Community;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
@@ -17,6 +16,6 @@ class CommunityList extends Component
 
     public function render()
     {
-        return view('livewire.community.components.community-list');
+        return view('livewire.communities.components.community-list');
     }
 }

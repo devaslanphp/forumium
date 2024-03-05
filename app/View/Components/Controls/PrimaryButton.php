@@ -12,7 +12,7 @@ class PrimaryButton extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $customClass
+        public string $customClass = ''
     )
     {
         //
