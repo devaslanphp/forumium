@@ -212,6 +212,7 @@ items-center justify-center flex">
                 ('leaderboard') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
                 ('leaderboard') ? 'page' : '' }}">Leaderboards</a>
             </li>
+            
             <li>
                 <a href="#" class="text-gray-400 dark:text-white pb-3 text-base font-semibold">About</a>
             </li>
