@@ -1,4 +1,8 @@
-<!-- Nav bar -->
+@php
+    $user = auth()->user();
+@endphp
+
+    <!-- Nav bar -->
 <div class="border-b bg-white">
     <nav class="p-2 sm:px-4 rounded w-full
 items-center justify-center flex">
@@ -25,25 +29,44 @@ items-center justify-center flex">
                         data-collapse-toggle="switchCommunity" type="button"
                         class="h-[48px] w-[48px] text-stone-400 flex items-center justify-center rounded-full
                     hover:bg-stone-300 hover:text-black">
-                        <svg class="w-[12px]" viewBox="0 0 12 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path
-                                d="M0.702509 13.2926C1.09284 12.8995 1.72829 12.8984 2.12 13.2901L4.58579 15.7559C5.36684 16.5369 6.63316 16.5369 7.41421 15.7559L9.88 13.2901C10.2717 12.8984 10.9072 12.8995 11.2975 13.2926C11.6859 13.6837 11.6848 14.3153 11.295 14.7051L7.41421 18.5859C6.63317 19.3669 5.36684 19.3669 4.58579 18.5859L0.705005 14.7051C0.315239 14.3153 0.314123 13.6837 0.702509 13.2926Z" fill="currentColor"></path><path d="M11.2975 7.28749C10.9072 7.68059 10.2717 7.68171 9.88 7.28999L7.41421 4.82421C6.63316 4.04316 5.36684 4.04316 4.58579 4.82421L2.12 7.28999C1.72829 7.68171 1.09284 7.68059 0.702509 7.28749C0.314123 6.89635 0.315239 6.26476 0.705005 5.87499L4.58579 1.99421C5.36683 1.21316 6.63316 1.21316 7.41421 1.99421L11.295 5.87499C11.6848 6.26476 11.6859 6.89635 11.2975 7.28749Z" fill="currentColor"></path></svg>
+                        <svg class="w-[12px]" viewBox="0 0 12 20" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.702509 13.2926C1.09284 12.8995 1.72829 12.8984 2.12 13.2901L4.58579 15.7559C5.36684 16.5369 6.63316 16.5369 7.41421 15.7559L9.88 13.2901C10.2717 12.8984 10.9072 12.8995 11.2975 13.2926C11.6859 13.6837 11.6848 14.3153 11.295 14.7051L7.41421 18.5859C6.63317 19.3669 5.36684 19.3669 4.58579 18.5859L0.705005 14.7051C0.315239 14.3153 0.314123 13.6837 0.702509 13.2926Z"
+                                fill="currentColor"></path>
+                            <path
+                                d="M11.2975 7.28749C10.9072 7.68059 10.2717 7.68171 9.88 7.28999L7.41421 4.82421C6.63316 4.04316 5.36684 4.04316 4.58579 4.82421L2.12 7.28999C1.72829 7.68171 1.09284 7.68059 0.702509 7.28749C0.314123 6.89635 0.315239 6.26476 0.705005 5.87499L4.58579 1.99421C5.36683 1.21316 6.63316 1.21316 7.41421 1.99421L11.295 5.87499C11.6848 6.26476 11.6859 6.89635 11.2975 7.28749Z"
+                                fill="currentColor"></path>
+                        </svg>
                     </button>
                     <div id="switchCommunity" class="absolute z-10 hidden font-normal bg-white divide-y divide-gray-100
-                    rounded-lg shadow-lg w-80 border dark:bg-gray-700 dark:divide-gray-600">
+                    rounded-lg shadow-lg w-80 border dark:bg-gray-700 dark:divide-gray-600 translate-x-[-40%]">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="/signup" class="text-lg block px-4 py-2 hover:bg-gray-100
-                                dark:hover:bg-gray-600
+                                <a href="/signup" class="text-lg block px-4 py-2 hover:bg-custom-primary
+                                    dark:hover:bg-custom-primary
                                 dark:hover:text-white flex items-center gap-2 px-[15px] py-[14px] font-semibold">
                                     <i class="fa fa-plus text-xl w-10 h-10 grid place-items-center bg-stone-300
                                     text-stone-400 rounded-lg"></i> Create a Community</a>
                             </li>
                             <li>
-                                <a href="#" class="text-lg block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600
+                                <a href="{{route('communities.discovery')}}" class="text-lg block px-4 py-2 hover:bg-custom-primary
+                                    dark:hover:bg-custom-primary
                                 dark:hover:text-white flex items-center gap-2 px-[15px] py-[14px] font-semibold">
                                     <i class="fa-solid fa-compass text-xl w-10 h-10 grid place-items-center bg-stone-300
                                     text-stone-400 rounded-lg"></i> Discover Communities </a>
                             </li>
+                            @if($user)
+                                @foreach($user->communities as $community)
+                                    <li>
+                                        <livewire:communities.components.community-logo-name :community="$community"
+                                                                                             is-link
+                                                                                             custom-class="px-4 py-2 hover:bg-custom-primary
+                                    dark:hover:bg-custom-primary dark:hover:text-white"/>
+                                    </li>
+                                @endforeach
+                            @endif
+
                         </ul>
                     </div>
                 </li>
@@ -181,24 +204,24 @@ items-center justify-center flex">
     </nav>
     <nav class="">
         <div class="container mx-auto max-w-5xl">
-    <div class="flex items-center">
-        <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-            <li>
-                <a href="{{ route('home') }}"
-                   wire:navigate.hover
-                   class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+            <div class="flex items-center">
+                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                    <li>
+                        <a href="{{ route('home') }}"
+                           wire:navigate.hover
+                           class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
                 ('/') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is('/') ? 'page'
                 : '' }}">Community</a>
-            </li>
-            <li>
-                <a href="{{ route('classroom') }}"
-                   wire:navigate.hover
-                   class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('classroom') ? 'border-b-4 border-black' : 'text-gray-400' }}"
-                   aria-current="{{ request()->is('classroom') ? 'page' : '' }}"
-                >Classroom</a>
-            </li>
-            <li>
-                <a href="{{ route('calendar') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                    </li>
+                    <li>
+                        <a href="{{ route('classroom') }}"
+                           wire:navigate.hover
+                           class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('classroom') ? 'border-b-4 border-black' : 'text-gray-400' }}"
+                           aria-current="{{ request()->is('classroom') ? 'page' : '' }}"
+                        >Classroom</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('calendar') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
                 ('calendar') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
                 ('calendar') ? 'page' : '' }}">Calendar</a>
             </li>

@@ -3,7 +3,6 @@
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SocialiteController;
-use App\Http\Livewire\Community\CreateCommunity;
 use App\Models\Discussion;
 use App\Models\Tag;
 use App\Models\User;

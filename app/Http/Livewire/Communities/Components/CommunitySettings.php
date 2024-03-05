@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Community\Components;
+namespace App\Http\Livewire\Communities\Components;
 
 use App\Models\Community;
 use Filament\Forms\Components\Fieldset;
@@ -15,8 +15,6 @@ use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Livewire\Component;
-use Symfony\Component\Console\Input\Input;
-use function Laravel\Prompts\text;
 
 class CommunitySettings extends Component implements HasForms
 {
@@ -33,7 +31,7 @@ class CommunitySettings extends Component implements HasForms
 
     public function render()
     {
-        return view('livewire.community.components.community-settings')
+        return view('livewire.communities.components.community-settings')
             ->layout('components.layout-profile', ['user' => auth()->user(), 'title' => "Edit {$this->community->name}"]);
     }
 
@@ -54,15 +52,17 @@ class CommunitySettings extends Component implements HasForms
             Fieldset::make('Media')
                 ->schema([
                     FileUpload::make('banner_images')
+                        ->imageCropAspectRatio('1:1')
+                        ->enableReordering()
                         ->directory('images')
                         ->image()
                         ->multiple(),
-                    Repeater::make('banner_youtube_urls')
+                 /*   Repeater::make('banner_youtube_urls')
                         ->schema([
                             TextInput::make('banner_youtube_urls')
                                 ->label('Youtube URL')
                                 ->helperText('Paste url from YouTube'),
-                        ]),
+                        ]),*/
                 ])
                 ->columns(1),
             Textarea::make('long_description'),

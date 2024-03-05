@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Community;
+namespace App\Http\Livewire\Communities;
 
 use App\Models\Community;
 use Filament\Forms\Components\Grid;
@@ -27,7 +27,7 @@ class CreateCommunity extends Component implements HasForms
 
     public function render()
     {
-        return view('livewire.community.create-community')
+        return view('livewire.communities.create-community')
             ->layout('components.blank-layout');
     }
 

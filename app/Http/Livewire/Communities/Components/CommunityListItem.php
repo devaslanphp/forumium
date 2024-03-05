@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Community\Components;
+namespace App\Http\Livewire\Communities\Components;
 
 use App\Models\Community;
 use Livewire\Component;
@@ -15,6 +15,6 @@ class CommunityListItem extends Component
 
     public function render()
     {
-        return view('livewire.community.components.community-list-item', ['community'=>$this->community]);
+        return view('livewire.communities.components.community-list-item', ['community'=>$this->community]);
     }
 }
