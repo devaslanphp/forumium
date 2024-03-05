@@ -222,19 +222,19 @@ items-center justify-center flex">
                             aria-current="{{ request()->is('classroom') ? 'page' : '' }}">Classroom</a>
                     </li>
                     <li>
-                        <a href="{{ route('calendar') }}"
-                            class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('calendar') ? 'border-b-4 border-black' : 'text-gray-400' }}"
-                            aria-current="{{ request()->is('calendar') ? 'page' : '' }}">Calendar</a>
+                        <a href="{{ route('calendar') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                ('calendar') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
+                ('calendar') ? 'page' : '' }}">Calendar</a>
                     </li>
                     <li>
-                        <a href="{{ route('member') }}"
-                            class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('member') ? 'border-b-4 border-black' : 'text-gray-400' }}"
-                            aria-current="{{ request()->is('member') ? 'page' : '' }}">Members</a>
+                        <a href="{{ route('member') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                ('member') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
+                ('member') ? 'page' : '' }}">Members</a>
                     </li>
                     <li>
-                        <a href="{{ route('leaderboard') }}"
-                            class="text-base font-semibold dark:text-white pb-3 block {{ request()->is('leaderboard') ? 'border-b-4 border-black' : 'text-gray-400' }}"
-                            aria-current="{{ request()->is('leaderboard') ? 'page' : '' }}">Leaderboards</a>
+                        <a href="{{ route('leaderboard') }}" class="text-base font-semibold dark:text-white pb-3 block {{ request()->is
+                ('leaderboard') ? 'border-b-4 border-black' : 'text-gray-400' }}" aria-current="{{ request()->is
+                ('leaderboard') ? 'page' : '' }}">Leaderboards</a>
                     </li>
 
                     <li>
