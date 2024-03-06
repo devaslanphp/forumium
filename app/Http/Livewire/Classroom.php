@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Community;
 use Filament\Forms;
 use App\Models\Course;
 use Livewire\Component;
@@ -14,7 +15,9 @@ class Classroom extends Component implements Forms\Contracts\HasForms
 
     use Forms\Concerns\InteractsWithForms;
 
-    public $course_title, $course_description, $deleteId, $course_image, $course_id;
+    public Community $community;
+
+    public $title, $description, $deleteId, $image, $course_id;
     public $courses;
 
     public function mount(): void
@@ -25,17 +28,18 @@ class Classroom extends Component implements Forms\Contracts\HasForms
     protected function getFormSchema(): array
     {
         return [
-            FileUpload::make('course_image')
+            FileUpload::make('image')
                 ->directory('images')
                 ->image(),
-            TextInput::make('course_title'),
-            Textarea::make('course_description'),
+            TextInput::make('title'),
+            Textarea::make('description'),
         ];
     }
+
     public function resetFields()
     {
-        $this->course_title = '';
-        $this->course_description = '';
+        $this->title = '';
+        $this->description = '';
     }
 
     public function create(): void
@@ -44,11 +48,12 @@ class Classroom extends Component implements Forms\Contracts\HasForms
         $this->courses = Course::all();
         $this->resetFields();
     }
+
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        $this->course_title = $course->course_title;
-        $this->course_description = $course->course_description;
+        $this->title = $course->title;
+        $this->description = $course->description;
         $this->course_id = $course->id;
     }
 
@@ -59,8 +64,8 @@ class Classroom extends Component implements Forms\Contracts\HasForms
         try {
             // Update category
             Course::find($this->course_id)->fill([
-                'course_title' => $this->course_title,
-                'course_description' => $this->course_description
+                'title' => $this->title,
+                'description' => $this->description
             ])->save();
             session()->flash('success', 'Course Updated Successfully!!');
 
@@ -75,6 +80,7 @@ class Classroom extends Component implements Forms\Contracts\HasForms
     {
         $this->deleteId = $id;
     }
+
     public function delete()
     {
         Course::find($this->deleteId)->delete();
@@ -83,6 +89,7 @@ class Classroom extends Component implements Forms\Contracts\HasForms
     public function render()
     {
         $this->courses = Course::all();
-        return view('livewire.classroom.classroom');
+        return view('livewire.classroom.classroom')
+            ->layout('components.layout', ['community' => $this->community, 'title' => $this->community->name]);
     }
 }

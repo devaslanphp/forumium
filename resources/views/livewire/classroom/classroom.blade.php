@@ -12,7 +12,7 @@
                 <div class="flex items-center justify-between mb-3">
                     <h5
                         class="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
-                        {{ $course->course_title }}
+                        {{ $course->title }}
                     </h5>
                     <p
                         class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
@@ -29,7 +29,7 @@
                     </p>
                 </div>
                 <p class="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
-                    {{ $course->course_description }}
+                    {{ $course->description }}
                 </p>
             </div>
             <div class="p-6 pt-3">

@@ -10,8 +10,8 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'course_image',
-        'course_title',
-        'course_description',
+        'image',
+        'title',
+        'description',
     ];
 }

@@ -17,29 +17,23 @@ class UserRolesSeeder extends Seeder
      */
     public function run()
     {
-        // Admin
-        $admin = UsersSeeder::$admin['email'];
-        $adminRole = RolesSeeder::$adminRole;
-        $user = User::where('email', $admin)->first();
-        $role = Role::where('name', $adminRole)->first();
-        if ($user && $role) {
-            UserRole::where('user_id', $user->id)->where('role_id', Role::where('name', RoleConstants::MEMBER->value)->first()->id)->delete();
-            if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
-                UserRole::create([
-                    'user_id' => $user->id,
-                    'role_id' => $role->id
-                ]);
-            }
-        }
+        $this->assignRole(UsersSeeder::$admin['email'], RolesSeeder::$adminRole);
+        $this->assignRole(UsersSeeder::$mod['email'], RolesSeeder::$modRole);
+        $this->assignRole(UsersSeeder::$member1['email'], RolesSeeder::$memberRole);
+        $this->assignRole(UsersSeeder::$member2['email'], RolesSeeder::$memberRole);
+    }
 
-        // Mod
-        $mod = UsersSeeder::$mod['email'];
-        $modRole = RolesSeeder::$modRole;
-        $user = User::where('email', $mod)->first();
-        $role = Role::where('name', $modRole)->first();
+    private function assignRole($userEmail, $roleName)
+    {
+        $user = User::where('email', $userEmail)->first();
+        $role = Role::where('name', $roleName)->first();
+
         if ($user && $role) {
-            UserRole::where('user_id', $user->id)->where('role_id', Role::where('name', RoleConstants::MEMBER->value)->first()->id)->delete();
-            if (!UserRole::where('user_id', $user->id)->where('role_id', $role)->count()) {
+            $defaultMemberRoleId = Role::where('name', RoleConstants::MEMBER->value)->first()->id;
+
+            UserRole::where('user_id', $user->id)->where('role_id', $defaultMemberRoleId)->delete();
+
+            if (!UserRole::where('user_id', $user->id)->where('role_id', $role->id)->count()) {
                 UserRole::create([
                     'user_id' => $user->id,
                     'role_id' => $role->id

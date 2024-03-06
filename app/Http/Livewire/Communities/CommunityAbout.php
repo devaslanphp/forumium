@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Communities;
 use App\Models\Community;
 use Livewire\Component;
 
-class CommunityPreviewPage extends Component
+class CommunityAbout extends Component
 {
     public string $title;
     public Community $community;
@@ -26,7 +26,7 @@ class CommunityPreviewPage extends Component
 
     public function render()
     {
-        return view('livewire.communities.community-preview-page')
-            ->layout('components.layout');
+        return view('livewire.communities.community-about')
+            ->layout('components.layout', ['community'=>$this->community]);
     }
 }

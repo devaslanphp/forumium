@@ -2,18 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Community;
 use App\Models\Event;
 use Livewire\Component;
 
 class Calendar extends Component
 {
+    public Community $community;
     public $events = '';
 
     public function getevent()
     {
         $events = Event::select('id', 'title', 'start')->get();
 
-        return  json_encode($events);
+        return json_encode($events);
     }
 
     /**
@@ -51,6 +53,7 @@ class Calendar extends Component
 
         $this->events = json_encode($events);
 
-        return view('livewire.calendar');
+        return view('livewire.calendar')
+            ->layout('components.layout', ['community' => $this->community, 'title' => $this->community->name]);
     }
 }

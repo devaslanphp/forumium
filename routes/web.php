@@ -164,20 +164,3 @@ Route::middleware(['auth', 'verified'])
         Route::get('logout', LogoutController::class)
             ->name('logout');
     });
-
-
-Route::view('classroom', 'classroom')
-->name('classroom');
-Route::view('calendar', 'calendar')
-->name('calendar');
-// Route::view('member', 'member')
-// ->name('member');
-Route::get('member', function () {
-    return view('livewire.member.member');
-})->name('member');
-Route::get('leaderboard', function () {
-    return view('livewire.leaderboard.leaderboard');
-})->name('leaderboard');
-
-
-// Livewire::component('calendar', Calendar::class);
