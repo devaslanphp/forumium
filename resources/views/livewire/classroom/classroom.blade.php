@@ -1,13 +1,12 @@
 @include('livewire.classroom.create')
-<div class="grid grid-cols-3 gap-4">
+<div class="grid-cols-1 sm:grid md:grid-cols-3 ">
     @foreach ($courses as $course)
         <div
-            class="relative flex flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md hover:shadow-lg hover:shadow-gray-900/20">
-            <div
-                class="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
-                <img src="https://dummyimage.com/720x400" alt="ui/ux review check" />
-            </div>
-
+            class="mt-6 mr-3 flex flex-col rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white sm:shrink-0 sm:grow sm:basis-0">
+            <a href="#!">
+                <img class="rounded-t-lg" src="https://tecdn.b-cdn.net/img/new/standard/city/041.webp"
+                    alt="Hollywood Sign on The Hill" />
+            </a>
             <div class="p-6">
                 <div class="flex items-center justify-between mb-3">
                     <h5
@@ -28,9 +27,10 @@
                         </button>
                     </p>
                 </div>
-                <p class="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
+                <p class="mb-4 text-base">
                     {{ $course->description }}
                 </p>
+
             </div>
             <div class="p-6 pt-3">
                 <button
@@ -39,21 +39,20 @@
                     OPEN
                 </button>
             </div>
-        </div>
-        <div id="dropdownDots"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                <li>
-                    <a
-                        class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        wire:click="edit({{ $course->id }})">Edit</a>
-                </li>
-                <li>
-                    <button
-                        class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        wire:click="delete({{ $course->id }})">Delete</button>
-                </li>
-            </ul>
+            <div id="dropdownDots"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+                    <li>
+                        <a class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            wire:click="edit({{ $course->id }})">Edit</a>
+                    </li>
+                    <li>
+                        <button
+                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            wire:click="delete({{ $course->id }})">Delete</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     @endforeach
 </div>
