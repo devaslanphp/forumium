@@ -1,6 +1,6 @@
 <div class="">
     <a
-        href="{{route('communities.community.preview', ['community'=> $community->slug])}}"
+        href="{{route('communities.community.home', ['community'=> $community->slug])}}"
         class="relative max-w-sm bg-white border border-gray-200 rounded-xl overflow-hidden dark:bg-gray-800
         dark:border-gray-700
  flex flex-col h-96 hover:shadow-lg">

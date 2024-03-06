@@ -13,12 +13,23 @@ class UsersSeeder extends Seeder
 
     public static array $admin = [
         'name' => 'Administrator',
-        'email' => 'admin@forumium.app'
+        'email' => 'admin@domain.com'
     ];
 
     public static array $mod = [
         'name' => 'Moderator',
-        'email' => 'mod@forumium.app'
+        'email' => 'mod@domain.com'
+    ];
+
+
+    public static array $member1 = [
+        'name' => 'Jane Doe',
+        'email' => 'jane@domain.com'
+    ];
+
+    public static array $member2 = [
+        'name' => 'John Depp',
+        'email' => 'John@domain.com'
     ];
 
     /**
@@ -28,25 +39,10 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        // Admin
-        if (!User::where('email', self::$admin['email'])->count()) {
-            $data = self::$admin;
-            $data['email_verified_at'] = now();
-            $data['password'] = $this->password;
-            $data['bio'] = fake()->paragraph();
-            $data['is_email_visible'] = false;
-            User::create($data);
-        }
-
-        // Mod
-        if (!User::where('email', self::$mod['email'])->count()) {
-            $data = self::$mod;
-            $data['email_verified_at'] = now();
-            $data['password'] = $this->password;
-            $data['bio'] = fake()->paragraph();
-            $data['is_email_visible'] = false;
-            User::create($data);
-        }
+        $this->createOrUpdateUser(self::$admin);
+        $this->createOrUpdateUser(self::$mod);
+        $this->createOrUpdateUser(self::$member1);
+        $this->createOrUpdateUser(self::$member2);
 
         // Notifications
         User::all()->each(function ($user) {
@@ -60,5 +56,17 @@ class UsersSeeder extends Seeder
                     ]);
                 });
         });
+    }
+
+    private function createOrUpdateUser(array $userData)
+    {
+        if (!User::where('email', $userData['email'])->count()) {
+            $data = $userData;
+            $data['email_verified_at'] = now();
+            $data['password'] = $this->password;
+            $data['bio'] = fake()->paragraph();
+            $data['is_email_visible'] = false;
+            User::create($data);
+        }
     }
 }

@@ -1,3 +1,3 @@
 <div class="flex flex-col w-full">
-    <livewire:calendar/>
+    <h1>leaderboard</h1>
 </div>
