@@ -1,3 +1,7 @@
+## Important
+
+This repository is not maintained anymore.
+
 # Forumium
 
 <p align="center">
